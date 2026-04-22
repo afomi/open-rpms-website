@@ -1,0 +1,1247 @@
+---
+layout: default
+title: "EHR Site Tracking Record"
+description: "A checklist for facilities preparing for Electronic Health Record (EHR) implementation under the IHS Resource and Patient Management System."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        EHR Site Tracking Record
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        Use this checklist to track your facility's activities in preparation for Electronic Health Record (EHR) implementation.
+        From time to time the EHR Deployment Team will request an updated copy to track your progress and coordinate deployment activities with other facilities.
+      </p>
+      <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-500">
+        Last Updated: 2010-09-03 &mdash; Source: IHS EHR Deployment Program
+      </p>
+    </div>
+
+    {% assign sections = "Organizational Infrastructure,EHR Team,Information Technology Infrastructure: Hardware,Information Technology Infrastructure: Software,Pharmacy Infrastructure,Radiology Infrastructure,Laboratory Infrastructure,Patient Management / HIM Infrastructure,Clinical RPMS Package Infrastructure" | split: "," %}
+
+    <!-- Organizational Infrastructure -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Organizational Infrastructure
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">1.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Make the decision to participate as an EHR site.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The most important step is the first one — deciding to transition to EHR.
+                This is not a decision to be taken lightly, because of the implications for and impact upon the entire facility.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">2.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Ensure that organization leadership is committed.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Neither the decision to use EHR, nor the activities required to implement it, can take place without the full knowledge, consent, and support of an organization's administration and governing body (including Area Office officials), as well as local tribal leadership.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">3.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Ensure that medical staff are committed.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                EHR is above all a clinical application, and its greatest impact will be on providers.
+                While the medical staff do not need to be unanimous in their support for EHR, the transition will be more likely to succeed if influential clinicians are enthusiastic and energetic about EHR.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">4.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Organization leaders convey new vision, communicate core values, and increase their visibility.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                EHR implementation is more than just installation of new software: comprehensive process changes are required throughout the organization if the potential improvements in patient safety and quality of care offered by EHR are to be realized.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">5.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Organization leaders and EHR Team develop change management plan to demonstrate their commitment to staff.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The implementation of EHR brings many changes to a facility.
+                Many of the facility's business processes must be reviewed and possibly revised to better fit the use of an electronic health record.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">6.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Assign EHR project manager.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The project manager takes overall responsibility for the successful implementation of EHR at the facility and is the main contact person for the EHR Program.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">7.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Hire and/or appoint a clinical application coordinator (CAC).
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The EHR Program expects all facilities to have a CAC.
+                For most facilities, this will be a full-time, new-hire position.
+                The typical CAC is a nurse or midlevel provider with strong computer skills who understands all aspects of the EHR graphical user interface.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">8.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Establish EHR Implementation Team.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Include: (a) CAC, (b) Pharmacy Package administrator, (c) Lab Package administrator, (d) Radiology Package administrator, (e) QA officer/GPRA coordinator, and representatives from (f) nursing, (g) HIM, (h) coding, (i) data entry, (j) business office, (k) medical staff, (l) other clinical departments, and (m) IT staff.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">9.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop CAC training plan.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Consider: (a) CAC Implementation Team, (b) site visit to EHR site, (c) FileMan, (d) PCC Outputs, (e) Lab Package, (f) Radiology Package, (g) advanced EHR trainings, and (h) basic site manager training.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">10.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Complete EHR site survey.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Submission of this survey to the EHR Program is required before a facility can be added to the EHR implementation queue.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">11.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Review the EHR website and sign up key staff for the EHR ListServ.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The EHR ListServ is the principal forum for discussion of EHR-related issues and has proven to be a valuable support and networking tool for EHR sites.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">12.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Attend an EHR "Lessons Learned" seminar.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                It is highly recommended that facilities send staff to the EHR: Overview, Implementation and Lessons Learned course.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">13.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform Force Field Analysis.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Identify both "driving forces" and "restraining forces" for EHR implementation.
+                Discuss ways to mitigate the restraining forces and use the driving forces to your benefit.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">14.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Identify clinical champions/super users from each clinical service.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Clinical champions are influential members of the medical staff with enthusiasm for EHR and a measure of technical skill who are likely to be the first EHR users.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">15.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop staff incentives.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Providing incentives to encourage committed and enthusiastic participation in the initiative can go a long way toward preserving staff morale throughout the transition.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">16.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Communicate with labor union (if applicable).
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                If any employees at the facility are members of a labor union, the EHR Implementation Team must discuss any potential changes in these employees' scope of work with the union.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">17.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Determine staff concerns and follow up.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                On a regular basis, the EHR Implementation Team should discuss upcoming changes with the facility's staff and address any concerns in a timely manner.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- EHR Team -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        EHR Team
+      </h2>
+      <ol class="space-y-6 list-none" start="18">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">18.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Identify a subgroup of the EHR Implementation Team to ensure regular communication with employees and the community.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                This committee might consider creating a pamphlet for the facility's patients that explains what EHR is and how it might affect them.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">19.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Create an EHR implementation plan and timeline.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The EHR Implementation Team should consider major milestones in the EHR implementation process and create an estimated timeline for these milestones.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">20.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Attend EHR CAC/Implementation Team training.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Most facilities should be using Pharmacy 5/7 for at least one month prior to attending CAC training.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">21.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Provide Area Office with a copy of the implementation plan.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">22.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Publicly promote the EHR initiative.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Use newsletters, community meetings, local newspaper, fliers, etc.
+                The community should be aware of upcoming changes in business process and clinic flow.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">23.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Identify baseline measures and metrics.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Evaluation is a critical component of the EHR Program, both locally and nationally.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">24.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Identify the first go-live clinic or location.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                This decision may be influenced by hours of operation, patient volume, physical layout, the presence of computers and network connections, and the specific clinical and nursing staff in each location.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">25.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Ensure that all EHR Implementation Team members and key clinical staff have viewed an EHR demonstration.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">26.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop training plan for new software packages (PIMS, Radiology, Pharmacy, etc.).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">27.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Design an implementation plan.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Consider: by provider, by clinic, by function, or a combination.
+                Determine if rollout will proceed "tab by tab" or "provider by provider."
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">28.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform productivity risk assessment and develop mitigation plan.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Sites implementing EHR can expect to see a decline in provider productivity for the first several weeks, and possibly lasting as long as two to three months.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">29.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop contingency plans for system down time.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Procedures must be developed for rapidly identifying and correcting the cause of failure, and for continuing to provide patient care while corrective measures are being applied.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">30.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Review CAC User Guide and Clinicians Guide user manuals.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">31.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform work flow analysis and business process review for EHR.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Implementation of an electronic health record forces a broad range of business process changes in a variety of departments.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">32.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Determine which consults must be set up in EHR.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">33.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Begin planning for EHR quick orders.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                A quick order is a single order or a set of orders that is predefined in the system, allowing providers to choose it with a minimum amount of clicks.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">34.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Implement Adverse Reaction Tracking (ART) package.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Assign GMRA keys to data entry staff and turn on the ALG mnemonic.
+                Only allergies and adverse reactions documented in ART will be included in order checks in EHR.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">35.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Define protocol ("standing") orders for nursing staff.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                EHR requires standing orders to be very clearly defined.
+                Ambiguous standing orders that may have been acceptable in the paper environment will not work in EHR.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">36.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Review notifications.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                For each notification, determine: (1) Mandatory, Enabled, or Disabled? (2) Priority? (3) Who receives it? (4) What makes it go away?
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">37.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Review order checks.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                A site must determine when an order check will be applicable.
+                The entire order checking menu must be reviewed before going live.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">38.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Review note titles.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Identify and revise note titles according to discipline rather than provider.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">39.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Design order menus.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The menu layout should be carefully designed and documented on paper prior to the National EHR Team's onsite setup visit.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">40.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop quick orders for medications, lab, radiology, and nursing.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">41.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Establish a medical records subcommittee for approval of Text Integration Utility (TIU) templates.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">42.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Prepare and obtain approval for general, clinic-specific, and provider-specific TIU templates.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">43.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Determine the effect of EHR on departmental policies and procedures, rewriting as needed.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">44.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Inform the community and staff of the EHR go-live date and what they can expect.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">45.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Go live with EHR Phase I (according to implementation plan).
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Only very small facilities will be able to effect full-scale implementation in a single event.
+                The majority will start with a handful of providers in a single clinic or ward.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">46.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Run and report follow-up metrics (1, 3, and 6 months; 1 year).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">47.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform stepwise, scheduled rollout of EHR to remainder of facility.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The EHR Program strongly recommends that a specific timeline for moving the application through all clinical departments be adopted in advance and followed.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- IT Hardware -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Information Technology Infrastructure: Hardware
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">48.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Evaluate current hardware and network.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Includes: evaluation of RPMS hardware, server, and capacity; evaluation of facility network infrastructure; evaluation of end-user hardware needs.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">49.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Begin procurement process for hardware.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">50.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Evaluate IT staffing available to support EHR implementation and maintenance; hire additional IT staff if necessary.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">51.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Install new equipment.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- IT Software -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Information Technology Infrastructure: Software
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">52.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Obtain and review VueCentric installation guides.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">53.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform RPMS package optimizations.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">54.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set up a share drive prior to implementing EHR.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The share drive is where the EHR application files reside, and must be shared so that client computers can access the application.
+                This must be done prior to installing the EHR GUI since creation of a shared folder requires administrative rights to the Windows Server.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">55.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Install remaining EHR components (including GUI files).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">56.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Prepare training database.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">57.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set up EHR client on user computers.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Provide access to training database for exploration after staff attend CAC School and/or prior to EHR onsite setup.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">58.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Run XBEHRCK at the outset to identify and install required upgrades to existing RPMS software.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The XBEHRCK routine identifies deficiencies in RPMS application versions and patches.
+                All required upgrades and patches must be installed before any EHR-specific applications are installed.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">59.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Run XBEHRCK again when Pharmacy is ready to upgrade to version 7.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- Pharmacy -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Pharmacy Infrastructure
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">60.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Chief Pharmacist consults with OIT pharmacy consultants.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">61.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform pharmacist training for Pharmacy 5/7.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">62.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform Pharmacy 5/7 training, installation, and go-live.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">63.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Implement "Paperless Refill" option.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">64.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform pharmacy file cleanup and preparation for Pharmacy 5/7.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The revision process is estimated to require a full-time pharmacist a minimum of two weeks to complete.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- Radiology -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Radiology Infrastructure
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">65.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Implement Ward Order Entry for Radiology (if not already in use).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">66.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Implement Radiology Reports within the Radiology Package (if not already in use).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">67.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform Radiology file setup and training for Radiology Package.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">68.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform Radiology go-live.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">69.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set a date to stop printing paper reports.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- Laboratory -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Laboratory Infrastructure
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">70.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform Laboratory file cleanup for Laboratory 5.2 (if not already in use).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">71.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform Laboratory 5.2 training, installation, and go-live (including most recent patch).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">72.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Implement Ward Order Entry for Laboratory (if not already in use).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">73.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set up label printers and printers for reports and labels at clinics and in lab.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">74.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set a date to stop printing cumulative reports.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">75.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop a system for bringing Point-of-Care (POC) labs into the Laboratory package.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">76.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop a system for bringing microbiology reports into the RPMS Laboratory package.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">77.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Develop a system for bringing reference labs into the Laboratory package.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">78.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set a date to stop printing Reference Lab reports.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- HIM -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Patient Management / HIM Infrastructure
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">79.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Review medical records policy and begin to define the legal medical record and its primary source.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Switching to EHR means facilities must update policies and procedures that outline the maintenance, use, disclosure, and retention of the medical record.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">80.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform Patient Information Management System (PIMS) training and go-live.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Discontinue use of appointment books in all locations.
+                PIMS incorporates scheduling, admission/discharge/transfer (ADT), and sensitive patient tracking functions.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">81.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set up ICD-9 pick lists by clinic and/or by provider.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">82.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Set up CPT superbill pick lists (usually by clinic or specialty).
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">83.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Review the Provider File with input from CHS, Pharmacy, Nursing, and Medical staff.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Ensure that only active providers with appropriate affiliation and discipline are listed.
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- Clinical RPMS -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Clinical RPMS Package Infrastructure
+      </h2>
+      <ol class="space-y-6 list-none">
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">84.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform utilization assessment and implementation of RPMS point-of-service package: Immunization.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Nursing staff should be using it exclusively for immunization entry and management of the immunization registry.
+                Dependence upon immunization "blue sheets" must be eliminated.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">85.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform utilization assessment and implementation of the RPMS Diabetes Management package.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Ensure optimization of the Diabetes Registry, Visual DMS, and the Audit tools.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">86.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform utilization assessment and implementation of point-of-service package: Behavioral Health.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The integration of behavioral and medical information supports coordinated care and improved health outcomes.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">87.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform utilization assessment and implementation of Women's Health package.
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Covers Pap smears, mammograms, breast exams, and biopsies.
+                Several EHR reminders depend upon accurate data in the Women's Health package.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex gap-4">
+            <span class="shrink-0 text-sm font-semibold text-neutral-400 dark:text-neutral-500 w-6">88.</span>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-white">
+                Perform utilization assessment and implementation of case management packages (e.g., Asthma package).
+              </p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+  </main>
+</div>
