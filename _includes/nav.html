@@ -6,14 +6,19 @@
     <div class="flex lg:flex-1">
       <a
         href="{{ "/" | relative_url }}"
-        class="-m-1.5 p-1.5"
+        class="-m-1.5 p-1.5 flex items-center gap-2"
       >
-        <span class="sr-only">{{ site.title }}</span>
         <img
-          class="h-8 w-auto"
+          class="h-7 w-auto text-neutral-900 dark:text-white"
           src="{{ "/assets/img/mark.svg" | relative_url }}"
-          alt="logo"
+          alt="OpenRPMS mark"
         >
+        <span class="text-sm font-bold tracking-tight text-neutral-900 dark:text-white">
+          OpenRPMS
+        </span>
+        <span class="hidden sm:inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 text-xs text-neutral-500 dark:text-neutral-400 font-medium">
+          unofficial
+        </span>
       </a>
     </div>
     <div class="flex lg:hidden">
@@ -43,30 +48,30 @@
     </div>
     <div class="hidden lg:flex lg:gap-x-12">
       <a
-        href="{{ "/blog" | relative_url }}"
+        href="{{ "/packages" | relative_url }}"
         class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
       >
-        Blog
+        Packages
       </a>
       <a
-        href="{{ "/design" | relative_url }}"
+        href="{{ "/ehr-site-tracking" | relative_url }}"
         class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
       >
-        Design
+        EHR Site Tracking
       </a>
       <a
-        href="https://github.com/new?template_name=jekyll-with-tailwind&template_owner=afomi"
+        href="{{ "/licensing" | relative_url }}"
         class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
       >
-        Use Template
+        Licensing
       </a>
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
       <a
-        href="https://github.com/afomi/jekyll-with-tailwind"
+        href="https://www.ihs.gov/rpms/"
         class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
       >
-        GitHub <span aria-hidden="true">&rarr;</span>
+        IHS RPMS <span aria-hidden="true">&rarr;</span>
       </a>
     </div>
   </nav>
@@ -121,30 +126,30 @@
         <div class="-my-6 divide-y divide-neutral-500/10">
           <div class="space-y-2 py-6">
             <a
-              href="{{ "/blog" | relative_url }}"
+              href="{{ "/packages" | relative_url }}"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
             >
-              Blog
+              Packages
             </a>
             <a
-              href="{{ "/design" | relative_url }}"
+              href="{{ "/ehr-site-tracking" | relative_url }}"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
             >
-              Design
+              EHR Site Tracking
             </a>
             <a
-              href="https://github.com/new?template_name=jekyll-with-tailwind&template_owner=afomi"
+              href="{{ "/licensing" | relative_url }}"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
             >
-              Use Template
+              Licensing
             </a>
           </div>
           <div class="py-6">
             <a
-              href="https://github.com/afomi/jekyll-with-tailwind"
+              href="https://www.ihs.gov/rpms/"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
             >
-              GitHub
+              IHS RPMS
             </a>
           </div>
         </div>
