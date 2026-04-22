@@ -1,0 +1,177 @@
+---
+layout: default
+title: "Licensing"
+description: "RPMS is U.S. government-authored software and is in the public domain. Learn about the legal basis and any restricted components."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Licensing
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS is developed by employees of the U.S. federal government and is in the public domain.
+        It is freely available for use, study, and redistribution.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Public Domain Status
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+          <p class="text-neutral-700 dark:text-neutral-300">
+            Works created by employees of the United States Government within the scope of their employment are not subject to domestic copyright protection under U.S. law.
+            This means RPMS — including its core packages, documentation, and source code — is in the public domain.
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300">
+            The legal basis is <strong class="text-neutral-900 dark:text-white">17 U.S.C. § 105</strong>:
+          </p>
+          <blockquote class="border-l-4 border-neutral-300 dark:border-neutral-600 pl-4 italic text-neutral-600 dark:text-neutral-400">
+            "Copyright protection under this title is not available for any work of the United States Government."
+          </blockquote>
+          <div class="flex flex-col gap-2 pt-2">
+            <a
+              href="https://www.usa.gov/government-works"
+              class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              usa.gov/government-works — Official plain-language explanation &rarr;
+            </a>
+            <a
+              href="https://www.copyright.gov/title17/92chap1.html#105"
+              class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              17 U.S.C. § 105 — Full statutory text &rarr;
+            </a>
+            <a
+              href="https://www.copyright.gov/help/faq/faq-definitions.html"
+              class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              U.S. Copyright Office — Works of the U.S. Government &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Shared Infrastructure with VistA
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+          <p class="text-neutral-700 dark:text-neutral-300">
+            RPMS shares core infrastructure packages with the VA's VistA system, all of which carry the same public domain status:
+          </p>
+          <ul class="space-y-2 text-neutral-700 dark:text-neutral-300 list-disc list-inside">
+            <li><strong class="text-neutral-900 dark:text-white">VA FileMan</strong> — database management layer</li>
+            <li><strong class="text-neutral-900 dark:text-white">VA Kernel</strong> — operating system abstraction layer</li>
+            <li><strong class="text-neutral-900 dark:text-white">VA MailMan</strong> — messaging infrastructure</li>
+          </ul>
+          <p class="text-neutral-700 dark:text-neutral-300">
+            These packages were jointly developed by IHS and VA developers and have been distributed via Freedom of Information Act (FOIA) requests since the 1990s.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Restricted Components
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+          <p class="text-neutral-700 dark:text-neutral-300">
+            A small number of packages are marked as restricted distribution (<strong class="text-neutral-900 dark:text-white">**</strong>) in the certified applications list.
+            These are withheld from public release for one of two reasons:
+          </p>
+          <div class="space-y-4 pt-2">
+            <div>
+              <h3 class="font-semibold text-neutral-900 dark:text-white">
+                Third-party intellectual property
+              </h3>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The CPT File (ACPT) incorporates Current Procedural Terminology codes owned by the American Medical Association.
+                CPT codes are commercial data developed at private expense and require a separate AMA license.
+                IHS facilities must obtain their own AMA CPT license independently.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-900 dark:text-white">
+                Sensitive regulated content
+              </h3>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                The Controlled Drug Export System (BPDM) and similar packages are withheld due to DEA and controlled substance regulatory considerations, not commercial IP restrictions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Database Runtime
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+          <p class="text-neutral-700 dark:text-neutral-300">
+            RPMS runs on the MUMPS/M programming language and requires a compatible database runtime.
+            The runtime itself is separate from the public domain RPMS code:
+          </p>
+          <ul class="space-y-2 text-neutral-700 dark:text-neutral-300 list-disc list-inside">
+            <li>
+              <strong class="text-neutral-900 dark:text-white">InterSystems IRIS / Caché</strong> — proprietary, requires a commercial license
+            </li>
+            <li>
+              <strong class="text-neutral-900 dark:text-white">YottaDB</strong> — open source alternative, AGPL licensed
+            </li>
+            <li>
+              <strong class="text-neutral-900 dark:text-white">GT.M</strong> — open source alternative, AGPL licensed
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Obtaining RPMS Source Code
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+          <p class="text-neutral-700 dark:text-neutral-300">
+            RPMS source code and certified packages are available directly from IHS:
+          </p>
+          <div class="flex flex-col gap-2">
+            <a
+              href="https://www.ihs.gov/rpms/applications/"
+              class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              IHS RPMS Applications — official package distribution &rarr;
+            </a>
+            <a
+              href="https://www.ihs.gov/rpms/applications/ftp/?parent=&fld=dist"
+              class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              IHS RPMS FTP distribution directory &rarr;
+            </a>
+          </div>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500">
+            A FOIA request may be used to obtain any package not publicly listed.
+            Contact IHS at <a href="mailto:itsupport@ihs.gov" class="text-blue-600 dark:text-blue-400 hover:underline">itsupport@ihs.gov</a> for application support.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

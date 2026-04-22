@@ -1,0 +1,306 @@
+---
+layout: default
+title: "Security Patterns"
+description: "Access control, audit trails, controlled substance e-prescribing, and security architecture from RPMS distilled as reusable patterns."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Security Patterns
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        Security in RPMS is not a layer added on top — it is embedded in the runtime.
+        VA Kernel controls every user session, every menu option, every device connection.
+        These patterns predate modern zero-trust frameworks by decades and solve the same problems in a healthcare-specific context.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Kernel-Based Access Control
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          VA Kernel (XU) — the security model every application inherits
+        </p>
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Menu-based access control
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Every function in RPMS is a menu option.
+              Access to any function — ordering labs, prescribing medications, viewing records, generating reports — requires explicit assignment of that menu option to the user or role.
+              No menu assignment means no access.
+              Not "access denied" — the option simply does not appear.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Electronic signature (ESIG)
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Provider orders and clinical notes require electronic signature — a separate credential from the login password.
+              The ESIG code is a second factor for clinical actions.
+              Unsigned orders cannot be fulfilled.
+              Unsigned notes are drafts, not part of the legal record.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Device-level access control
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Kernel manages device (terminal) definitions.
+              Certain functions are restricted to specific devices — a pharmacy terminal can dispense medications; a registration terminal cannot.
+              Physical location maps to access scope.
+            </p>
+          </div>
+
+        </div>
+        <div class="mt-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Access control expressed as capability assignment, not role assignment.
+            The atomic unit is a named function (menu option), not a role label.
+            Roles are just named collections of menu options.
+            Modern equivalent: capability-based access control (CBAC) vs. role-based access control (RBAC).
+            The distinction matters when healthcare functions don't map cleanly to job titles.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Comprehensive Audit Trail
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          User Security Audit (BUSA) — who did what, when, from where
+        </p>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 mb-4">
+          <div class="space-y-3">
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Every access to sensitive data in RPMS is logged.
+              The audit record captures: user identity, timestamp, workstation, action taken, and the record accessed.
+              The User Security Audit (BUSA) package surfaces this data for compliance review.
+            </p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Audit logs are write-once — users cannot modify or delete their own audit trail.
+              Supervisors and compliance officers review the audit log independently from the clinical application.
+            </p>
+            <div class="mt-3 rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400 mb-1">Captured per access event:</p>
+              <ul class="text-xs text-neutral-600 dark:text-neutral-400 space-y-0.5">
+                <li>· User DUZ (unique identifier)</li>
+                <li>· Timestamp (date + time)</li>
+                <li>· Device / terminal</li>
+                <li>· Application / menu option accessed</li>
+                <li>· Patient record accessed (where applicable)</li>
+                <li>· Action type (view, add, edit, delete)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Audit as a first-class system component — not a logging afterthought.
+            The audit trail is a separate domain object with its own application (BUSA), its own access controls, and its own reporting tools.
+            HIPAA requires audit logs; RPMS had them before HIPAA existed.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Controlled Substance E-Prescribing
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          EPCS (BEPC) — DEA-compliant electronic prescribing with two-factor authentication
+        </p>
+        <div class="space-y-4 mb-4">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Identity proofing before enrollment
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              DEA regulations require in-person or remote identity proofing before a provider can be enrolled in EPCS.
+              RPMS implements this as a formal enrollment workflow separate from standard user creation.
+              The DEA registrant number is a required domain object — tied to the provider, not the facility.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Two-factor signing for controlled substance orders
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Signing a controlled substance prescription requires: (1) the provider's electronic signature code, and (2) a hard token or logical access credential.
+              A single credential is insufficient.
+              The two-factor check is enforced at the order-signing step — not at login.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Schedule-aware drug validation
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The pharmacy system (PSO) knows the DEA schedule of every drug in the National Drug File (PSN).
+              Controlled substances are flagged at order entry.
+              EPCS routing applies only to scheduled drugs — routing logic is schedule-aware, not blanket.
+            </p>
+          </div>
+        </div>
+        <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Security requirements vary by the sensitivity of the action — not uniformly applied to all actions.
+            Controlled substances require a higher security bar than routine prescriptions.
+            The domain model carries the sensitivity classification (DEA schedule) alongside the drug entity, and the security layer reads it at signing time.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Credential Expiration as a Security Event
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Medical Staff Credentials — time-bound access tied to license validity
+        </p>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 mb-4">
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+            A provider's ability to prescribe, order, and document is contingent on active credentials.
+            RPMS tracks license expiration dates as domain objects and enforces them at the access control layer.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-start gap-3">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-28 pt-0.5">30 days before</span>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Automated alerts sent to provider and administration for upcoming expirations.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-28 pt-0.5">On expiration</span>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Prescribing and ordering privileges suspended automatically — not manually revoked.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-28 pt-0.5">On renewal</span>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Credentials updated, privileges automatically restored.</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Time-bound access — credentials are not permanent grants.
+            They are grants with expiration dates.
+            The security model must treat expiration as an event, not a manual process.
+            Modern equivalent: certificate-based access with automatic revocation on expiry.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          The Security Domain Objects
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            RPMS's security model can be expressed as a small set of domain objects with well-defined relationships:
+          </p>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">User (DUZ)</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">The unique user identifier. Every action is attributed to a DUZ. Cannot be reassigned or deleted — only inactivated.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Menu Option</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">The atomic unit of access. A named function in the system. Users are granted options; options can be grouped into menus for convenience.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Electronic Signature (ESIG)</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">A second credential required for clinical actions. Separate from login. Required for order signing and note authentication.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Device</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">A registered terminal or workstation. Access to certain functions is scoped to specific devices — location is part of the security context.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Credential</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">A professional license or privilege with an issue date, expiration date, and issuing authority. Tied to the Provider entity, not the User entity.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Audit Record</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">An immutable log entry: User + Action + Target + Timestamp + Device. Written at the kernel level — cannot be suppressed by application code.</p>
+            </div>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            <strong class="text-neutral-900 dark:text-white">Pattern:</strong>
+            Security as a cross-cutting domain concern — not an application-level feature.
+            Every RPMS application inherits audit, access control, and signature enforcement from Kernel.
+            No application can bypass it.
+            Modern equivalent: a policy enforcement layer in a service mesh — enforced at the infrastructure level, not per-service.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Related Packages
+        </h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">XU</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">VA Kernel</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">User authentication, menu access control, device management, security model foundation.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">BUSA</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">User Security Audit</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">Audit log access and compliance reporting. Separate from the clinical applications it audits.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">BEPC</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">Electronic Prescribing of Controlled Substances</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">DEA-compliant two-factor e-prescribing with identity proofing workflow.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">GMRA</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">Adverse Reaction Tracking</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">Safety-critical allergy data. Only ART-documented allergies trigger order checks — a security boundary for patient safety.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">PSN</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">National Drug File</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">Drug schedule classification (DEA I–V) as a domain object — drives EPCS routing and controlled substance order checks.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">PXRM</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">VA Clinical Reminders</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">Rule-based alerts at the point of care — a clinical safety layer distinct from the access security layer.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
