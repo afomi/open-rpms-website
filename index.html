@@ -1,252 +1,182 @@
 ---
 layout: default
-title: "Own Your Website"
+title: "OpenRPMS — Open-Source Healthcare Operations"
+description: "Distilling the patterns, domain model, and workflows from RPMS into open, reusable healthcare operations knowledge."
 ---
 
 <div class="bg-white dark:bg-neutral-950">
   {% include nav.html %}
 
   <main class="isolate">
-    <!-- Hero section -->
-    <div class="relative pt-14">
-      <div
-        class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        aria-hidden="true"
-      >
-        <div
-          class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary-400 to-secondary-400 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-        >
+
+    <!-- Hero -->
+    <div class="mx-auto max-w-4xl px-6 py-24 sm:py-32 lg:px-8">
+      <div class="max-w-2xl">
+        <span class="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-700">
+          Unofficial · Independent · Open Source
+        </span>
+        <h1 class="mt-6 text-5xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-6xl">
+          Healthcare operations,
+          <br>
+          open-sourced.
+        </h1>
+        <p class="mt-6 text-lg text-neutral-600 dark:text-neutral-400">
+          The Resource and Patient Management System (RPMS) encodes 40+ years of clinical and administrative workflow knowledge for the Indian Health Service.
+          This site distills those patterns — the domain model, workflows, architecture, and security model — into open, reusable knowledge for anyone building health systems.
+        </p>
+        <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">
+          Not a transcription of MUMPS globals.
+          An opinionated extraction of the ideas worth carrying forward.
+        </p>
+        <div class="mt-10 flex items-center gap-x-6">
+          <a
+            href="{{ "/domain-model" | relative_url }}"
+            class="rounded-md bg-neutral-900 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-neutral-900 shadow-sm hover:bg-neutral-700 dark:hover:bg-neutral-100"
+          >
+            Start with the Domain Model
+          </a>
+          <a
+            href="{{ "/applications" | relative_url }}"
+            class="text-sm font-semibold text-neutral-900 dark:text-neutral-100"
+          >
+            Browse all applications <span aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </div>
-      <div class="py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-2xl text-center">
-            <span class="inline-flex items-center rounded-full bg-primary-50 px-4 py-1 text-sm font-medium text-primary-700 ring-1 ring-inset ring-primary-600/20 dark:bg-primary-950 dark:text-primary-300 dark:ring-primary-400/20">
-              Open Source Template
-            </span>
-            <h1 class="mt-6 text-balance text-5xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-7xl">
-              Own Your Website
-            </h1>
-            <p class="mt-8 text-pretty text-lg font-medium text-gray-500 dark:text-neutral-400 sm:text-xl/8">
-              A simple, modern template for building your own website.
-              No subscriptions, no platforms, no algorithms.
-              Just your content, your design, your rules.
+    </div>
+
+    <!-- What's here -->
+    <div class="border-t border-neutral-200 dark:border-neutral-800">
+      <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">
+          What's here
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <a
+            href="{{ "/domain-model" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              Domain Model
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Core healthcare entities — Patient, Encounter, Order, Problem, Result — distilled from decades of operational use.
             </p>
-            <div class="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="https://github.com/new?template_name=jekyll-with-tailwind&template_owner=afomi"
-                class="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
-              >
-                Use This Template
-              </a>
-              <a
-                href="https://github.com/afomi/jekyll-with-tailwind"
-                class="text-sm/6 font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                View on GitHub <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        aria-hidden="true"
-      >
-        <div
-          class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-secondary-400 to-accent-400 opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-        >
+          </a>
+
+          <a
+            href="{{ "/architecture" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              System Architecture
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Four-layer model, infrastructure stack, decentralized-by-design federation pattern, and standards governance.
+            </p>
+          </a>
+
+          <a
+            href="{{ "/clinical-workflows" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              Clinical Workflows
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Pre-visit prep, encounter-at-arrival, cohort query at point of care, and external clinical decision support.
+            </p>
+          </a>
+
+          <a
+            href="{{ "/administrative-workflows" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              Administrative Workflows
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Registration, credentialing, billing, and resource management as first-class domain operations.
+            </p>
+          </a>
+
+          <a
+            href="{{ "/security" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              Security Patterns
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Kernel-based access control, audit trails, e-prescribing of controlled substances, and user security auditing.
+            </p>
+          </a>
+
+          <a
+            href="{{ "/applications" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              Application Catalog
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              All 70+ RPMS modules organized by domain — Clinical, Administrative, Infrastructure — with namespace codes.
+            </p>
+          </a>
+
         </div>
       </div>
     </div>
 
-    <!-- Feature section -->
-    <div class="mx-auto mt-16 max-w-7xl px-6 sm:mt-24 lg:px-8">
-      <div class="mx-auto max-w-2xl lg:text-center">
-        <h2 class="text-base/7 font-semibold text-primary-600 dark:text-primary-400">
-          Why build your own?
-        </h2>
-        <p class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-balance">
-          Take back control of your online presence
-        </p>
-        <p class="mt-6 text-lg/8 text-gray-600 dark:text-neutral-400">
-          Social platforms come and go.
-          Algorithms change.
-          Your website is yours forever.
-        </p>
-      </div>
-      <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-        <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-          <div class="relative pl-16">
-            <dt class="text-base/7 font-semibold text-gray-900 dark:text-neutral-100">
-              <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-primary-600">
-                <svg
-                  class="size-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-4.247m0 0A8.959 8.959 0 0 1 3 12c0-1.105.2-2.163.566-3.141"
-                  />
-                </svg>
-              </div>
-              Your Domain, Your Identity
-            </dt>
-            <dd class="mt-2 text-base/7 text-gray-600 dark:text-neutral-400">
-              Build on your own domain.
-              No platform branding, no algorithm deciding who sees your content.
-              Your online home, on your terms.
-            </dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base/7 font-semibold text-gray-900 dark:text-neutral-100">
-              <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-primary-600">
-                <svg
-                  class="size-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
-                  />
-                </svg>
-              </div>
-              Simple & Modern Stack
-            </dt>
-            <dd class="mt-2 text-base/7 text-gray-600 dark:text-neutral-400">
-              Jekyll for static site generation, Tailwind CSS for styling.
-              Fast, secure, and easy to customize.
-              No databases, no complexity.
-            </dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base/7 font-semibold text-gray-900 dark:text-neutral-100">
-              <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-primary-600">
-                <svg
-                  class="size-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"
-                  />
-                </svg>
-              </div>
-              Free to Host
-            </dt>
-            <dd class="mt-2 text-base/7 text-gray-600 dark:text-neutral-400">
-              Deploy to GitHub Pages for free, or use any static host.
-              No monthly fees, no vendor lock-in.
-              Just HTML, CSS, and your content.
-            </dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base/7 font-semibold text-gray-900 dark:text-neutral-100">
-              <div class="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-primary-600">
-                <svg
-                  class="size-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"
-                  />
-                </svg>
-              </div>
-              Fully Customizable
-            </dt>
-            <dd class="mt-2 text-base/7 text-gray-600 dark:text-neutral-400">
-              Custom colors, typography, and layouts.
-              Check out the <a
-                href="{{ "/design" | relative_url }}"
-                class="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
-              >design system</a> to see what's possible.
-            </dd>
-          </div>
-        </dl>
+    <!-- Why this exists -->
+    <div class="border-t border-neutral-200 dark:border-neutral-800">
+      <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+        <div class="max-w-2xl">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+            Why this exists
+          </h2>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            RPMS serves one of the most underserved patient populations in the United States.
+            It has done so reliably for decades, in low-bandwidth, resource-constrained environments, at facilities ranging from a two-room rural clinic to a 200-bed area hospital.
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            The implementation — MUMPS globals, VAX-era conventions, terminal-based interfaces — is not what's valuable.
+            The operational knowledge embedded in the design is.
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300">
+            This site is an attempt to extract that knowledge: the domain model, the workflow patterns, the security architecture, the hard-won decisions about what healthcare IT actually needs to do under pressure.
+            The goal is to make those patterns available to anyone building health systems — free of the MUMPS runtime, the IRIS license, and the 1990s UX.
+          </p>
+        </div>
+        <div class="mt-8 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            <strong class="text-neutral-900 dark:text-white">Disclaimer:</strong>
+            OpenRPMS is an unofficial, independent project.
+            It is not affiliated with the Indian Health Service, the Department of Health and Human Services, or the U.S. government.
+            See <a
+              href="{{ "/licensing" | relative_url }}"
+              class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+            >Licensing</a> for source and IP status of RPMS components.
+          </p>
+        </div>
       </div>
     </div>
 
-    <!-- CTA section -->
-    <div class="relative isolate mt-32 px-6 py-32 sm:mt-40 sm:py-40 lg:px-8">
-      <div
-        class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
-        aria-hidden="true"
-      >
-        <div
-          class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-primary-400 to-accent-400"
-          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-        >
-        </div>
-      </div>
-      <div
-        class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-32 opacity-25 blur-3xl sm:pt-40 xl:justify-end"
-        aria-hidden="true"
-      >
-        <div
-          class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-secondary-400 to-primary-400 xl:ml-0 xl:mr-[calc(50%-12rem)]"
-          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-        >
-        </div>
-      </div>
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-          Ready to build your own?
-        </h2>
-        <p class="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-600 dark:text-neutral-400">
-          Fork this template, customize it, and deploy.
-          Your website can be live in minutes.
-        </p>
-        <div class="mt-10 flex items-center justify-center gap-x-6">
-          <a
-            href="https://github.com/new?template_name=jekyll-with-tailwind&template_owner=afomi"
-            class="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
-          >
-            Get Started
-          </a>
-          <a
-            href="{{ "/blog" | relative_url }}"
-            class="text-sm/6 font-semibold text-gray-900 dark:text-neutral-100"
-          >
-            Read the blog <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </div>
-    </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="relative z-10 mx-auto max-w-7xl px-6 pb-8 lg:px-8">
-    <div class="border-t border-gray-900/10 pt-8 dark:border-neutral-100/10">
-      <p class="text-sm/6 text-gray-500 dark:text-neutral-400">
-        A free, open-source template.
-        <a
-          href="https://github.com/afomi/jekyll-with-tailwind"
-          class="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
-        >View source on GitHub</a>.
+  <footer class="border-t border-neutral-200 dark:border-neutral-800">
+    <div class="mx-auto max-w-4xl px-6 py-8 lg:px-8">
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+        OpenRPMS — unofficial, independent documentation.
+        RPMS is a product of the <a
+          href="https://www.ihs.gov/rpms/"
+          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Indian Health Service</a>.
       </p>
     </div>
   </footer>
+
 </div>

@@ -1,0 +1,669 @@
+---
+layout: default
+title: "IHS-EHR Site Questionnaire"
+description: "The IHS Electronic Health Record Program site questionnaire used to gather facility information, assess readiness, and prepare for EHR implementation."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        IHS-EHR Site Questionnaire
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        The purpose of this questionnaire is to allow the IHS Electronic Health Record (EHR) Program to gather information about a facility — the type of work done there, and the clinical, business, and technical environment.
+        Completing the survey helps the EHR Program support implementation efforts and stimulates early thinking about what transitioning to a computer-based health record will involve.
+      </p>
+      <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">
+        Choosing to transition from paper charts to the EHR requires a commitment by virtually all organizational departments to significant changes in business processes.
+        A facility interested in EHR should begin the process of team building and planning as early as possible before the anticipated date of implementation.
+      </p>
+      <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-500">
+        Last Updated: 2010-09-07 &mdash; Source: IHS EHR Program
+      </p>
+    </div>
+
+    <!-- I. Facility Information -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        I. Facility Information
+      </h2>
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200 dark:divide-neutral-800">
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
+              Name
+            </p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">
+              Facility legal name
+            </p>
+          </div>
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
+              Affiliation
+            </p>
+            <div class="flex gap-4 text-sm text-neutral-700 dark:text-neutral-300">
+              <span>IHS</span>
+              <span>Tribal</span>
+              <span>Urban</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200 dark:divide-neutral-800">
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
+              Address
+            </p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">
+              Street, city, state, zip
+            </p>
+          </div>
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
+              Category
+            </p>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-700 dark:text-neutral-300">
+              <span>Hospital</span>
+              <span>Clinic</span>
+              <span>Emergency Room</span>
+              <span>Urgent Care</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- II. Principal EHR Contact -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        II. Principal EHR Contact Person
+      </h2>
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+        <div class="p-5">
+          <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+            Name
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200 dark:divide-neutral-800">
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+              Title
+            </p>
+          </div>
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+              Telephone
+            </p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200 dark:divide-neutral-800">
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+              Fax
+            </p>
+          </div>
+          <div class="p-5">
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+              E-Mail
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- III. Local EHR Implementation Team -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        III. Local EHR Implementation Team
+      </h2>
+      <p class="mb-4 text-sm text-neutral-600 dark:text-neutral-400 italic">
+        It is important that sites take a team approach to planning for and implementing the Electronic Health Record.
+        Some suggested members of that team are listed below, but each site will have unique preferences and needs for who should be involved.
+        The most important consideration is that your facility has strong administrative and clinical leadership ("champions") behind the EHR effort.
+      </p>
+      <p class="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
+        Please provide contact information for your team members, and specify a role and contact information for additional team members not listed below.
+      </p>
+
+      {% assign team_roles = "CEO/HSA,Clinical Director,CIO/Information Systems,Director of Nurses,HIM,Business Office Manager,Chief Pharmacist,Laboratory Supervisor,Radiology Supervisor" | split: "," %}
+
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+        {% for role in team_roles %}
+        <div class="p-5">
+          <p class="font-semibold text-neutral-900 dark:text-white mb-3">
+            {{ role }}
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+            <span>Name:</span>
+            <span>Telephone:</span>
+            <span>E-Mail:</span>
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="p-5">
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 italic mb-3">
+            Additional roles (as needed)
+          </p>
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <span class="font-medium">(Role)</span>
+              <span>Telephone:</span>
+              <span>E-Mail:</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <span class="font-medium">(Role)</span>
+              <span>Telephone:</span>
+              <span>E-Mail:</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <span class="font-medium">(Role)</span>
+              <span>Telephone:</span>
+              <span>E-Mail:</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IV. Description of Facility -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        IV. Description of Facility
+      </h2>
+      <div class="space-y-4">
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="font-semibold text-neutral-900 dark:text-white mb-2">
+            General description, location, population served, etc.
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="font-semibold text-neutral-900 dark:text-white mb-2">
+            Types of clinical services provided (medical, dental, mental health, pharmacy, etc.)
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-neutral-700 dark:text-neutral-300">
+            <span>Does the facility have satellite clinics? &nbsp; Yes / No</span>
+          </div>
+          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+            If yes, do you expect them to participate in the <strong>initial</strong> installation of EHR? &nbsp; Yes / No
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="font-semibold text-neutral-900 dark:text-white mb-2">
+            Medical staff description
+          </p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            Describe the medical staff, including the number of physicians, the number of midlevel providers, full-time vs. part-time providers, and a general idea of staff stability, vacancy rates, turnover, etc.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="font-semibold text-neutral-900 dark:text-white mb-2">
+            First implementation area
+          </p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+            In what part of the facility do you plan to implement EHR <strong>first</strong> (inpatient ward, outpatient clinic, emergency room, etc.)?
+          </p>
+          <ul class="space-y-1 text-sm text-neutral-600 dark:text-neutral-400 list-disc list-inside">
+            <li>How many providers work regularly in this area?</li>
+            <li>Describe the daily census/patient volume in this area.</li>
+            <li>What are the hours of service in this area?</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- V. EHR Components To Be Installed -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        V. EHR Components To Be Installed
+      </h2>
+      <p class="mb-4 text-sm text-neutral-600 dark:text-neutral-400">
+        Describe the EHR components and functions that the facility plans to implement.
+        This list is not comprehensive, but it provides an idea of the different components available.
+      </p>
+
+      {% assign ehr_components = "Provider order entry for medications (pharmacy),Provider order entry for laboratory tests,Provider order entry for radiology exams,Provider entry for inpatient nursing orders,Documentation of immunizations,Template-based note authoring,Dictation system for note authoring,Charge capture for billing purposes" | split: "," %}
+
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+        {% for component in ehr_components %}
+        <div class="flex items-center justify-between p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            {{ component }}
+          </p>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 ml-4">
+            Yes / No
+          </span>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- VI. Current RPMS Environment -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        VI. Current RPMS Environment
+      </h2>
+      <p class="mb-4 text-sm text-neutral-600 dark:text-neutral-400">
+        Describe the current RPMS application environment at the facility.
+        List all clinical support and point-of-service applications currently in use, including RPMS versions and patches.
+      </p>
+
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 mb-6">
+        <div class="p-5">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+              Is the facility running RPMS (general)?
+            </p>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500">Yes / No</span>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-3">
+            Computing Environment
+          </p>
+          <div class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+            <p>Hardware:</p>
+            <p>Server:</p>
+            <p>Operating system, etc.:</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RPMS Package Table -->
+      {% assign rpms_packages = "Pharmacy,Laboratory,Radiology,PIMS,Scheduling GUI,Billing,RCIS,Contract Health,Diabetes,CRS,Immunization,iCare,Case Management,Emergency Room System,Women's Health,Asthma Register System,Dental,Behavioral Health" | split: "," %}
+
+      <div class="space-y-3">
+        {% for pkg in rpms_packages %}
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="font-semibold text-neutral-900 dark:text-white mb-2">
+            {{ pkg }}
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500">
+            RPMS version/patch:
+          </p>
+          {% if pkg == "Pharmacy" %}
+          <div class="mt-2 text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+            <p>Pharmacy package name:</p>
+            <p>Does your facility currently use a Pharmacy Point of Sale (POS) application? &nbsp; Yes / No</p>
+            <p>POS Package Name:</p>
+          </div>
+          {% endif %}
+          {% if pkg == "Laboratory" %}
+          <div class="mt-2 text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+            <p>Does your facility currently use Ward Order Entry for Laboratory? &nbsp; Yes / No</p>
+            <p>If Yes, lab orders are entered by: &nbsp; Provider &nbsp; Nursing Staff &nbsp; Other</p>
+            <p>Do you use a local health facility to process your labs? &nbsp; Yes / No</p>
+            <p class="font-semibold mt-2">Reference Lab and POC Tests</p>
+            <p>Reference lab interface: &nbsp; Yes / No</p>
+            <p>If Yes, is the interface bidirectional or unidirectional?</p>
+            <p>CLIA waived tests? &nbsp; Yes / No</p>
+            <p>Result entered into RPMS? &nbsp; Yes / No</p>
+          </div>
+          {% endif %}
+          {% if pkg == "Radiology" %}
+          <div class="mt-2 text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+            <p>Does your facility currently use Ward Order Entry for Radiology? &nbsp; Yes / No</p>
+            <p>If Yes, radiology orders are entered by: &nbsp; Provider &nbsp; Nursing Staff &nbsp; Other</p>
+            <p>Does your facility transcribe dictated radiology reports into the Radiology package? &nbsp; Yes / No</p>
+          </div>
+          {% endif %}
+          {% if pkg == "Diabetes" %}
+          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+            Visual DMS: &nbsp; Yes / No
+          </p>
+          {% endif %}
+          {% if pkg == "CRS" %}
+          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+            GUI CRS: &nbsp; Yes / No
+          </p>
+          {% endif %}
+          {% if pkg == "Dental" %}
+          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+            Dentrix: &nbsp; Yes / No
+          </p>
+          {% endif %}
+          {% if pkg == "Behavioral Health" %}
+          <div class="mt-2 text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+            <p>IHS Patient Chart: &nbsp; Yes / No</p>
+            <p>Behavioral Health GUI: &nbsp; Yes / No</p>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="font-semibold text-neutral-900 dark:text-white mb-2">
+            Other major RPMS applications
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+              Is your facility running PCC Plus?
+            </p>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500">Yes / No</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VII. Current Network and Computing Environment -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        VII. Current Network and Computing Environment
+      </h2>
+      <p class="mb-4 text-sm text-neutral-600 dark:text-neutral-400 italic">
+        One of the main requirements (and advantages) of an electronic record is that all users have access to the system at the point of service.
+        Nobody should be looking for a computer to enter or retrieve information.
+      </p>
+      <p class="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
+        Please describe your facility's current computer network situation and share your thoughts about getting it ready for EHR.
+      </p>
+
+      {% assign network_questions = "Windows PC clients or wireless in all exam rooms?,Windows PC clients or wireless in all provider offices?,Windows PC clients or wireless in all nursing areas?,Is the facility fully networked including access points at all clinical support areas (pharmacy, laboratory, radiology, registration, business office, medical records)?" | split: "," %}
+
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 mb-6">
+        {% for q in network_questions %}
+        <div class="flex items-center justify-between p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            {{ q }}
+          </p>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 ml-4">
+            Yes / No
+          </span>
+        </div>
+        {% endfor %}
+        <div class="p-5">
+          <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+            Describe the type of network, speed/bandwidth capability, etc.
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+      </div>
+
+      <!-- Hardware and Network Requirements note -->
+      <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5 mb-6">
+        <p class="font-semibold text-neutral-900 dark:text-white mb-3">
+          Hardware and Network Requirements
+        </p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
+          A thorough review of the local technology environment will be required at any facility implementing the RPMS EHR.
+          Facilities will need to evaluate hardware needs in or near exam rooms and provider offices to ensure that providers and other users of the EHR have access to the system at the point of service.
+        </p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
+          Because the EHR is a client/server application, it does not require a separate server to run.
+          The VueCentric framework resides on each client (user) computer, and all data resides on the RPMS server.
+          Updates to the framework application or GUI components are deposited in a single object library folder, which automatically updates the client computers each time the application is launched.
+        </p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">
+          I/T/U health care facilities vary greatly in size, services provided, and in a number of other factors.
+          For this reason, it is difficult to provide a single set of recommendations for hardware and network infrastructure that will fit all sites.
+          Contact your Area MIS department or CAC for questions regarding these requirements.
+        </p>
+      </div>
+
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+        <div class="p-5">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
+            If your facility does not meet these requirements, how do you plan to achieve full hardware and networking capability?
+            Include timelines.
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+        <div class="flex items-center justify-between p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            Has a financial commitment been made by facility administration to bring the network up to the level necessary for EHR implementation?
+          </p>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 ml-4">
+            Yes / No
+          </span>
+        </div>
+        <div class="p-5">
+          <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">
+            IT Support Environment
+          </p>
+          <div class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+            <p>Number of dedicated IT staff for clinic:</p>
+            <p>Hours of operation for IT department:</p>
+            <p class="mt-3">
+              If the IT department hours do not match the hours of service in clinical areas using EHR, how would you handle hardware and network problems after hours to support clinical care?
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIII. Clinical Support Environment -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        VIII. Clinical Support Environment
+      </h2>
+      <p class="mb-4 text-sm text-neutral-600 dark:text-neutral-400 italic">
+        Two key players in a local EHR implementation effort are the clinical champion and the clinical application coordinator (CAC).
+        The clinical champion is typically a physician who provides the energy and motivation to bring the medical staff on board with the EHR.
+        The CAC is often a nurse or other health professional whose permanent job is to be a resource and troubleshooter for clinical users, helping the EHR to work for them.
+        The CAC also provides ongoing training for new staff and on new components and features of the EHR.
+      </p>
+
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+
+        <div class="p-5">
+          <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+            Who is the local "clinical champion" for EHR implementation?
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            If this person is not the clinical director, does this person have the authority to make recommendations, set policy, and/or motivate staff as necessary to achieve successful EHR implementation?
+          </p>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 ml-4">
+            Yes / No
+          </span>
+        </div>
+
+        <div class="p-5">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+              Does the facility have a full-time CAC?
+            </p>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500">Yes / No</span>
+          </div>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
+            If Yes, please provide the CAC's name and contact information.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-neutral-600 dark:text-neutral-400">
+            <span>Name:</span>
+            <span>Telephone:</span>
+            <span>E-Mail:</span>
+          </div>
+        </div>
+
+        <div class="p-5">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">
+              If No, is there a plan to hire a fill-time CAC?
+            </p>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 ml-4">Yes / No</span>
+          </div>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            If Yes, what is the timeframe for this hire?
+          </p>
+        </div>
+
+        <div class="p-5">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
+            If CAC duty hours do not match the hours of service in clinical areas using EHR, how might the facility support clinical users who may have problems using EHR during off hours?
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+
+        <div class="p-5">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
+            If no CAC is planned, how do you envision that the facility will cover the functions of a CAC in support of clinical use of the EHR?
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            Open text response
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIII (cont). Business Process Environment -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        VIII. Business Process Environment
+      </h2>
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+        <div class="p-5">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">
+              Has the facility undergone a recent (within two years) formal evaluation of clinical and administrative business processes, such as in preparation for accreditation?
+            </p>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0 ml-4">Yes / No</span>
+          </div>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-1">
+            If Yes, please describe some of the business process changes you implemented in response to the recommendations.
+          </p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            If No, please describe how you might go about evaluating and redesigning your business processes in preparation for the EHR implementation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- IX. Comments -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        IX. Comments
+      </h2>
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">
+          Please make additional comments regarding your facility, your staff, and your plans for implementation of the EHR.
+          This will help EHR Program staff understand your unique circumstances so that we may provide better support to you in this effort.
+          Feel free to include any specific questions or concerns you may have.
+          Attach additional pages if necessary.
+        </p>
+      </div>
+    </section>
+
+    <!-- Attestations -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Attestations
+      </h2>
+      <p class="mb-4 text-sm text-neutral-600 dark:text-neutral-400">
+        The undersigned administrators and staff request the assistance and support of the IHS Office of Information Technology in preparation for, installation of, and implementation of the IHS Electronic Health Record.
+        In so doing they attest to the following:
+      </p>
+      <ul class="space-y-3 mb-8">
+        <li class="flex gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+          <span class="shrink-0 mt-0.5 text-neutral-400">&bull;</span>
+          <span>
+            The organization's administration is committed to supporting implementation of the electronic record, including expenditure of funds as needed to bring the facility's network and computer hardware infrastructure to the level necessary to operate the EHR in a clinical environment.
+          </span>
+        </li>
+        <li class="flex gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+          <span class="shrink-0 mt-0.5 text-neutral-400">&bull;</span>
+          <span>
+            The medical staff is supportive of plans to implement the EHR system.
+          </span>
+        </li>
+        <li class="flex gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+          <span class="shrink-0 mt-0.5 text-neutral-400">&bull;</span>
+          <span>
+            The administration and medical staff are both aware that clinical implementation of an electronic medical record system will reduce provider productivity in patient care during a transitional period that may last for several months.
+          </span>
+        </li>
+        <li class="flex gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+          <span class="shrink-0 mt-0.5 text-neutral-400">&bull;</span>
+          <span>
+            The local Tribal government has been consulted and is supportive of plans to implement the EHR system.
+          </span>
+        </li>
+        <li class="flex gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+          <span class="shrink-0 mt-0.5 text-neutral-400">&bull;</span>
+          <span>
+            The organization will participate in a program of evaluation of the success and effectiveness of the IHS EHR.
+            This is required as a part of funding for IHS-EHR, and will involve collection or reporting of various types of clinical, productivity, and revenue data.
+          </span>
+        </li>
+        <li class="flex gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+          <span class="shrink-0 mt-0.5 text-neutral-400">&bull;</span>
+          <span>
+            The organization's Governing Body is aware of the organization's plans to implement the EHR, and has committed its full support.
+          </span>
+        </li>
+      </ul>
+
+      <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800">
+        <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+              CEO/HSA
+            </p>
+            <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+              (in lieu of signature)
+            </p>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+            Clinical Director
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            (in lieu of signature)
+          </p>
+        </div>
+        <div class="p-5">
+          <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+            CIO/IRM/Site Manager
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+            (in lieu of signature)
+          </p>
+        </div>
+        <div class="p-5">
+          <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+            Date Submitted to EHR Program
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>

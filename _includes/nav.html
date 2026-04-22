@@ -46,27 +46,51 @@
         </svg>
       </button>
     </div>
-    <div class="hidden lg:flex lg:gap-x-12">
+    <div class="hidden lg:flex lg:gap-x-8">
       <a
-        href="{{ "/packages" | relative_url }}"
+        href="{{ "/domain-model" | relative_url }}"
         class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
       >
-        Packages
+        Domain Model
       </a>
       <a
-        href="{{ "/ehr-site-tracking" | relative_url }}"
+        href="{{ "/architecture" | relative_url }}"
         class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
       >
-        EHR Site Tracking
+        Architecture
       </a>
+      <a
+        href="{{ "/clinical-workflows" | relative_url }}"
+        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
+      >
+        Clinical
+      </a>
+      <a
+        href="{{ "/administrative-workflows" | relative_url }}"
+        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
+      >
+        Administrative
+      </a>
+      <a
+        href="{{ "/security" | relative_url }}"
+        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
+      >
+        Security
+      </a>
+      <a
+        href="{{ "/applications" | relative_url }}"
+        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
+      >
+        Applications
+      </a>
+    </div>
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
       <a
         href="{{ "/licensing" | relative_url }}"
-        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
+        class="text-sm/6 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
       >
         Licensing
       </a>
-    </div>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
       <a
         href="https://www.ihs.gov/rpms/"
         class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
@@ -126,16 +150,52 @@
         <div class="-my-6 divide-y divide-neutral-500/10">
           <div class="space-y-2 py-6">
             <a
-              href="{{ "/packages" | relative_url }}"
+              href="{{ "/domain-model" | relative_url }}"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
             >
-              Packages
+              Domain Model
+            </a>
+            <a
+              href="{{ "/architecture" | relative_url }}"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+            >
+              Architecture
+            </a>
+            <a
+              href="{{ "/clinical-workflows" | relative_url }}"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+            >
+              Clinical Workflows
+            </a>
+            <a
+              href="{{ "/administrative-workflows" | relative_url }}"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+            >
+              Administrative Workflows
+            </a>
+            <a
+              href="{{ "/security" | relative_url }}"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+            >
+              Security
+            </a>
+            <a
+              href="{{ "/applications" | relative_url }}"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+            >
+              Applications
             </a>
             <a
               href="{{ "/ehr-site-tracking" | relative_url }}"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
             >
               EHR Site Tracking
+            </a>
+            <a
+              href="{{ "/ehr-site-survey" | relative_url }}"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+            >
+              EHR Site Survey
             </a>
             <a
               href="{{ "/licensing" | relative_url }}"

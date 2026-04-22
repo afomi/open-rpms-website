@@ -1,0 +1,211 @@
+---
+layout: default
+title: "System Architecture"
+description: "How RPMS is composed — four layers, infrastructure packages, and the patterns that make a decentralized federated EHR work."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        System Architecture
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS is a decentralized, site-based system.
+        Each facility runs its own instance.
+        Data flows upward to the Indian Health National Data Base for population-level reporting.
+        Understanding how the four layers and infrastructure packages fit together is the foundation for building anything that interoperates with RPMS.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          The Four-Component Model
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Hardware</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Flexible configurations supporting facilities from small rural clinics to large area hospitals.
+              Originally AIX/Unix servers; now primarily virtualized or cloud-hosted IRIS instances.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Software</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              70+ MUMPS/M applications organized into Clinical, Administrative, and Infrastructure categories.
+              Each application owns a namespace prefix that scopes its data and code.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Network</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Site-level TCP/IP with RPC Broker handling client-server communication.
+              HL7 interfaces connect RPMS to external systems — labs, pharmacies, imaging.
+              MailMan provides internal messaging.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Database</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              InterSystems IRIS (formerly Caché) as the primary runtime.
+              VA FileMan sits on top as the schema and data access layer — all application data is stored in FileMan files, making the schema itself queryable.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          The Infrastructure Stack
+        </h2>
+        <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+          Every RPMS application depends on this shared foundation.
+          Understanding these packages is essential for any integration or reimplementation.
+        </p>
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">XU</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">VA Kernel</h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  The OS abstraction layer. Handles user authentication, menu-based access control, device management, task scheduling, and the security model that all other applications rely on.
+                  Think of it as the OS kernel — nothing runs without it.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">DI</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">VA FileMan</h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  The database management and schema layer. All RPMS data is stored in FileMan files.
+                  Crucially, the schema itself is stored in the database — making it introspectable and queryable.
+                  FileMan predates relational databases as a common choice for medical records and solved the same problems differently: hierarchical globals with a metadata-driven access layer on top.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">XWB</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">RPC Broker</h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  The client-server bridge. GUI clients (VIM.exe, VueCentric) communicate with the MUMPS server by calling named Remote Procedure Calls over TCP.
+                  Every RPC is a named, registered entry point — a primitive but effective API contract.
+                  The RPC registry in FileMan is effectively a public API manifest.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">HL</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">HL7 / BHL</h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  HL7 v2 message handling for lab results, ADT events, pharmacy orders, and more.
+                  IHS Support for HL7 Interfaces (BHL) extends the base HL7 package for IHS-specific workflows.
+                  This is the primary integration pathway for connecting RPMS to external systems.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">XM</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">MailMan</h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  Internal messaging and notification infrastructure.
+                  Alerts, reminders, approval routing, and inter-facility communication all run through MailMan.
+                  An early, domain-specific event bus.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">BMW</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">RPMS/Ensemble Cache Classes</h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  The modern interoperability layer. BMW maps FileMan files to IRIS classes and exposes them via ADO.NET — enabling .NET applications like BPRM to query RPMS data using SQL-like semantics without touching MUMPS directly.
+                  The bridge between the legacy MUMPS world and modern web applications.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Decentralized by Design
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-3">
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            Each facility runs its own RPMS instance.
+            There is no central database — data lives at the site.
+            This was a deliberate choice for resilience: a network outage at one site does not affect others.
+            Facilities can operate fully offline.
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            Population-level data flows upward through periodic exports to the Indian Health National Data Base, satisfying reporting requirements (HEDIS, ORYX, GPRA) without centralizing day-to-day operations.
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            <strong class="text-neutral-900 dark:text-white">Pattern:</strong> This is a federated architecture with eventual consistency for analytics — a pattern now common in modern distributed systems, arrived at pragmatically decades earlier.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Standards & Conventions (SAC)
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-3">
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            The RPMS Standards and Conventions Committee (SAC) maintains the rules that keep 70+ independently developed applications from breaking each other.
+            Key documents include:
+          </p>
+          <ul class="space-y-1 text-sm text-neutral-700 dark:text-neutral-300 list-disc list-inside">
+            <li>RPMS Programming Standards and Conventions (MUMPS/M)</li>
+            <li>RPMS Ensemble Programming Standards and Conventions</li>
+            <li>RPMS GUI Programming Standards and Conventions</li>
+            <li>SAC Developers' Handbook</li>
+            <li>RPMS Documentation Style Guide</li>
+          </ul>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            The SAC is the governance mechanism that makes a federated, multi-site, multi-decade codebase maintainable.
+            <strong class="text-neutral-900 dark:text-white">Pattern:</strong> Explicit shared conventions enforced by a standards body — not a monorepo, not a single team, but agreed-upon rules.
+          </p>
+          <a
+            href="https://www.ihs.gov/rpms/sac/"
+            class="inline-block text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            IHS SAC documentation &rarr;
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

@@ -1,0 +1,193 @@
+---
+layout: default
+title: "Administrative Workflow Patterns"
+description: "Registration, credentialing, billing, and operations workflows from RPMS distilled as reusable patterns."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Administrative Workflow Patterns
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        Healthcare administration is often treated as a secondary concern in open-source health IT.
+        RPMS takes it seriously — registration, credentialing, billing, and resource management are first-class domain operations.
+        These patterns are as worth replicating as the clinical ones.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Concurrent Multi-Clerk Registration
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Patient Registration (AG) — multiple departments, one record
+        </p>
+        <div class="space-y-4">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">2:15 pm</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Three clinic clerks access the same patient record simultaneously
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  Registration clerks in the Diabetes, Urgent Care, and Family Practice clinics are all using Patient Registration at the same time.
+                  Each accesses: medical record number, demographics, tribal membership, and insurance eligibility.
+                  No duplicate data entry. No scheduling conflicts. One source of truth.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">2:15 pm</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Medical records clerk establishes new chart from earlier capture
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  New-patient data captured earlier (at the point of first contact) is used to establish a formal chart record.
+                  Data collection and record formalization are decoupled — capture happens first, reconciliation follows.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            A single patient record shared across all departments in real time — no department-specific silos.
+            The patient identity data model includes fields specific to the IHS context: tribal membership, IHS eligibility, and Contract Health Services authorization.
+            These are domain objects that don't exist in generic EHR frameworks.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Credential Tracking with Expiration Alerts
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Medical Staff Credentials — workforce compliance as a domain operation
+        </p>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 mb-4">
+          <div class="flex gap-4">
+            <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">4:45 pm</span>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                Administration clerk runs credential status report
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Medical Staff Credentials produces an updated report on all credential files.
+                Automated alerts are sent to providers whose licenses are due for renewal or who need to re-apply for privileges.
+                The system initiates the compliance action — staff don't need to remember.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Credential expiration as a time-based event that triggers a notification workflow.
+            The domain objects are: Provider, Credential, Privilege, ExpirationDate, Alert.
+            Modern equivalent: scheduled jobs that check credential state and dispatch notifications — but in RPMS this was built as a first-class healthcare administration operation, not an afterthought.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Administrative Request Routing
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Administrative Resource Management System (ARMS) — travel and resource requests
+        </p>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 mb-4">
+          <div class="flex gap-4">
+            <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">4:45 pm</span>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                Travel request entered — system auto-computes per diem and routes for approval
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Staff member requests to attend a training session.
+                ARMS automatically computes the approved per diem and lodging rates for the training location.
+                Clerk enters remaining travel information.
+                Request is electronically routed for approval — no paper forms, no manual rate lookup.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Request → auto-computation of derived values → electronic approval routing.
+            The domain objects are: Request, Location, PerDiemRate, ApprovalWorkflow, Approver.
+            This is a general approval workflow pattern applied to healthcare administration.
+            The auto-computation of rates from location data is a rules engine embedded in the domain model.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          The IHS-Specific Patient Data Model
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            RPMS's patient registration data model includes fields that generic EHR frameworks don't have.
+            These are not edge cases — they are core domain objects for this population:
+          </p>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Tribal Membership</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">Tribal affiliation determines eligibility for IHS services and Contract Health Services.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">IHS Eligibility</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">Determines which services the patient may receive under the federal Indian Health program.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Contract Health Authorization</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">Authorization status for services referred outside the IHS facility network.</p>
+            </div>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">Medical Record Number</p>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400">Facility-scoped identifier, with Master Patient Index (AGMP) handling cross-facility identity resolution.</p>
+            </div>
+          </div>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+            <strong class="text-neutral-900 dark:text-white">Pattern:</strong>
+            Domain models must reflect the actual population being served — not a generic patient model that ignores context.
+            The IHS patient model is a lesson in domain-driven design applied to a specific, underserved population.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          BPMN Diagram: Patient Registration Flow
+        </h2>
+        <div class="rounded-lg border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center">
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+            BPMN diagram placeholder — Patient Registration flow
+          </p>
+          <p class="mt-2 text-xs text-neutral-400 dark:text-neutral-500">
+            Swimlanes: Patient · Registration Clerk · Medical Records · Insurance Verification
+          </p>
+          <p class="mt-1 text-xs text-neutral-400 dark:text-neutral-500">
+            Key events: First contact → Demographic capture → Tribal eligibility check → Insurance eligibility → Chart establishment → Record available to all departments
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

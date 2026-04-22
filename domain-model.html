@@ -1,0 +1,209 @@
+---
+layout: default
+title: "Domain Model"
+description: "Core healthcare domain objects distilled from RPMS — an opinionated open-source model for health care operations."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Domain Model
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS encodes decades of healthcare operations into its data model.
+        This page distills those domain objects — the core entities, relationships, and design decisions that recur across the system.
+        This is an opinionated, open-source interpretation: the patterns worth carrying forward, not a transcription of the MUMPS globals.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Core Entities
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Patient</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              The central entity. In IHS context, includes: MRN, demographics, tribal membership, IHS eligibility, and insurance.
+              Identity resolution across facilities is handled by the Master Patient Index (AGMP).
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">AG · AGMP · PIMS</p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Encounter / Visit</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              A patient-provider interaction. The PCC Suite structures the encounter: chief complaint, diagnoses (ICD), procedures (CPT), vitals, notes, and orders.
+              The encounter is the unit of care delivery and the unit of billing.
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">BJPC · APCD · APCH · GMRV</p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Problem</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              Active, chronic, or resolved conditions linked to the patient record.
+              Updated at encounters. The Problem List is the longitudinal health narrative — referenced across all clinical applications.
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">PCC Problem List</p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Order</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              A provider directive: lab test, medication, radiology study, consult, immunization, nursing order.
+              Orders are placed in EHR, routed to the relevant department, and tracked to completion.
+              Quick orders (pre-defined sets) reduce entry time for common scenarios.
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">LR · PSO · PSJ · RA · GMRC</p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Result</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              The outcome of an order: lab values, radiology findings, consult notes.
+              Results are surfaced at point of care — available to providers at terminals and on printers the moment they are reported.
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">LR · RA · BLE</p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Document / Note</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              Clinical documentation: SOAP notes, procedure notes, consult responses, discharge summaries.
+              Text Integration Utility (TIU) provides the document framework.
+              Templates define structure; providers fill in content.
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">TIU · EHR</p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Provider</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              A credentialed clinician or staff member. Linked to: credentials, privileges, expiration dates, alerts.
+              Provider identity controls what a user can order, prescribe, document, and access.
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">Kernel · XU · Medical Staff Credentials</p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-mono text-sm font-bold text-neutral-900 dark:text-white mb-2">Adverse Reaction / Allergy</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              Tracked in the Adverse Reaction Tracking (ART) package — separate from the Problem List.
+              Only ART-documented allergies trigger order checks.
+              A safety-critical domain object with its own dedicated application.
+            </p>
+            <p class="text-xs font-mono text-neutral-400 dark:text-neutral-500">GMRA</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Code Systems & Vocabulary
+        </h2>
+        <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+          RPMS manages multiple clinical vocabularies as first-class domain objects — not hard-coded strings.
+          Each code system has an annual update cycle managed by a dedicated package.
+        </p>
+        <div class="space-y-3">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-4">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">ICD / AUM</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">ICD Diagnosis Codes</p>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Annual updates via ICD Update package (AUM). Used for diagnosis coding on every encounter and for population reporting.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-4">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">CPT / ACPT</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">Procedure Codes (restricted)</p>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">AMA-owned. Requires separate license. Annual updates. Used for billing and reporting. Restricted from open distribution.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-4">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">SNOMED / BSTS</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">SNOMED Clinical Terms</p>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">IHS Standard Terminology package. Used for interoperability with external systems and CCDA document exchange.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-4">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">Taxonomy / ATX</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">IHS Taxonomy</p>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">IHS-specific grouping of ICD codes into clinically meaningful categories for reporting and population health analysis.</p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-4">
+            <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">BCQM</code>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">IHS Code Mapping</p>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Maps between IHS-specific codes and standard vocabularies. The interoperability translation layer.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Document Exchange Evolution
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-4">
+            RPMS's document exchange standard has evolved through three generations — a concrete lesson in standards migration that any health IT architect will eventually face:
+          </p>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-24 pt-0.5">BJMD (2011)</span>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">C32/CCD Clinical Summary — the first structured patient summary format. XML-based, HL7 CCD standard.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-24 pt-0.5">BCCD (2015)</span>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Consolidated CDA (CCDA) — the Meaningful Use-era standard. Richer structure, more sections, ONC-required for certification.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-24 pt-0.5">BREH (2023)</span>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">RPMS EHI Export — Electronic Health Information export per 21st Century Cures Act. The current interoperability standard.</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Pattern:</strong>
+            Standards migrate. Design your domain model to be standard-agnostic — the export format should be a view over the domain model, not baked into it.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          FileMan: Schema as Data
+        </h2>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-3">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            VA FileMan stores its schema — the definition of every file, field, and relationship — inside the database itself as data.
+            This makes the schema introspectable, queryable, and modifiable at runtime without code changes.
+          </p>
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            Every RPMS FileMan file has a number (e.g., File 2 is the Patient file, File 9000010 is the Visit file).
+            These numbers are stable identifiers — the equivalent of table names in a relational schema, but with guaranteed stability across all RPMS sites.
+          </p>
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Pattern:</strong>
+            A self-describing data store with a stable, numeric schema identity.
+            Modern equivalents: schema registries, event schema versioning, database migration frameworks.
+            The key insight is that <em>the schema is part of the domain model</em> — not a separate concern.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

@@ -1,0 +1,232 @@
+---
+layout: default
+title: "Clinical Workflow Patterns"
+description: "Real RPMS clinical workflows distilled as reusable UX and process patterns for healthcare system design."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Clinical Workflow Patterns
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS clinical workflows represent decades of hard-won operational knowledge from resource-constrained, high-stakes healthcare settings.
+        These patterns are worth understanding and replicating — not the specific MUMPS implementation, but the operational logic underneath.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Pre-Visit Preparation
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Diabetes Clinic scenario — scheduling through patient arrival
+        </p>
+        <div class="space-y-4">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">Day −1 / 1pm</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Appointment list generated from Outpatient Scheduling
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  Medical records technician pulls tomorrow's Diabetes Clinic list.
+                  For each patient, the Diabetes Standard Health Summary is printed — a pre-computed snapshot of the patient's current status, active problems, medications, and outstanding preventive care.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">Day −1 / 4pm</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Nurse coordinator pre-stages care
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  Reviews each Health Summary. Completes lab slips and referral forms. Orders immunizations.
+                  Everything is ready before patients arrive — reducing appointment time and clinical cognitive load.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            The Health Summary is a <em>pre-computed patient snapshot</em> — not a live query, but a generated document representing the patient's state at a point in time.
+            This pattern works well in low-bandwidth, offline-capable environments and reduces per-encounter query load.
+            Modern equivalent: a patient card or care gap report generated nightly.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Encounter-at-Arrival
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Walk-in / urgent care workflow
+        </p>
+        <div class="space-y-4">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">8:05 am</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Walk-in arrives — PCC Health Summary printed immediately
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  As the chart is pulled, the Health Summary generates automatically.
+                  The triage nurse checks it for: chief complaint context, overdue immunizations, outstanding preventive care, current medications and allergies.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">8:05 am</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Triage nurse orders labs
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  Lab orders placed at triage — before the provider sees the patient.
+                  Results will be ready by the time the provider encounters the patient.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">8:25 am</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Provider accesses results at point of care — no phone call needed
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  Lab results print at the lab printer the moment they are reported.
+                  The physician accesses radiology results at a terminal — not by calling the radiologist.
+                  Updates Problem List and adds Related Notes in the same workflow.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            The encounter begins at arrival, not when the provider enters the room.
+            Data collection, order entry, and care gap identification happen in parallel — distributed across triage nurse, lab, and provider without duplication.
+            This is a pull-based, event-driven workflow long before those terms existed in software design.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: Cohort Query at Point of Care
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Q-Man / population health query — finding patients who share a condition
+        </p>
+        <div class="space-y-4">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">9:48 am</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Clinician identifies a care gap for one patient — suspects others have the same gap
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  A 38-year-old woman with dysfunctional uterine bleeding has not had tissue sampling ordered.
+                  The nurse clinician recalls two similar recent cases — but can't name them.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">9:55 am</span>
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  Q-Man query returns the cohort in minutes
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  Using PCC Query (Q-Man), the clinician enters criteria: diagnosis, missing order type, date range.
+                  Within minutes: two patients identified who need tissue sampling.
+                  The care gap becomes an actionable list.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Population health queries available to clinicians at the point of care — not just to administrators or analysts.
+            Q-Man is a proto-population-health tool: define criteria, find a cohort, act.
+            Modern equivalent: care gap lists, risk stratification dashboards, panel management tools.
+            The key insight is that <em>the same data used for individual care should also be queryable across the population</em>.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Pattern: External Clinical Decision Support
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Public health integration — connecting to CDC at point of care
+        </p>
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 mb-4">
+          <div class="flex gap-4">
+            <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-16 pt-0.5">11:30 am</span>
+            <div>
+              <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                Confirmed meningococcal case — public health nurse retrieves CDC guidelines in-workflow
+              </p>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                Rather than switching context to a browser, the nurse accesses the CDC Prevention Guidelines directly through RPMS's Network Communication capability.
+                Guidelines retrieved, printed, and orders placed — without leaving the patient encounter workflow.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Domain Pattern:</strong>
+            Clinical decision support sourced from authoritative external references, surfaced in-workflow.
+            The pattern predates modern CDS Hooks by decades.
+            The principle is the same: the right guidance, at the right moment, without leaving the care workflow.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          BPMN Diagram: Diabetes Clinic Visit Flow
+        </h2>
+        <div class="rounded-lg border border-dashed border-neutral-300 dark:border-neutral-700 p-8 text-center">
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+            BPMN diagram placeholder — Diabetes Clinic visit flow
+          </p>
+          <p class="mt-2 text-xs text-neutral-400 dark:text-neutral-500">
+            Swimlanes: Medical Records · Nurse Coordinator · Triage Nurse · Provider · Lab
+          </p>
+          <p class="mt-1 text-xs text-neutral-400 dark:text-neutral-500">
+            Key events: Appointment list generated → Health Summary printed → Pre-visit prep → Patient arrival → Triage → Lab orders → Provider encounter → Result access → Problem list update → Notes documented
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
