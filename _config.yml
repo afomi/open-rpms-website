@@ -4,7 +4,13 @@ baseurl: ""
 
 title: "OpenRPMS"
 
-description: "Modern documentation and reference for the Indian Health Service Resource and Patient Management System (RPMS)."
+description: "Open-source documentation and reference for the Indian Health Service (IHS) Resource and Patient Management System (RPMS) and Electronic Health Record (EHR) — clinical workflows, domain model, and architecture for open healthcare."
+
+author:
+  name: "Civic Studio"
+  url: "https://civic.studio"
+
+keywords: "open source healthcare, Indian Health Service, IHS, RPMS, EHR, Electronic Health Record, Resource and Patient Management System, clinical workflows, open healthcare, tribal health, Civic Studio"
 
 permalink: /blog/:title/
 
