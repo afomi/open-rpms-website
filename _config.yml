@@ -17,6 +17,19 @@ permalink: /blog/:title/
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-datapage-generator
+
+page_gen:
+  - data: packages
+    template: package
+    name: namespace
+    dir: packages
+    title: name
+  - data: workflows
+    template: workflow
+    name: id
+    dir: workflows
+    title: name
 
 exclude:
   - package.json

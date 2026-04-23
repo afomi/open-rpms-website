@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://openrpms.org/bpmn"
+             id="pre-visit-preparation">
+
+  <collaboration id="Collaboration_PreVisit">
+    <participant id="Lane_MedRecords" name="Medical Records" processRef="Process_MedRecords" />
+    <participant id="Lane_NurseCoord" name="Nurse Coordinator" processRef="Process_NurseCoord" />
+  </collaboration>
+
+  <process id="Process_MedRecords" isExecutable="false">
+    <startEvent id="Start_PullList" name="Day −1 1pm">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <task id="Task_PullAppointmentList" name="Pull tomorrow&#39;s Diabetes Clinic appointment list">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_2</outgoing>
+    </task>
+    <task id="Task_PrintHealthSummary" name="Print Diabetes Standard Health Summary per patient">
+      <incoming>Flow_2</incoming>
+      <outgoing>Flow_3</outgoing>
+    </task>
+    <endEvent id="End_SummariesReady" name="Summaries ready for coordinator">
+      <incoming>Flow_3</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1" sourceRef="Start_PullList" targetRef="Task_PullAppointmentList" />
+    <sequenceFlow id="Flow_2" sourceRef="Task_PullAppointmentList" targetRef="Task_PrintHealthSummary" />
+    <sequenceFlow id="Flow_3" sourceRef="Task_PrintHealthSummary" targetRef="End_SummariesReady" />
+  </process>
+
+  <process id="Process_NurseCoord" isExecutable="false">
+    <startEvent id="Start_ReviewSummaries" name="Day −1 4pm">
+      <outgoing>Flow_4</outgoing>
+    </startEvent>
+    <task id="Task_ReviewSummaries" name="Review each Health Summary">
+      <incoming>Flow_4</incoming>
+      <outgoing>Flow_5</outgoing>
+    </task>
+    <task id="Task_PrepLabSlips" name="Complete lab slips, referral forms, order immunizations">
+      <incoming>Flow_5</incoming>
+      <outgoing>Flow_6</outgoing>
+    </task>
+    <endEvent id="End_PreVisitComplete" name="Pre-visit prep complete">
+      <incoming>Flow_6</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_4" sourceRef="Start_ReviewSummaries" targetRef="Task_ReviewSummaries" />
+    <sequenceFlow id="Flow_5" sourceRef="Task_ReviewSummaries" targetRef="Task_PrepLabSlips" />
+    <sequenceFlow id="Flow_6" sourceRef="Task_PrepLabSlips" targetRef="End_PreVisitComplete" />
+  </process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PreVisit">
+      <bpmndi:BPMNShape id="Shape_MedRecords" bpmnElement="Lane_MedRecords" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="720" height="160" />
+        <bpmndi:BPMNLabel><dc:Bounds x="170" y="145" width="30" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_NurseCoord" bpmnElement="Lane_NurseCoord" isHorizontal="true">
+        <dc:Bounds x="160" y="240" width="720" height="160" />
+        <bpmndi:BPMNLabel><dc:Bounds x="170" y="305" width="30" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Start_PullList" bpmnElement="Start_PullList">
+        <dc:Bounds x="232" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="218" y="185" width="65" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_PullAppointmentList" bpmnElement="Task_PullAppointmentList">
+        <dc:Bounds x="320" y="120" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_PrintHealthSummary" bpmnElement="Task_PrintHealthSummary">
+        <dc:Bounds x="540" y="120" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_End_SummariesReady" bpmnElement="End_SummariesReady">
+        <dc:Bounds x="762" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="740" y="185" width="80" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Start_ReviewSummaries" bpmnElement="Start_ReviewSummaries">
+        <dc:Bounds x="232" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="218" y="345" width="65" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_ReviewSummaries" bpmnElement="Task_ReviewSummaries">
+        <dc:Bounds x="320" y="280" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_PrepLabSlips" bpmnElement="Task_PrepLabSlips">
+        <dc:Bounds x="540" y="280" width="160" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_End_PreVisitComplete" bpmnElement="End_PreVisitComplete">
+        <dc:Bounds x="762" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="740" y="345" width="80" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_Flow_1" bpmnElement="Flow_1">
+        <di:waypoint x="268" y="160" /><di:waypoint x="320" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_2" bpmnElement="Flow_2">
+        <di:waypoint x="480" y="160" /><di:waypoint x="540" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_3" bpmnElement="Flow_3">
+        <di:waypoint x="700" y="160" /><di:waypoint x="762" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_4" bpmnElement="Flow_4">
+        <di:waypoint x="268" y="320" /><di:waypoint x="320" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_5" bpmnElement="Flow_5">
+        <di:waypoint x="480" y="320" /><di:waypoint x="540" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_6" bpmnElement="Flow_6">
+        <di:waypoint x="700" y="320" /><di:waypoint x="762" y="320" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

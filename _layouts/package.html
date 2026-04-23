@@ -1,0 +1,142 @@
+---
+layout: default
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-4">
+      <a
+        href="{{ "/packages" | relative_url }}"
+        class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+      >
+        &larr; All packages
+      </a>
+    </div>
+
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4 flex-wrap">
+        <code class="font-mono text-sm font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 px-3 py-1.5 rounded">
+          {{ page.namespace }}
+        </code>
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
+          {% if page.kind == 'clinical' %}
+            bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-600/20 dark:ring-blue-400/20
+          {% elsif page.kind == 'administrative' %}
+            bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 ring-1 ring-inset ring-amber-600/20 dark:ring-amber-400/20
+          {% else %}
+            bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 ring-1 ring-inset ring-neutral-500/20
+          {% endif %}
+        ">
+          {{ page.kind }}
+        </span>
+        {% if page.version %}
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 ring-1 ring-inset ring-neutral-500/20">
+          v{{ page.version }}
+        </span>
+        {% endif %}
+        {% if page.cert_year %}
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 ring-1 ring-inset ring-green-600/20 dark:ring-green-400/20">
+          {{ page.cert_year }} certified
+        </span>
+        {% endif %}
+        {% if page.restricted %}
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-1 ring-inset ring-red-600/20 dark:ring-red-400/20">
+          restricted
+        </span>
+        {% endif %}
+        {% if page.deprecated %}
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-500 ring-1 ring-inset ring-neutral-500/20 line-through">
+          deprecated
+        </span>
+        {% endif %}
+      </div>
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        {{ page.name }}
+      </h1>
+      {% if page.description %}
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        {{ page.description }}
+      </p>
+      {% endif %}
+      {% if page.restricted and page.restricted_note %}
+      <div class="mt-4 flex gap-2 items-start rounded-lg bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 px-4 py-3">
+        <span class="text-sm text-red-700 dark:text-red-300">
+          {{ page.restricted_note }}
+        </span>
+      </div>
+      {% endif %}
+      {% if page.deprecated and page.deprecated_note %}
+      <div class="mt-4 flex gap-2 items-start rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 px-4 py-3">
+        <span class="text-sm text-neutral-600 dark:text-neutral-400">
+          {{ page.deprecated_note }}
+        </span>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="space-y-8">
+
+      {% if page.purpose %}
+      <section>
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+          Purpose
+        </h2>
+        <p class="text-neutral-700 dark:text-neutral-300">
+          {{ page.purpose }}
+        </p>
+      </section>
+      {% endif %}
+
+      {% if page.workflows %}
+      <section>
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+          Related Workflows
+        </h2>
+        <ul class="space-y-2">
+          {% for workflow in page.workflows %}
+          <li>
+            <a
+              href="{{ "/workflows" | relative_url }}#{{ workflow | slugify }}"
+              class="text-sm text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 underline"
+            >
+              {{ workflow }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if page.personas %}
+      <section>
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+          Who Uses This
+        </h2>
+        <ul class="space-y-1">
+          {% for persona in page.personas %}
+          <li class="text-sm text-neutral-700 dark:text-neutral-300">
+            {{ persona }}
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if page.notes %}
+      <section>
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+          Notes
+        </h2>
+        <p class="text-neutral-700 dark:text-neutral-300">
+          {{ page.notes }}
+        </p>
+      </section>
+      {% endif %}
+
+    </div>
+
+  </main>
+</div>

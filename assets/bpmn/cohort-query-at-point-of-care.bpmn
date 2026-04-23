@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://openrpms.org/bpmn"
+             id="cohort-query-at-point-of-care">
+
+  <collaboration id="Collab_CohortQuery">
+    <participant id="Part_Clinician" name="Clinician" processRef="Process_Clinician" />
+    <participant id="Part_System" name="RPMS / Q-Man" processRef="Process_System" />
+  </collaboration>
+
+  <process id="Process_Clinician" isExecutable="false">
+    <startEvent id="Start_CareGap" name="Care gap identified for one patient">
+      <outgoing>F1</outgoing>
+    </startEvent>
+    <task id="Task_EnterCriteria" name="Enter query criteria: diagnosis, missing order, date range">
+      <incoming>F1</incoming>
+      <outgoing>F2</outgoing>
+    </task>
+    <task id="Task_ReviewCohort" name="Review returned cohort — act on care gaps">
+      <incoming>F2</incoming>
+      <outgoing>F3</outgoing>
+    </task>
+    <endEvent id="End_CareGapsActioned" name="Care gaps actioned">
+      <incoming>F3</incoming>
+    </endEvent>
+    <sequenceFlow id="F1" sourceRef="Start_CareGap" targetRef="Task_EnterCriteria" />
+    <sequenceFlow id="F2" sourceRef="Task_EnterCriteria" targetRef="Task_ReviewCohort" />
+    <sequenceFlow id="F3" sourceRef="Task_ReviewCohort" targetRef="End_CareGapsActioned" />
+  </process>
+
+  <process id="Process_System" isExecutable="false">
+    <startEvent id="Start_QueryReceived" name="Query submitted">
+      <outgoing>F4</outgoing>
+    </startEvent>
+    <task id="Task_RunQuery" name="Execute PCC database query across patient population">
+      <incoming>F4</incoming>
+      <outgoing>F5</outgoing>
+    </task>
+    <endEvent id="End_CohortReturned" name="Cohort list returned to clinician">
+      <incoming>F5</incoming>
+    </endEvent>
+    <sequenceFlow id="F4" sourceRef="Start_QueryReceived" targetRef="Task_RunQuery" />
+    <sequenceFlow id="F5" sourceRef="Task_RunQuery" targetRef="End_CohortReturned" />
+  </process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collab_CohortQuery">
+      <bpmndi:BPMNShape id="S_Clinician" bpmnElement="Part_Clinician" isHorizontal="true"><dc:Bounds x="160" y="80" width="760" height="160" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_System" bpmnElement="Part_System" isHorizontal="true"><dc:Bounds x="160" y="240" width="760" height="160" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_CareGap" bpmnElement="Start_CareGap"><dc:Bounds x="212" y="142" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="190" y="185" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_EnterCriteria" bpmnElement="Task_EnterCriteria"><dc:Bounds x="300" y="120" width="180" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_ReviewCohort" bpmnElement="Task_ReviewCohort"><dc:Bounds x="620" y="120" width="180" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_CareGapsActioned" bpmnElement="End_CareGapsActioned"><dc:Bounds x="852" y="142" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="830" y="185" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_QueryReceived" bpmnElement="Start_QueryReceived"><dc:Bounds x="480" y="302" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="460" y="345" width="76" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_RunQuery" bpmnElement="Task_RunQuery"><dc:Bounds x="560" y="280" width="180" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_CohortReturned" bpmnElement="End_CohortReturned"><dc:Bounds x="792" y="302" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="770" y="345" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="E_F1" bpmnElement="F1"><di:waypoint x="248" y="160" /><di:waypoint x="300" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F2" bpmnElement="F2"><di:waypoint x="480" y="160" /><di:waypoint x="620" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F3" bpmnElement="F3"><di:waypoint x="800" y="160" /><di:waypoint x="852" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F4" bpmnElement="F4"><di:waypoint x="516" y="320" /><di:waypoint x="560" y="320" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F5" bpmnElement="F5"><di:waypoint x="740" y="320" /><di:waypoint x="792" y="320" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

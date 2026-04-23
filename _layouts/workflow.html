@@ -1,0 +1,156 @@
+---
+layout: default
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/bpmn-js@18.15.0/dist/assets/bpmn-js.css"
+>
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-4">
+      <a
+        href="{{ "/workflows" | relative_url }}"
+        class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+      >
+        &larr; All workflows
+      </a>
+    </div>
+
+    <div class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
+          {% if page.category == 'clinical' %}
+            bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-600/20 dark:ring-blue-400/20
+          {% else %}
+            bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 ring-1 ring-inset ring-amber-600/20 dark:ring-amber-400/20
+          {% endif %}
+        ">
+          {{ page.category }}
+        </span>
+      </div>
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        {{ page.name }}
+      </h1>
+      {% if page.scenario %}
+      <p class="mt-4 text-neutral-500 dark:text-neutral-400">
+        {{ page.scenario }}
+      </p>
+      {% endif %}
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+            Process Diagram
+          </h2>
+          <a
+            href="{{ "/assets/bpmn/" | append: page.id | append: ".bpmn" | relative_url }}"
+            download
+            class="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 underline"
+          >
+            Download .bpmn
+          </a>
+        </div>
+        <div
+          id="bpmn-canvas"
+          class="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900"
+          style="height: 340px;"
+        ></div>
+        <p id="bpmn-error" class="hidden mt-2 text-xs text-neutral-400 dark:text-neutral-500 text-center">
+          Diagram not yet available.
+        </p>
+      </section>
+
+      {% if page.steps %}
+      <section>
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4">
+          Steps
+        </h2>
+        <div class="space-y-4">
+          {% for step in page.steps %}
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <div class="flex gap-4">
+              {% if step.time %}
+              <span class="shrink-0 font-mono text-xs text-neutral-400 dark:text-neutral-500 w-20 pt-0.5">
+                {{ step.time }}
+              </span>
+              {% endif %}
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-white">
+                  {{ step.title }}
+                </p>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  {{ step.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if page.pattern %}
+      <section class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-6">
+        <h2 class="text-sm font-bold text-neutral-900 dark:text-white mb-2">
+          Domain Pattern: {{ page.pattern.title }}
+        </h2>
+        <p class="text-sm text-neutral-700 dark:text-neutral-300">
+          {{ page.pattern.description }}
+        </p>
+      </section>
+      {% endif %}
+
+      {% if page.rpms_packages %}
+      <section>
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+          RPMS Packages
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {% for ns in page.rpms_packages %}
+          <a
+            href="{{ "/packages/" | append: ns | relative_url }}"
+            class="inline-flex items-center font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 px-3 py-1.5 rounded transition-colors"
+          >
+            {{ ns }}
+          </a>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+    </div>
+
+  </main>
+</div>
+
+<script src="https://unpkg.com/bpmn-js@18.15.0/dist/bpmn-viewer.development.js"></script>
+<script>
+  (function () {
+    var viewer = new BpmnJS({ container: '#bpmn-canvas' });
+    var bpmnUrl = '{{ "/assets/bpmn/" | append: page.id | append: ".bpmn" | relative_url }}';
+
+    fetch(bpmnUrl)
+      .then(function (res) {
+        if (!res.ok) throw new Error('not found');
+        return res.text();
+      })
+      .then(function (xml) {
+        return viewer.importXML(xml);
+      })
+      .then(function () {
+        viewer.get('canvas').zoom('fit-viewport');
+      })
+      .catch(function () {
+        document.getElementById('bpmn-canvas').style.display = 'none';
+        document.getElementById('bpmn-error').classList.remove('hidden');
+      });
+  })();
+</script>

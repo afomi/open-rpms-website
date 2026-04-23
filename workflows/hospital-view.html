@@ -1,0 +1,155 @@
+---
+layout: default
+title: "Hospital-Wide Process View"
+description: "All RPMS clinical and administrative workflow processes on one canvas."
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/bpmn-js@18.15.0/dist/assets/bpmn-js.css"
+>
+
+<style>
+  .bpmn-panel {
+    height: 280px;
+  }
+  .bpmn-panel .bjs-container {
+    border-radius: 0.5rem;
+  }
+</style>
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+
+    <div class="mb-4">
+      <a
+        href="{{ "/workflows" | relative_url }}"
+        class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+      >
+        &larr; All workflows
+      </a>
+    </div>
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Hospital-Wide Process View
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        All clinical and administrative workflows on one canvas.
+        Click any diagram to open the full workflow.
+      </p>
+    </div>
+
+    {% assign clinical_workflows = site.data.workflows | where: "category", "clinical" %}
+    {% assign administrative_workflows = site.data.workflows | where: "category", "administrative" %}
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-8">
+        Clinical
+      </h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+        {% for workflow in clinical_workflows %}
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+          <div class="px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+            <div>
+              <a
+                href="{{ "/workflows/" | append: workflow.id | relative_url }}"
+                class="text-sm font-semibold text-neutral-900 dark:text-white hover:underline"
+              >
+                {{ workflow.name }}
+              </a>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                {{ workflow.scenario }}
+              </p>
+            </div>
+            <a
+              href="{{ "/assets/bpmn/" | append: workflow.id | append: ".bpmn" | relative_url }}"
+              download
+              class="shrink-0 ml-4 text-xs text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 underline"
+            >
+              .bpmn
+            </a>
+          </div>
+          <div
+            id="canvas-{{ workflow.id }}"
+            class="bpmn-panel bg-neutral-50 dark:bg-neutral-900"
+            data-bpmn-url="{{ "/assets/bpmn/" | append: workflow.id | append: ".bpmn" | relative_url }}"
+            data-workflow-href="{{ "/workflows/" | append: workflow.id | relative_url }}"
+          ></div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-8">
+        Administrative
+      </h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+        {% for workflow in administrative_workflows %}
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+          <div class="px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+            <div>
+              <a
+                href="{{ "/workflows/" | append: workflow.id | relative_url }}"
+                class="text-sm font-semibold text-neutral-900 dark:text-white hover:underline"
+              >
+                {{ workflow.name }}
+              </a>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                {{ workflow.scenario }}
+              </p>
+            </div>
+            <a
+              href="{{ "/assets/bpmn/" | append: workflow.id | append: ".bpmn" | relative_url }}"
+              download
+              class="shrink-0 ml-4 text-xs text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 underline"
+            >
+              .bpmn
+            </a>
+          </div>
+          <div
+            id="canvas-{{ workflow.id }}"
+            class="bpmn-panel bg-neutral-50 dark:bg-neutral-900"
+            data-bpmn-url="{{ "/assets/bpmn/" | append: workflow.id | append: ".bpmn" | relative_url }}"
+            data-workflow-href="{{ "/workflows/" | append: workflow.id | relative_url }}"
+          ></div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="https://unpkg.com/bpmn-js@18.15.0/dist/bpmn-viewer.development.js"></script>
+<script>
+  document.querySelectorAll('.bpmn-panel').forEach(function (panel) {
+    var url = panel.dataset.bpmnUrl;
+    var href = panel.dataset.workflowHref;
+    var viewer = new BpmnJS({ container: panel });
+
+    fetch(url)
+      .then(function (res) {
+        if (!res.ok) throw new Error('not found');
+        return res.text();
+      })
+      .then(function (xml) {
+        return viewer.importXML(xml);
+      })
+      .then(function () {
+        viewer.get('canvas').zoom('fit-viewport');
+        // clicking the diagram navigates to the workflow page
+        panel.style.cursor = 'pointer';
+        panel.addEventListener('click', function () {
+          window.location.href = href;
+        });
+      })
+      .catch(function () {
+        panel.innerHTML =
+          '<p class="flex items-center justify-center h-full text-xs text-neutral-400 dark:text-neutral-600">Diagram not yet available</p>';
+      });
+  });
+</script>

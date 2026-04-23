@@ -1,0 +1,153 @@
+[
+  {
+    "id": "pre-visit-preparation",
+    "name": "Pre-Visit Preparation",
+    "category": "clinical",
+    "scenario": "Diabetes Clinic scenario — scheduling through patient arrival",
+    "rpms_packages": ["BDM", "APCH", "BJPC"],
+    "steps": [
+      {
+        "time": "Day −1 / 1pm",
+        "title": "Appointment list generated from Outpatient Scheduling",
+        "description": "Medical records technician pulls tomorrow's Diabetes Clinic list. For each patient, the Diabetes Standard Health Summary is printed — a pre-computed snapshot of the patient's current status, active problems, medications, and outstanding preventive care."
+      },
+      {
+        "time": "Day −1 / 4pm",
+        "title": "Nurse coordinator pre-stages care",
+        "description": "Reviews each Health Summary. Completes lab slips and referral forms. Orders immunizations. Everything is ready before patients arrive — reducing appointment time and clinical cognitive load."
+      }
+    ],
+    "pattern": {
+      "title": "Pre-Computed Patient Snapshot",
+      "description": "The Health Summary is a pre-computed patient snapshot — not a live query, but a generated document representing the patient's state at a point in time. This pattern works well in low-bandwidth, offline-capable environments and reduces per-encounter query load. Modern equivalent: a patient card or care gap report generated nightly."
+    }
+  },
+  {
+    "id": "encounter-at-arrival",
+    "name": "Encounter-at-Arrival",
+    "category": "clinical",
+    "scenario": "Walk-in / urgent care workflow",
+    "rpms_packages": ["APCH", "LR", "RA", "BJPC"],
+    "steps": [
+      {
+        "time": "8:05 am",
+        "title": "Walk-in arrives — PCC Health Summary printed immediately",
+        "description": "As the chart is pulled, the Health Summary generates automatically. The triage nurse checks it for: chief complaint context, overdue immunizations, outstanding preventive care, current medications and allergies."
+      },
+      {
+        "time": "8:05 am",
+        "title": "Triage nurse orders labs",
+        "description": "Lab orders placed at triage — before the provider sees the patient. Results will be ready by the time the provider encounters the patient."
+      },
+      {
+        "time": "8:25 am",
+        "title": "Provider accesses results at point of care — no phone call needed",
+        "description": "Lab results print at the lab printer the moment they are reported. The physician accesses radiology results at a terminal — not by calling the radiologist. Updates Problem List and adds Related Notes in the same workflow."
+      }
+    ],
+    "pattern": {
+      "title": "Distributed Parallel Care Entry",
+      "description": "The encounter begins at arrival, not when the provider enters the room. Data collection, order entry, and care gap identification happen in parallel — distributed across triage nurse, lab, and provider without duplication. This is a pull-based, event-driven workflow long before those terms existed in software design."
+    }
+  },
+  {
+    "id": "cohort-query-at-point-of-care",
+    "name": "Cohort Query at Point of Care",
+    "category": "clinical",
+    "scenario": "Q-Man / population health query — finding patients who share a condition",
+    "rpms_packages": ["AMQQ", "BQI"],
+    "steps": [
+      {
+        "time": "9:48 am",
+        "title": "Clinician identifies a care gap for one patient — suspects others have the same gap",
+        "description": "A 38-year-old woman with dysfunctional uterine bleeding has not had tissue sampling ordered. The nurse clinician recalls two similar recent cases — but can't name them."
+      },
+      {
+        "time": "9:55 am",
+        "title": "Q-Man query returns the cohort in minutes",
+        "description": "Using PCC Query (Q-Man), the clinician enters criteria: diagnosis, missing order type, date range. Within minutes: two patients identified who need tissue sampling. The care gap becomes an actionable list."
+      }
+    ],
+    "pattern": {
+      "title": "Population Query at Point of Care",
+      "description": "Population health queries available to clinicians at the point of care — not just to administrators or analysts. Q-Man is a proto-population-health tool: define criteria, find a cohort, act. Modern equivalent: care gap lists, risk stratification dashboards, panel management tools. The key insight is that the same data used for individual care should also be queryable across the population."
+    }
+  },
+  {
+    "id": "external-clinical-decision-support",
+    "name": "External Clinical Decision Support",
+    "category": "clinical",
+    "scenario": "Public health integration — connecting to CDC at point of care",
+    "rpms_packages": ["BJPC", "GIS"],
+    "steps": [
+      {
+        "time": "11:30 am",
+        "title": "Confirmed meningococcal case — public health nurse retrieves CDC guidelines in-workflow",
+        "description": "Rather than switching context to a browser, the nurse accesses the CDC Prevention Guidelines directly through RPMS's Network Communication capability. Guidelines retrieved, printed, and orders placed — without leaving the patient encounter workflow."
+      }
+    ],
+    "pattern": {
+      "title": "In-Workflow External Reference",
+      "description": "Clinical decision support sourced from authoritative external references, surfaced in-workflow. The pattern predates modern CDS Hooks by decades. The principle is the same: the right guidance, at the right moment, without leaving the care workflow."
+    }
+  },
+  {
+    "id": "concurrent-multi-clerk-registration",
+    "name": "Concurrent Multi-Clerk Registration",
+    "category": "administrative",
+    "scenario": "Patient Registration (AG) — multiple departments, one record",
+    "rpms_packages": ["AG", "AGMP", "PIMS"],
+    "steps": [
+      {
+        "time": "2:15 pm",
+        "title": "Three clinic clerks access the same patient record simultaneously",
+        "description": "Registration clerks in the Diabetes, Urgent Care, and Family Practice clinics are all using Patient Registration at the same time. Each accesses: medical record number, demographics, tribal membership, and insurance eligibility. No duplicate data entry. No scheduling conflicts. One source of truth."
+      },
+      {
+        "time": "2:15 pm",
+        "title": "Medical records clerk establishes new chart from earlier capture",
+        "description": "New-patient data captured earlier (at the point of first contact) is used to establish a formal chart record. Data collection and record formalization are decoupled — capture happens first, reconciliation follows."
+      }
+    ],
+    "pattern": {
+      "title": "Single Record, Multi-Department Access",
+      "description": "A single patient record shared across all departments in real time — no department-specific silos. The patient identity data model includes fields specific to the IHS context: tribal membership, IHS eligibility, and Contract Health Services authorization. These are domain objects that don't exist in generic EHR frameworks."
+    }
+  },
+  {
+    "id": "credential-tracking-with-expiration-alerts",
+    "name": "Credential Tracking with Expiration Alerts",
+    "category": "administrative",
+    "scenario": "Medical Staff Credentials — workforce compliance as a domain operation",
+    "rpms_packages": ["BPRM"],
+    "steps": [
+      {
+        "time": "4:45 pm",
+        "title": "Administration clerk runs credential status report",
+        "description": "Medical Staff Credentials produces an updated report on all credential files. Automated alerts are sent to providers whose licenses are due for renewal or who need to re-apply for privileges. The system initiates the compliance action — staff don't need to remember."
+      }
+    ],
+    "pattern": {
+      "title": "Time-Based Event Notification",
+      "description": "Credential expiration as a time-based event that triggers a notification workflow. The domain objects are: Provider, Credential, Privilege, ExpirationDate, Alert. Modern equivalent: scheduled jobs that check credential state and dispatch notifications — but in RPMS this was built as a first-class healthcare administration operation, not an afterthought."
+    }
+  },
+  {
+    "id": "administrative-request-routing",
+    "name": "Administrative Request Routing",
+    "category": "administrative",
+    "scenario": "Administrative Resource Management System (ARMS) — travel and resource requests",
+    "rpms_packages": ["ACR"],
+    "steps": [
+      {
+        "time": "4:45 pm",
+        "title": "Travel request entered — system auto-computes per diem and routes for approval",
+        "description": "Staff member requests to attend a training session. ARMS automatically computes the approved per diem and lodging rates for the training location. Clerk enters remaining travel information. Request is electronically routed for approval — no paper forms, no manual rate lookup."
+      }
+    ],
+    "pattern": {
+      "title": "Request → Derived Values → Approval Routing",
+      "description": "Request → auto-computation of derived values → electronic approval routing. The domain objects are: Request, Location, PerDiemRate, ApprovalWorkflow, Approver. This is a general approval workflow pattern applied to healthcare administration. The auto-computation of rates from location data is a rules engine embedded in the domain model."
+    }
+  }
+]

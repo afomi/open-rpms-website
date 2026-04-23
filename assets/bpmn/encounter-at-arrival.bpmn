@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://openrpms.org/bpmn"
+             id="encounter-at-arrival">
+
+  <collaboration id="Collaboration_Encounter">
+    <participant id="Part_TriageNurse" name="Triage Nurse" processRef="Process_Triage" />
+    <participant id="Part_Lab" name="Laboratory" processRef="Process_Lab" />
+    <participant id="Part_Provider" name="Provider" processRef="Process_Provider" />
+  </collaboration>
+
+  <process id="Process_Triage" isExecutable="false">
+    <startEvent id="Start_Arrival" name="8:05am Walk-in arrives"><outgoing>F1</outgoing></startEvent>
+    <task id="Task_PrintSummary" name="Print PCC Health Summary"><incoming>F1</incoming><outgoing>F2</outgoing></task>
+    <task id="Task_ReviewSummary" name="Review summary: allergies, meds, care gaps"><incoming>F2</incoming><outgoing>F3</outgoing></task>
+    <task id="Task_OrderLabs" name="Place lab orders at triage"><incoming>F3</incoming><outgoing>F4</outgoing></task>
+    <endEvent id="End_Triage" name="Triage complete"><incoming>F4</incoming></endEvent>
+    <sequenceFlow id="F1" sourceRef="Start_Arrival" targetRef="Task_PrintSummary" />
+    <sequenceFlow id="F2" sourceRef="Task_PrintSummary" targetRef="Task_ReviewSummary" />
+    <sequenceFlow id="F3" sourceRef="Task_ReviewSummary" targetRef="Task_OrderLabs" />
+    <sequenceFlow id="F4" sourceRef="Task_OrderLabs" targetRef="End_Triage" />
+  </process>
+
+  <process id="Process_Lab" isExecutable="false">
+    <startEvent id="Start_LabOrder" name="Lab order received"><outgoing>F5</outgoing></startEvent>
+    <task id="Task_ProcessSpecimen" name="Process specimen"><incoming>F5</incoming><outgoing>F6</outgoing></task>
+    <task id="Task_ReportResults" name="Report results — print at lab printer"><incoming>F6</incoming><outgoing>F7</outgoing></task>
+    <endEvent id="End_LabDone" name="Results available"><incoming>F7</incoming></endEvent>
+    <sequenceFlow id="F5" sourceRef="Start_LabOrder" targetRef="Task_ProcessSpecimen" />
+    <sequenceFlow id="F6" sourceRef="Task_ProcessSpecimen" targetRef="Task_ReportResults" />
+    <sequenceFlow id="F7" sourceRef="Task_ReportResults" targetRef="End_LabDone" />
+  </process>
+
+  <process id="Process_Provider" isExecutable="false">
+    <startEvent id="Start_ProviderEncounter" name="8:25am Provider sees patient"><outgoing>F8</outgoing></startEvent>
+    <task id="Task_AccessResults" name="Access lab and radiology results at terminal"><incoming>F8</incoming><outgoing>F9</outgoing></task>
+    <task id="Task_UpdateProblemList" name="Update Problem List"><incoming>F9</incoming><outgoing>F10</outgoing></task>
+    <task id="Task_AddNotes" name="Add Related Notes"><incoming>F10</incoming><outgoing>F11</outgoing></task>
+    <endEvent id="End_EncounterDone" name="Encounter documented"><incoming>F11</incoming></endEvent>
+    <sequenceFlow id="F8" sourceRef="Start_ProviderEncounter" targetRef="Task_AccessResults" />
+    <sequenceFlow id="F9" sourceRef="Task_AccessResults" targetRef="Task_UpdateProblemList" />
+    <sequenceFlow id="F10" sourceRef="Task_UpdateProblemList" targetRef="Task_AddNotes" />
+    <sequenceFlow id="F11" sourceRef="Task_AddNotes" targetRef="End_EncounterDone" />
+  </process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_Encounter">
+      <bpmndi:BPMNShape id="S_Triage" bpmnElement="Part_TriageNurse" isHorizontal="true"><dc:Bounds x="160" y="80" width="760" height="140" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Lab" bpmnElement="Part_Lab" isHorizontal="true"><dc:Bounds x="160" y="220" width="760" height="140" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Provider" bpmnElement="Part_Provider" isHorizontal="true"><dc:Bounds x="160" y="360" width="760" height="160" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_Arrival" bpmnElement="Start_Arrival"><dc:Bounds x="212" y="132" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="195" y="175" width="70" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_PrintSummary" bpmnElement="Task_PrintSummary"><dc:Bounds x="300" y="110" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_ReviewSummary" bpmnElement="Task_ReviewSummary"><dc:Bounds x="490" y="110" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_OrderLabs" bpmnElement="Task_OrderLabs"><dc:Bounds x="680" y="110" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_Triage" bpmnElement="End_Triage"><dc:Bounds x="862" y="132" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="845" y="175" width="70" height="14" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_LabOrder" bpmnElement="Start_LabOrder"><dc:Bounds x="212" y="272" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="195" y="315" width="70" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_ProcessSpecimen" bpmnElement="Task_ProcessSpecimen"><dc:Bounds x="490" y="250" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_ReportResults" bpmnElement="Task_ReportResults"><dc:Bounds x="680" y="250" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_LabDone" bpmnElement="End_LabDone"><dc:Bounds x="862" y="272" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="845" y="315" width="70" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_Provider" bpmnElement="Start_ProviderEncounter"><dc:Bounds x="212" y="420" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="195" y="463" width="70" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_AccessResults" bpmnElement="Task_AccessResults"><dc:Bounds x="300" y="398" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_UpdateProblemList" bpmnElement="Task_UpdateProblemList"><dc:Bounds x="490" y="398" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_AddNotes" bpmnElement="Task_AddNotes"><dc:Bounds x="680" y="398" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_EncounterDone" bpmnElement="End_EncounterDone"><dc:Bounds x="862" y="420" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="845" y="463" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="E_F1" bpmnElement="F1"><di:waypoint x="248" y="150" /><di:waypoint x="300" y="150" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F2" bpmnElement="F2"><di:waypoint x="440" y="150" /><di:waypoint x="490" y="150" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F3" bpmnElement="F3"><di:waypoint x="630" y="150" /><di:waypoint x="680" y="150" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F4" bpmnElement="F4"><di:waypoint x="820" y="150" /><di:waypoint x="862" y="150" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F5" bpmnElement="F5"><di:waypoint x="248" y="290" /><di:waypoint x="490" y="290" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F6" bpmnElement="F6"><di:waypoint x="630" y="290" /><di:waypoint x="680" y="290" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F7" bpmnElement="F7"><di:waypoint x="820" y="290" /><di:waypoint x="862" y="290" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F8" bpmnElement="F8"><di:waypoint x="248" y="438" /><di:waypoint x="300" y="438" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F9" bpmnElement="F9"><di:waypoint x="440" y="438" /><di:waypoint x="490" y="438" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F10" bpmnElement="F10"><di:waypoint x="630" y="438" /><di:waypoint x="680" y="438" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F11" bpmnElement="F11"><di:waypoint x="820" y="438" /><di:waypoint x="862" y="438" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

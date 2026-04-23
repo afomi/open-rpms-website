@@ -34,13 +34,24 @@ description: "All 70+ RPMS modules organized by domain: Clinical, Administrative
         Support healthcare planning, delivery, management, and research.
       </p>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {% assign clinical = "Adverse Reaction Tracking|GMRA,Behavioral Health System|AMH,C32/CCD Clinical Summary|BJMD,Care Management Event Tracking|BTPW,Case Management System|ACM,Certified Electronic Record Checker|BCER,Chronic Disease Management|BCDM,Clinical Reporting System|BGP,Community Health Representative System|BCH,Consolidated Clinical Document Architecture|BCCD,Consult/Request Tracking|GMRC,Contract Health Services|ACHS,Current Procedural Terminology|ACPT,Dental Data System|ADE,Dental/EDR Interface|BADE,Diabetes Management System|BDM,Electronic Health Record|EHR,Electronic Laboratory Reporting|BLE,Electronic Prescribing of Controlled Substances|BEPC,Emergency Department Dashboard|BEDD,Emergency Room System|AMER,e-Prescribing Productions|BEPR,Generic Interface System|GIS,Health Summary Components|BHS,HIV Management System|BKM,iCare Population Management|BQI,ICD Lookup System|AICD,ICD Update|AUM,IHS Code Mapping|BCQM,IHS PCC Suite|BJPC,Immunization Data Exchange|BYIM,Immunization System|BI,Laboratory|LR,Master Patient Index|AGMP,Patient Merge|BPM,Patient Registration|AG,PCC Data Entry|APCD,PCC Health Summary|APCH,PCC Management Reports|APCL,Personal Health Record|BPHR,Pharmacy – Controlled Drug Export|BPDM,Pharmacy – National Drug File|PSN,Pharmacy – Outpatient|PSO,Pharmacy – Inpatient Suite|PSJ,Pharmacy Auto Refill|BEX,Pharmacy Automated Dispensing Interface|BOP,Prenatal Care Module|BJPN,Promoting Interoperability Reports|APCM,Radiology|RA,Referred Care Information System|BMC,Release of Information|BRN,RPMS EHI Export|BREH,SNOMED/DTS|BSTS,Taxonomy|ATX,Uniform Data System|BUD,VA Clinical Reminders|PXRM,VA Health Summary|GMTS,Vitals/Measurements|GMRV,Women's Health|BW" | split: "," %}
-        {% for app in clinical %}
-          {% assign parts = app | split: "|" %}
-          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
-            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ parts[1] }}</code>
-            <span class="text-sm text-neutral-800 dark:text-neutral-200">{{ parts[0] }}</span>
-          </div>
+        {% assign clinical_pkgs = site.data.packages | where: "kind", "clinical" | sort: "namespace" %}
+        {% for pkg in clinical_pkgs %}
+          <a
+            href="{{ "/packages/" | append: pkg.namespace | relative_url }}"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+          >
+            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
+            <div class="min-w-0">
+              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
+              {% if pkg.restricted %}
+              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
+              {% elsif pkg.deprecated %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
+              {% elsif pkg.version %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
+              {% endif %}
+            </div>
+          </a>
         {% endfor %}
       </div>
     </section>
@@ -54,13 +65,24 @@ description: "All 70+ RPMS modules organized by domain: Clinical, Administrative
         Support the business of providing healthcare — patient registration, scheduling, billing, credentialing, accounts receivable, and compliance reporting.
       </p>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {% assign admin = "Accounts Receivable|BAR,Administrative Resource Management System|ACR,Benchmark Price Update|APSA,BMXNet|BMX,Computerized Public Health Activity Data|BNI,eCQM Engine|ECQM,eCQM Export Tool|BQRE,Generic Retrieval Utility|GRU,National Site Tracking|BNP,Patient Information Management System|PIMS,Pharmacy Point of Sale|ABSP,Practice Management Application Suite|BPRM,Text Integration Utility|TIU,Third Party Billing|ABM,User Security Audit|BUSA,VA Lexicon Utility|LEX" | split: "," %}
-        {% for app in admin %}
-          {% assign parts = app | split: "|" %}
-          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
-            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ parts[1] }}</code>
-            <span class="text-sm text-neutral-800 dark:text-neutral-200">{{ parts[0] }}</span>
-          </div>
+        {% assign admin_pkgs = site.data.packages | where: "kind", "administrative" | sort: "namespace" %}
+        {% for pkg in admin_pkgs %}
+          <a
+            href="{{ "/packages/" | append: pkg.namespace | relative_url }}"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+          >
+            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
+            <div class="min-w-0">
+              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
+              {% if pkg.restricted %}
+              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
+              {% elsif pkg.deprecated %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
+              {% elsif pkg.version %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
+              {% endif %}
+            </div>
+          </a>
         {% endfor %}
       </div>
     </section>
@@ -75,13 +97,24 @@ description: "All 70+ RPMS modules organized by domain: Clinical, Administrative
         These are the foundation every other application depends on.
       </p>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {% assign infra = "Data Warehouse Export|BDW,Distribution Management|ADS,FileMan v22|DI,FileMan-To-Cache Conversion|BFMC,HL-7|HL,IHS Communications Support|BCOM,IHS Kernel Toolkit Extensions|BXT,IHS Support for HL7 Interfaces|BHL,IHS Utilities|XB,IHS VA Support Files|AVA,Kernel Toolkit|XT,Kernel v8|XU,MailMan|XM,Q-Man|AMQQ,RPC Broker|XWB,RPMS/Ensemble Cache Classes|BMW" | split: "," %}
-        {% for app in infra %}
-          {% assign parts = app | split: "|" %}
-          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3">
-            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ parts[1] }}</code>
-            <span class="text-sm text-neutral-800 dark:text-neutral-200">{{ parts[0] }}</span>
-          </div>
+        {% assign infra_pkgs = site.data.packages | where: "kind", "infrastructure" | sort: "namespace" %}
+        {% for pkg in infra_pkgs %}
+          <a
+            href="{{ "/packages/" | append: pkg.namespace | relative_url }}"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+          >
+            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
+            <div class="min-w-0">
+              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
+              {% if pkg.restricted %}
+              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
+              {% elsif pkg.deprecated %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
+              {% elsif pkg.version %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
+              {% endif %}
+            </div>
+          </a>
         {% endfor %}
       </div>
     </section>

@@ -1,0 +1,970 @@
+{
+  "ABM": {
+    "name": "Third Party Billing",
+    "namespace": "ABM",
+    "kind": "administrative",
+    "description": "Creates claims for submittal to Medicare, Medicaid, and private insurance for eligible patients from PCC visit information — gathers and enters claim data from other RPMS applications.",
+    "version": "2.6",
+    "cert_year": "2010",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "ABSP": {
+    "name": "Pharmacy Point of Sale",
+    "namespace": "ABSP",
+    "kind": "administrative",
+    "description": "Provides a means for I/T/U facilities to perform online submittal of pharmacy claims, via a switch company, to third-party payers.",
+    "version": "1.0",
+    "cert_year": "2001",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "ACR": {
+    "name": "Administrative Resource Management System",
+    "namespace": "ACR",
+    "kind": "administrative",
+    "description": "An automated requisition and purchase order system, featuring electronic routing of documents for approval and signature, and an automated commitment register.",
+    "version": "2.1",
+    "cert_year": "2002",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "APSA": {
+    "name": "Benchmark Price Update",
+    "namespace": "APSA",
+    "kind": "administrative",
+    "description": "Provides calculations on prescription drugs, both brand names and generics.",
+    "version": "6.1",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — submit a request through the IHS ServiceNow Self Service Portal using the OIT SQA RPMS File Request form",
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "BAR": {
+    "name": "Accounts Receivable",
+    "namespace": "BAR",
+    "kind": "administrative",
+    "description": "Processes, manages, reports, and follows up on Accounts Receivable transactions related to all Third Party Billing activity, including payment tracking and accounting by category, aging reports, and statements.",
+    "version": "1.8",
+    "cert_year": "2006",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "BMX": {
+    "name": "BMXNet",
+    "namespace": "BMX",
+    "kind": "administrative",
+    "description": "A set of software utilities designed to enable Windows applications written using the .NET framework to exchange data with RPMS using standard ADO.NET tables.",
+    "version": "4.0",
+    "cert_year": "2010",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "BNI": {
+    "name": "Computerized Public Health Activity Data",
+    "namespace": "BNI",
+    "kind": "administrative",
+    "description": "Provides for the entry of public health activity being performed by clinicians or other providers of public health activities.",
+    "version": "1.0",
+    "cert_year": "2007",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "BNP": {
+    "name": "National Site Tracking",
+    "namespace": "BNP",
+    "kind": "administrative",
+    "description": "Allows you to see which RPMS packages are installed on any reporting site within the Indian Health Service.",
+    "version": "1.0",
+    "cert_year": "2010",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "BPRM": {
+    "name": "Practice Management Application Suite",
+    "namespace": "BPRM",
+    "kind": "administrative",
+    "description": "A comprehensive application to address IHS Practice Management business functions via pluggable modules. Browser-accessible GUI provides integrated workflows and consistent user experience for RPMS Practice Management applications.",
+    "version": "4.0",
+    "cert_year": "2023",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "BQRE": {
+    "name": "eCQM Export Tool",
+    "namespace": "BQRE",
+    "kind": "administrative",
+    "description": "Part of the two-component eCQM Reporting Solution for the 2018 Reporting Period and beyond. Exports RPMS data into QRDA CAT-I files for reporting or to the eCQM Engine (ECQM) for clinical quality measure calculation and QRDA CAT-III file creation.",
+    "version": "8.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "BUSA": {
+    "name": "User Security Audit",
+    "namespace": "BUSA",
+    "kind": "administrative",
+    "description": "Enables advanced tracking of RPMS user activity to satisfy Meaningful Use II certification requirements. Contains a web-enabled reporting interface for filtering, sorting, and displaying logged data.",
+    "version": "1.0",
+    "cert_year": "2015",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "ECQM": {
+    "name": "eCQM Engine",
+    "namespace": "ECQM",
+    "kind": "administrative",
+    "description": "Calculates clinical quality measures from QRDA CAT-I files and generates QRDA CAT-III files for CMS submission. Part of the two-component eCQM Reporting Solution used starting with the 2018 Reporting Period.",
+    "version": "8.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "GRU": {
+    "name": "Generic Retrieval Utility",
+    "namespace": "GRU",
+    "kind": "administrative",
+    "description": "Permits constructing and executing complex queries against FileMan databases using a graphical user interface. Results may be viewed, exported to external applications, or output in customizable report formats.",
+    "version": "1.4",
+    "cert_year": "2012",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "LEX": {
+    "name": "VA Lexicon Utility",
+    "namespace": "LEX",
+    "kind": "administrative",
+    "description": "VA clinical terminology lexicon utility. Uses the LEX namespace and also includes GMPT and ICPT routines called by other VA applications.",
+    "version": "2.0",
+    "cert_year": "2004",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "PIMS": {
+    "name": "Patient Information Management System",
+    "namespace": "PIMS",
+    "kind": "administrative",
+    "description": "Contains the Admission/Discharge/Transfer (ADT) application, the Clinic Scheduling application, and the Sensitive Patient Tracking (SPT) module.",
+    "version": "5.3",
+    "cert_year": "2004",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "TIU": {
+    "name": "Text Integration Utility",
+    "namespace": "TIU",
+    "kind": "administrative",
+    "description": "The VA Text Integration Utility automates clinic notes — managing clinical document templates, note titles, and the authoring/signature workflow.",
+    "version": "1.0",
+    "cert_year": "2005",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/administrative/"
+  },
+  "ACHS": {
+    "name": "Contract Health Services",
+    "namespace": "ACHS",
+    "kind": "clinical",
+    "description": "Manages contract health service referrals and authorizations for care provided outside the IHS facility.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "ACM": {
+    "name": "Case Management System",
+    "namespace": "ACM",
+    "kind": "clinical",
+    "description": "Supports case management workflows for tracking patient care plans and service coordination.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "ACPT": {
+    "name": "Current Procedural Terminology",
+    "namespace": "ACPT",
+    "kind": "clinical",
+    "description": "Provides CPT code lookup and management for procedure coding in clinical documentation.",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — AMA license required",
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "ADE": {
+    "name": "Dental Data System",
+    "namespace": "ADE",
+    "kind": "clinical",
+    "description": "Supports dental encounter documentation, charting, and reporting for IHS dental programs.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AG": {
+    "name": "Patient Registration",
+    "namespace": "AG",
+    "kind": "clinical",
+    "description": "Core patient registration system for enrolling and managing patient demographic information and eligibility.",
+    "version": "7.1",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AGMP": {
+    "name": "Master Patient Index",
+    "namespace": "AGMP",
+    "kind": "clinical",
+    "description": "Maintains a master index of patients across facilities to support patient matching and data linking.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AICD": {
+    "name": "ICD Lookup System",
+    "namespace": "AICD",
+    "kind": "clinical",
+    "description": "Provides ICD-10-CM diagnosis code lookup and management for clinical documentation and coding.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AMH": {
+    "name": "Behavioral Health System",
+    "namespace": "AMH",
+    "kind": "clinical",
+    "description": "Documents behavioral health encounters, treatment plans, and outcomes for mental health and substance use programs.",
+    "version": "4.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AMQQ": {
+    "name": "Q-Man",
+    "namespace": "AMQQ",
+    "kind": "clinical",
+    "description": "Ad hoc query and reporting utility for extracting patient data and generating custom reports from the RPMS database.",
+    "version": "5.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "APCD": {
+    "name": "PCC Data Entry",
+    "namespace": "APCD",
+    "kind": "clinical",
+    "description": "Patient Care Component data entry module for recording encounter data including diagnoses, procedures, and provider information.",
+    "version": "6.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "APCH": {
+    "name": "PCC Health Summary",
+    "namespace": "APCH",
+    "kind": "clinical",
+    "description": "Generates patient health summaries from PCC encounter data for clinical review and care coordination.",
+    "version": "5.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "APCL": {
+    "name": "PCC Management Reports",
+    "namespace": "APCL",
+    "kind": "clinical",
+    "description": "Produces management and statistical reports from PCC data for program oversight and planning.",
+    "version": "5.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "APCM": {
+    "name": "Promoting Interoperability Reports",
+    "namespace": "APCM",
+    "kind": "clinical",
+    "description": "Generates reports required for Promoting Interoperability (formerly Meaningful Use) program attestation and compliance.",
+    "version": "3.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "APSP": {
+    "name": "IHS Pharmacy MOD",
+    "namespace": "APSP",
+    "kind": "clinical",
+    "description": "IHS-specific pharmacy modifications providing extensions and customizations to the RPMS pharmacy suite.",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "APSS": {
+    "name": "Pharmacy Rx Outpatient Automation Interface",
+    "namespace": "APSS",
+    "kind": "clinical",
+    "description": "Interface between RPMS pharmacy and outpatient automation dispensing systems.",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "ATX": {
+    "name": "Taxonomy",
+    "namespace": "ATX",
+    "kind": "clinical",
+    "description": "Manages clinical taxonomy definitions used for grouping diagnoses, procedures, and medications in reporting and alerts.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AUM": {
+    "name": "ICD Update",
+    "namespace": "AUM",
+    "kind": "clinical",
+    "description": "Manages annual ICD code set updates to keep diagnosis and procedure coding current.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AUPN": {
+    "name": "IHS Dictionaries — Patient",
+    "namespace": "AUPN",
+    "kind": "clinical",
+    "description": "IHS-specific patient data dictionary definitions and extensions used across clinical applications.",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "AUT": {
+    "name": "IHS Dictionaries — Pointers",
+    "namespace": "AUT",
+    "kind": "clinical",
+    "description": "IHS-specific pointer and reference dictionary definitions used across RPMS applications.",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BADE": {
+    "name": "Dental/EDR Interface",
+    "namespace": "BADE",
+    "kind": "clinical",
+    "description": "Interface between the RPMS Dental Data System and Electronic Dental Record (EDR) systems.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BCDM": {
+    "name": "Chronic Disease Management",
+    "namespace": "BCDM",
+    "kind": "clinical",
+    "description": "Supports population-level chronic disease management programs with registries, alerts, and outcome tracking.",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — contact IHS OIT",
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BCCD": {
+    "name": "Consolidated Clinical Document Architecture",
+    "namespace": "BCCD",
+    "kind": "clinical",
+    "description": "Generates and receives C-CDA documents for interoperability with external health information exchanges and systems.",
+    "version": "3.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BCER": {
+    "name": "Certified Electronic Record Checker",
+    "namespace": "BCER",
+    "kind": "clinical",
+    "description": "Validates EHR certification requirements and checks compliance with ONC certification criteria.",
+    "version": "2.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BCH": {
+    "name": "Community Health Representative System",
+    "namespace": "BCH",
+    "kind": "clinical",
+    "description": "Supports Community Health Representatives (CHR) in documenting home visits, health education, and community outreach activities.",
+    "version": "4.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BCQM": {
+    "name": "IHS Code Mapping",
+    "namespace": "BCQM",
+    "kind": "clinical",
+    "description": "Maps IHS-specific codes to standard terminologies (SNOMED, LOINC, RxNorm) for interoperability and quality reporting.",
+    "version": "2.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BDM": {
+    "name": "Diabetes Management System",
+    "namespace": "BDM",
+    "kind": "clinical",
+    "description": "Manages diabetes patient registries, tracks HbA1c and other clinical indicators, and supports audit and control surveys.",
+    "version": "5.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BEDD": {
+    "name": "Emergency Department Dashboard",
+    "namespace": "BEDD",
+    "kind": "clinical",
+    "description": "Real-time dashboard for emergency department patient tracking, bed status, and throughput monitoring.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BEPC": {
+    "name": "Electronic Prescribing of Controlled Substances",
+    "namespace": "BEPC",
+    "kind": "clinical",
+    "description": "Enables DEA-compliant electronic prescribing of controlled substances (EPCS) with two-factor authentication.",
+    "version": "2.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BEPR": {
+    "name": "e-Prescribing Productions",
+    "namespace": "BEPR",
+    "kind": "clinical",
+    "description": "Supports Surescripts electronic prescribing network integration for routing prescriptions to pharmacies.",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — Surescripts certification required",
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BEX": {
+    "name": "Pharmacy Auto Refill",
+    "namespace": "BEX",
+    "kind": "clinical",
+    "description": "Automates pharmacy refill processing and patient notification for outpatient prescription management.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BGP": {
+    "name": "Clinical Reporting System",
+    "namespace": "BGP",
+    "kind": "clinical",
+    "description": "Generates standardized clinical performance reports including Government Performance and Results Act (GPRA) measures.",
+    "version": "22.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BGU": {
+    "name": "IHS RPC Broker",
+    "namespace": "BGU",
+    "kind": "clinical",
+    "description": "IHS extensions to the VA RPC Broker providing client-server communication infrastructure for RPMS GUI applications.",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BHS": {
+    "name": "Health Summary Components",
+    "namespace": "BHS",
+    "kind": "clinical",
+    "description": "Provides reusable health summary display components for assembling patient health summaries across RPMS.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BI": {
+    "name": "Immunization System",
+    "namespace": "BI",
+    "kind": "clinical",
+    "description": "Tracks patient immunization records, manages vaccine inventory, and supports reporting to state immunization registries.",
+    "version": "8.5",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BJMD": {
+    "name": "C32/CCD Clinical Summary",
+    "namespace": "BJMD",
+    "kind": "clinical",
+    "description": "Generates CCD and C32 clinical summary documents for patient care transitions and referrals.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BJPC": {
+    "name": "IHS PCC Suite",
+    "namespace": "BJPC",
+    "kind": "clinical",
+    "description": "Integrated Patient Care Component suite providing the core clinical encounter documentation platform for IHS facilities.",
+    "version": "4.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BJPN": {
+    "name": "Prenatal Care Module",
+    "namespace": "BJPN",
+    "kind": "clinical",
+    "description": "Documents prenatal visits, tracks pregnancy progress, and generates perinatal outcome reports.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BJVN": {
+    "name": "Joslin Vision Network",
+    "namespace": "BJVN",
+    "kind": "clinical",
+    "description": "Interface supporting diabetic retinopathy screening through the Joslin Vision Network teleophthalmology program.",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — Joslin Vision Network agreement required",
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BKM": {
+    "name": "HIV Management System",
+    "namespace": "BKM",
+    "kind": "clinical",
+    "description": "Manages HIV patient registries, tracks clinical indicators, and supports Ryan White program reporting.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BLE": {
+    "name": "Electronic Laboratory Reporting",
+    "namespace": "BLE",
+    "kind": "clinical",
+    "description": "Transmits reportable lab results to public health authorities in HL7 format for disease surveillance.",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — state public health agreement required",
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BMC": {
+    "name": "Referred Care Information System",
+    "namespace": "BMC",
+    "kind": "clinical",
+    "description": "Tracks referrals and authorizations for care provided outside the IHS/tribal facility network.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BOP": {
+    "name": "Pharmacy Automated Dispensing Interface",
+    "namespace": "BOP",
+    "kind": "clinical",
+    "description": "Interface between RPMS pharmacy and automated dispensing cabinets (ADCs) for controlled substance tracking.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BPDM": {
+    "name": "Pharmacy — Controlled Drug Export",
+    "namespace": "BPDM",
+    "kind": "clinical",
+    "description": "Exports controlled substance dispensing data to state prescription drug monitoring programs (PDMPs).",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — state PDMP agreement required",
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BPHR": {
+    "name": "Personal Health Record",
+    "namespace": "BPHR",
+    "kind": "clinical",
+    "description": "Patient-facing personal health record providing access to health information via the IHS patient portal.",
+    "version": "3.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BPM": {
+    "name": "Patient Merge",
+    "namespace": "BPM",
+    "kind": "clinical",
+    "description": "Merges duplicate patient records across the RPMS system. Superseded by AGMP Master Patient Index.",
+    "deprecated": true,
+    "deprecated_note": "Do not use for new implementations — use AGMP Master Patient Index instead",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BREH": {
+    "name": "RPMS EHI Export",
+    "namespace": "BREH",
+    "kind": "clinical",
+    "description": "Exports Electronic Health Information (EHI) in compliance with ONC information blocking rules and 21st Century Cures Act.",
+    "version": "1.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BRN": {
+    "name": "Release of Information",
+    "namespace": "BRN",
+    "kind": "clinical",
+    "description": "Manages patient requests for release of medical records and tracks disclosure accounting.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BSTS": {
+    "name": "SNOMED/DTS",
+    "namespace": "BSTS",
+    "kind": "clinical",
+    "description": "SNOMED CT terminology server and Distribution and Terminology Services (DTS) interface for standardized clinical coding.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BTPW": {
+    "name": "Care Management Event Tracking",
+    "namespace": "BTPW",
+    "kind": "clinical",
+    "description": "Tracks care management events, patient outreach activities, and care coordination touchpoints.",
+    "version": "2.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BUD": {
+    "name": "Uniform Data System",
+    "namespace": "BUD",
+    "kind": "clinical",
+    "description": "Generates Uniform Data System (UDS) reports for HRSA-funded health centers on patient demographics and clinical quality measures.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BW": {
+    "name": "Women's Health",
+    "namespace": "BW",
+    "kind": "clinical",
+    "description": "Documents women's health encounters including family planning, cervical cancer screening, and reproductive health services.",
+    "version": "4.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BYIM": {
+    "name": "Immunization Data Exchange",
+    "namespace": "BYIM",
+    "kind": "clinical",
+    "description": "Supports bidirectional data exchange with state and regional immunization information systems (IIS).",
+    "version": "3.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "BQI": {
+    "name": "iCare Population Management",
+    "namespace": "BQI",
+    "kind": "clinical",
+    "description": "Population health management tool for identifying care gaps, managing patient panels, and tracking preventive care measures.",
+    "version": "5.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "CHIT": {
+    "name": "Consumer Health Information Technology",
+    "namespace": "CHIT",
+    "kind": "clinical",
+    "description": "Patient-facing consumer health IT applications including kiosk and self-service health information tools.",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "EHR": {
+    "name": "Electronic Health Record",
+    "namespace": "EHR",
+    "kind": "clinical",
+    "description": "Core EHR application providing the clinical desktop interface integrating all RPMS clinical modules for point-of-care documentation.",
+    "version": "1.1",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "GIS": {
+    "name": "Generic Interface System",
+    "namespace": "GIS",
+    "kind": "clinical",
+    "description": "Generic HL7 interface engine for transmitting clinical data between RPMS and external systems.",
+    "version": "3.0",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "GMRA": {
+    "name": "Adverse Reaction Tracking",
+    "namespace": "GMRA",
+    "kind": "clinical",
+    "description": "Records and tracks patient allergies and adverse drug reactions with clinical decision support alerts.",
+    "version": "4.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "GMRC": {
+    "name": "Consult/Request Tracking",
+    "namespace": "GMRC",
+    "kind": "clinical",
+    "description": "Manages clinical consultation requests and tracks referral status between services and providers.",
+    "version": "3.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "GMRV": {
+    "name": "Vitals/Measurements",
+    "namespace": "GMRV",
+    "kind": "clinical",
+    "description": "Records and displays patient vital signs and clinical measurements with trending and alert thresholds.",
+    "version": "5.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "GMTS": {
+    "name": "VA Health Summary",
+    "namespace": "GMTS",
+    "kind": "clinical",
+    "description": "Generates VA-style patient health summaries integrating data from across RPMS clinical modules.",
+    "version": "2.71",
+    "cert_year": "2025",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "LR": {
+    "name": "Laboratory",
+    "namespace": "LR",
+    "kind": "clinical",
+    "description": "Full-featured laboratory information system supporting order entry, specimen tracking, results reporting, and microbiology.",
+    "version": "5.2",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "MU2": {
+    "name": "Meaningful Use 2 Documentation",
+    "namespace": "MU2",
+    "kind": "clinical",
+    "description": "Documentation and attestation support for Meaningful Use Stage 2 program requirements. Superseded by APCM Promoting Interoperability.",
+    "deprecated": true,
+    "deprecated_note": "Superseded by APCM — use for historical reference only",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "PSJ": {
+    "name": "Pharmacy — Inpatient Suite",
+    "namespace": "PSJ",
+    "kind": "clinical",
+    "description": "Inpatient pharmacy management including unit dose dispensing, IV admixtures, and medication administration records.",
+    "version": "5.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "PSN": {
+    "name": "Pharmacy — National Drug File",
+    "namespace": "PSN",
+    "kind": "clinical",
+    "description": "VA National Drug File providing standardized drug information, formulary management, and drug interaction checking.",
+    "restricted": true,
+    "restricted_note": "Restricted distribution — VA NDF license required",
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "PSO": {
+    "name": "Pharmacy — Outpatient",
+    "namespace": "PSO",
+    "kind": "clinical",
+    "description": "Outpatient pharmacy dispensing system managing prescription processing, refills, and patient medication profiles.",
+    "version": "7.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "PXRM": {
+    "name": "VA Clinical Reminders",
+    "namespace": "PXRM",
+    "kind": "clinical",
+    "description": "Clinical reminder and decision support system for preventive care, disease management, and evidence-based guidelines.",
+    "version": "2.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "RA": {
+    "name": "Radiology",
+    "namespace": "RA",
+    "kind": "clinical",
+    "description": "Radiology information system supporting order entry, exam scheduling, result reporting, and DICOM interface.",
+    "version": "5.0",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "VEN": {
+    "name": "Well Child Component",
+    "namespace": "VEN",
+    "kind": "clinical",
+    "description": "Supports well child visit documentation, growth tracking, and developmental screening for pediatric care.",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/clinical/"
+  },
+  "ADS": {
+    "name": "Distribution Management Package",
+    "namespace": "ADS",
+    "kind": "infrastructure",
+    "description": "Supports collecting license data from IHS RPMS installations. Periodically captures maximum concurrent users per server and sends data to a central repository for license administration and transparency between sites, areas, and OIT.",
+    "version": "1.0",
+    "cert_year": "2020",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "AVA": {
+    "name": "IHS VA Support Files",
+    "namespace": "AVA",
+    "kind": "infrastructure",
+    "description": "System patches that provide various aspects of support for VA FileMan in IHS's RPMS.",
+    "version": "93.2",
+    "cert_year": "2019",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "BDW": {
+    "name": "Data Warehouse Export System",
+    "namespace": "BDW",
+    "kind": "infrastructure",
+    "description": "Local export of registration and visit data to the IHS National Data Warehouse.",
+    "version": "1.0",
+    "cert_year": "2006",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "BCOM": {
+    "name": "IHS Communications Support",
+    "namespace": "BCOM",
+    "kind": "infrastructure",
+    "description": "Transfers files and information securely from sites to one or more central data repositories.",
+    "version": "1.0",
+    "cert_year": "2020",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "BFMC": {
+    "name": "FileMan-To-Cache Class Conversion",
+    "namespace": "BFMC",
+    "kind": "infrastructure",
+    "description": "Converts FileMan file definitions to InterSystems Cache classes. See also C32/CCD Clinical Summary (BJMD).",
+    "version": "1.0",
+    "cert_year": "2011",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "BHL": {
+    "name": "IHS Support for HL7 Interfaces",
+    "namespace": "BHL",
+    "kind": "infrastructure",
+    "description": "Provides a way for RPMS applications to exchange healthcare data with commercial off-the-shelf and other applications using the HL7 protocol.",
+    "version": "1.0",
+    "cert_year": "1997",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "BMW": {
+    "name": "RPMS/Ensemble Cache Classes Database File",
+    "namespace": "BMW",
+    "kind": "infrastructure",
+    "description": "Required component of several IHS RPMS applications. Contains the IRIS.DAT database with IRIS classes generated against FileMan files.",
+    "version": "2025.3",
+    "cert_year": "2026",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "BXT": {
+    "name": "IHS Kernel Toolkit Extensions",
+    "namespace": "BXT",
+    "kind": "infrastructure",
+    "description": "IHS-developed extensions to the VA Kernel Toolkit application.",
+    "version": "1.0",
+    "cert_year": "2015",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "DI": {
+    "name": "FileMan v22",
+    "namespace": "DI",
+    "kind": "infrastructure",
+    "description": "VistA FileMan — the RPMS database management system. Creates and maintains a database management system on top of the MUMPS environment. See Kernel v8 (XU) for the latest patches.",
+    "version": "22.0",
+    "cert_year": "2003",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "HL": {
+    "name": "HL-7",
+    "namespace": "HL",
+    "kind": "infrastructure",
+    "description": "Assists DHCP applications exchange information with other applications using the HL7 protocol. Provides a generic interface to the HL7 protocol via a set of utility routines and files.",
+    "version": "1.6",
+    "cert_year": "2019",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "XB": {
+    "name": "IHS Utilities",
+    "namespace": "XB",
+    "kind": "infrastructure",
+    "description": "Utility routines used by RPMS developers.",
+    "version": "3.0",
+    "cert_year": "1997",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "XM": {
+    "name": "MailMan",
+    "namespace": "XM",
+    "kind": "infrastructure",
+    "description": "General purpose computerized message system for sending, receiving, copying, responding to, and organizing electronic mail within RPMS.",
+    "version": "8.0",
+    "cert_year": "2007",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "XT": {
+    "name": "Kernel Toolkit",
+    "namespace": "XT",
+    "kind": "infrastructure",
+    "description": "System application supporting Kernel. Supplements the Kernel software package with development tools, quality assessment tools, capacity management tools, and system management utilities. See Kernel v8 (XU) for the latest patches.",
+    "version": "7.3",
+    "cert_year": "1996",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "XU": {
+    "name": "Kernel v8",
+    "namespace": "XU",
+    "kind": "infrastructure",
+    "description": "Vendor-independent applications development and run-time environment providing standard services to application software. Executes in an M (MUMPS) environment. The authoritative location for latest Kernel and Kernel Toolkit patches.",
+    "version": "8.0",
+    "cert_year": "2019",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  },
+  "XWB": {
+    "name": "RPC Broker",
+    "namespace": "XWB",
+    "kind": "infrastructure",
+    "description": "Remote Procedure Call (RPC) Broker — the common communications driver interface for client/server application data exchange between GUI clients and RPMS server.",
+    "version": "1.1",
+    "restricted": false,
+    "source_url": "https://www.ihs.gov/rpms/applications/infrastructure/"
+  }
+}

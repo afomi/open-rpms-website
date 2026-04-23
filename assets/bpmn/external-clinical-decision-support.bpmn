@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://openrpms.org/bpmn"
+             id="external-clinical-decision-support">
+
+  <collaboration id="Collab_ExtCDS">
+    <participant id="Part_Nurse" name="Public Health Nurse" processRef="Process_Nurse" />
+    <participant id="Part_RPMS" name="RPMS / CDC Network" processRef="Process_RPMS" />
+  </collaboration>
+
+  <process id="Process_Nurse" isExecutable="false">
+    <startEvent id="Start_ConfirmedCase" name="Confirmed meningococcal case">
+      <outgoing>F1</outgoing>
+    </startEvent>
+    <task id="Task_RequestGuidelines" name="Request CDC Prevention Guidelines via RPMS network">
+      <incoming>F1</incoming>
+      <outgoing>F2</outgoing>
+    </task>
+    <task id="Task_PlaceOrders" name="Print guidelines — place orders without leaving encounter">
+      <incoming>F2</incoming>
+      <outgoing>F3</outgoing>
+    </task>
+    <endEvent id="End_OrdersPlaced" name="Orders placed in workflow">
+      <incoming>F3</incoming>
+    </endEvent>
+    <sequenceFlow id="F1" sourceRef="Start_ConfirmedCase" targetRef="Task_RequestGuidelines" />
+    <sequenceFlow id="F2" sourceRef="Task_RequestGuidelines" targetRef="Task_PlaceOrders" />
+    <sequenceFlow id="F3" sourceRef="Task_PlaceOrders" targetRef="End_OrdersPlaced" />
+  </process>
+
+  <process id="Process_RPMS" isExecutable="false">
+    <startEvent id="Start_GuidelineRequest" name="Guideline request received">
+      <outgoing>F4</outgoing>
+    </startEvent>
+    <task id="Task_FetchGuidelines" name="Fetch CDC guidelines via Network Communication">
+      <incoming>F4</incoming>
+      <outgoing>F5</outgoing>
+    </task>
+    <endEvent id="End_GuidelinesDelivered" name="Guidelines delivered in-workflow">
+      <incoming>F5</incoming>
+    </endEvent>
+    <sequenceFlow id="F4" sourceRef="Start_GuidelineRequest" targetRef="Task_FetchGuidelines" />
+    <sequenceFlow id="F5" sourceRef="Task_FetchGuidelines" targetRef="End_GuidelinesDelivered" />
+  </process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collab_ExtCDS">
+      <bpmndi:BPMNShape id="S_Nurse" bpmnElement="Part_Nurse" isHorizontal="true"><dc:Bounds x="160" y="80" width="760" height="160" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_RPMS" bpmnElement="Part_RPMS" isHorizontal="true"><dc:Bounds x="160" y="240" width="760" height="160" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_ConfirmedCase" bpmnElement="Start_ConfirmedCase"><dc:Bounds x="212" y="142" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="190" y="185" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_RequestGuidelines" bpmnElement="Task_RequestGuidelines"><dc:Bounds x="300" y="120" width="200" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_PlaceOrders" bpmnElement="Task_PlaceOrders"><dc:Bounds x="620" y="120" width="200" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_OrdersPlaced" bpmnElement="End_OrdersPlaced"><dc:Bounds x="872" y="142" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="850" y="185" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_GuidelineRequest" bpmnElement="Start_GuidelineRequest"><dc:Bounds x="380" y="302" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="358" y="345" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_FetchGuidelines" bpmnElement="Task_FetchGuidelines"><dc:Bounds x="460" y="280" width="200" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_GuidelinesDelivered" bpmnElement="End_GuidelinesDelivered"><dc:Bounds x="712" y="302" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="690" y="345" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="E_F1" bpmnElement="F1"><di:waypoint x="248" y="160" /><di:waypoint x="300" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F2" bpmnElement="F2"><di:waypoint x="500" y="160" /><di:waypoint x="620" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F3" bpmnElement="F3"><di:waypoint x="820" y="160" /><di:waypoint x="872" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F4" bpmnElement="F4"><di:waypoint x="416" y="320" /><di:waypoint x="460" y="320" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F5" bpmnElement="F5"><di:waypoint x="660" y="320" /><di:waypoint x="712" y="320" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

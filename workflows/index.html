@@ -1,0 +1,106 @@
+---
+layout: default
+title: "Workflow Patterns"
+description: "RPMS clinical and administrative workflow patterns — operational knowledge distilled from decades of healthcare delivery in resource-constrained settings."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+            Workflow Patterns
+          </h1>
+          <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+            RPMS workflows represent decades of hard-won operational knowledge from resource-constrained, high-stakes healthcare settings.
+            These patterns are worth understanding — not the MUMPS implementation, but the operational logic underneath.
+          </p>
+        </div>
+        <a
+          href="{{ "/workflows/hospital-view" | relative_url }}"
+          class="shrink-0 mt-2 inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+        >
+          Hospital view
+        </a>
+      </div>
+    </div>
+
+    {% assign clinical_workflows = site.data.workflows | where: "category", "clinical" %}
+    {% assign administrative_workflows = site.data.workflows | where: "category", "administrative" %}
+
+    <section class="mb-16">
+      <div class="flex items-center gap-3 mb-6">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">
+          Clinical
+        </h2>
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-600/20 dark:ring-blue-400/20">
+          {{ clinical_workflows | size }}
+        </span>
+      </div>
+      <div class="space-y-3">
+        {% for workflow in clinical_workflows %}
+        <a
+          href="{{ "/workflows/" | append: workflow.id | relative_url }}"
+          class="block rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+        >
+          <p class="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-900 dark:group-hover:text-white">
+            {{ workflow.name }}
+          </p>
+          <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+            {{ workflow.scenario }}
+          </p>
+          {% if workflow.rpms_packages %}
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {% for ns in workflow.rpms_packages %}
+            <span class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-0.5 rounded">
+              {{ ns }}
+            </span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex items-center gap-3 mb-6">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">
+          Administrative
+        </h2>
+        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 ring-1 ring-inset ring-amber-600/20 dark:ring-amber-400/20">
+          {{ administrative_workflows | size }}
+        </span>
+      </div>
+      <div class="space-y-3">
+        {% for workflow in administrative_workflows %}
+        <a
+          href="{{ "/workflows/" | append: workflow.id | relative_url }}"
+          class="block rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+        >
+          <p class="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-900 dark:group-hover:text-white">
+            {{ workflow.name }}
+          </p>
+          <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+            {{ workflow.scenario }}
+          </p>
+          {% if workflow.rpms_packages %}
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {% for ns in workflow.rpms_packages %}
+            <span class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-0.5 rounded">
+              {{ ns }}
+            </span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+
+  </main>
+</div>

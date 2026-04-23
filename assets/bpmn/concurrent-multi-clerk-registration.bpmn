@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://openrpms.org/bpmn"
+             id="concurrent-multi-clerk-registration">
+
+  <collaboration id="Collab_Registration">
+    <participant id="Part_Clerk" name="Registration Clerk" processRef="Process_Clerk" />
+    <participant id="Part_MedRecords" name="Medical Records" processRef="Process_MedRecords" />
+  </collaboration>
+
+  <process id="Process_Clerk" isExecutable="false">
+    <startEvent id="Start_PatientArrives" name="Patient arrives at clinic">
+      <outgoing>F1</outgoing>
+    </startEvent>
+    <task id="Task_AccessRecord" name="Access patient record: MRN, demographics, tribal membership, insurance">
+      <incoming>F1</incoming>
+      <outgoing>F2</outgoing>
+    </task>
+    <task id="Task_ScheduleAppointment" name="Schedule appointment — no duplicate entry, no conflicts">
+      <incoming>F2</incoming>
+      <outgoing>F3</outgoing>
+    </task>
+    <endEvent id="End_Registered" name="Patient registered">
+      <incoming>F3</incoming>
+    </endEvent>
+    <sequenceFlow id="F1" sourceRef="Start_PatientArrives" targetRef="Task_AccessRecord" />
+    <sequenceFlow id="F2" sourceRef="Task_AccessRecord" targetRef="Task_ScheduleAppointment" />
+    <sequenceFlow id="F3" sourceRef="Task_ScheduleAppointment" targetRef="End_Registered" />
+  </process>
+
+  <process id="Process_MedRecords" isExecutable="false">
+    <startEvent id="Start_NewPatientData" name="First-contact data captured">
+      <outgoing>F4</outgoing>
+    </startEvent>
+    <task id="Task_EstablishChart" name="Establish formal chart from captured data">
+      <incoming>F4</incoming>
+      <outgoing>F5</outgoing>
+    </task>
+    <endEvent id="End_ChartAvailable" name="Chart available to all departments">
+      <incoming>F5</incoming>
+    </endEvent>
+    <sequenceFlow id="F4" sourceRef="Start_NewPatientData" targetRef="Task_EstablishChart" />
+    <sequenceFlow id="F5" sourceRef="Task_EstablishChart" targetRef="End_ChartAvailable" />
+  </process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collab_Registration">
+      <bpmndi:BPMNShape id="S_Clerk" bpmnElement="Part_Clerk" isHorizontal="true"><dc:Bounds x="160" y="80" width="760" height="160" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_MedRecords" bpmnElement="Part_MedRecords" isHorizontal="true"><dc:Bounds x="160" y="240" width="760" height="160" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_PatientArrives" bpmnElement="Start_PatientArrives"><dc:Bounds x="212" y="142" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="190" y="185" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_AccessRecord" bpmnElement="Task_AccessRecord"><dc:Bounds x="300" y="120" width="220" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_ScheduleAppointment" bpmnElement="Task_ScheduleAppointment"><dc:Bounds x="580" y="120" width="200" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_Registered" bpmnElement="End_Registered"><dc:Bounds x="832" y="142" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="810" y="185" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_NewPatientData" bpmnElement="Start_NewPatientData"><dc:Bounds x="212" y="302" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="190" y="345" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_EstablishChart" bpmnElement="Task_EstablishChart"><dc:Bounds x="540" y="280" width="200" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_ChartAvailable" bpmnElement="End_ChartAvailable"><dc:Bounds x="792" y="302" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="770" y="345" width="80" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="E_F1" bpmnElement="F1"><di:waypoint x="248" y="160" /><di:waypoint x="300" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F2" bpmnElement="F2"><di:waypoint x="520" y="160" /><di:waypoint x="580" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F3" bpmnElement="F3"><di:waypoint x="780" y="160" /><di:waypoint x="832" y="160" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F4" bpmnElement="F4"><di:waypoint x="248" y="320" /><di:waypoint x="540" y="320" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_F5" bpmnElement="F5"><di:waypoint x="740" y="320" /><di:waypoint x="792" y="320" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
