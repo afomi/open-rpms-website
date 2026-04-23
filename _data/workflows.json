@@ -5,6 +5,13 @@
     "category": "clinical",
     "scenario": "Diabetes Clinic scenario — scheduling through patient arrival",
     "rpms_packages": ["BDM", "APCH", "BJPC"],
+    "resources": [
+      {
+        "title": "RPMS Clinical Workflows (IHS)",
+        "url": "https://www.ihs.gov/rpms/applications/clinical/",
+        "type": "html"
+      }
+    ],
     "steps": [
       {
         "time": "Day −1 / 1pm",
@@ -28,6 +35,13 @@
     "category": "clinical",
     "scenario": "Walk-in / urgent care workflow",
     "rpms_packages": ["APCH", "LR", "RA", "BJPC"],
+    "resources": [
+      {
+        "title": "RPMS Clinical Workflows (IHS)",
+        "url": "https://www.ihs.gov/rpms/applications/clinical/",
+        "type": "html"
+      }
+    ],
     "steps": [
       {
         "time": "8:05 am",
@@ -56,6 +70,13 @@
     "category": "clinical",
     "scenario": "Q-Man / population health query — finding patients who share a condition",
     "rpms_packages": ["AMQQ", "BQI"],
+    "resources": [
+      {
+        "title": "RPMS Clinical Workflows (IHS)",
+        "url": "https://www.ihs.gov/rpms/applications/clinical/",
+        "type": "html"
+      }
+    ],
     "steps": [
       {
         "time": "9:48 am",
@@ -79,6 +100,13 @@
     "category": "clinical",
     "scenario": "Public health integration — connecting to CDC at point of care",
     "rpms_packages": ["BJPC", "GIS"],
+    "resources": [
+      {
+        "title": "RPMS Clinical Workflows (IHS)",
+        "url": "https://www.ihs.gov/rpms/applications/clinical/",
+        "type": "html"
+      }
+    ],
     "steps": [
       {
         "time": "11:30 am",
@@ -97,6 +125,13 @@
     "category": "administrative",
     "scenario": "Patient Registration (AG) — multiple departments, one record",
     "rpms_packages": ["AG", "AGMP", "PIMS"],
+    "resources": [
+      {
+        "title": "RPMS Administrative Workflows (IHS)",
+        "url": "https://www.ihs.gov/rpms/applications/administrative/",
+        "type": "html"
+      }
+    ],
     "steps": [
       {
         "time": "2:15 pm",
@@ -120,6 +155,13 @@
     "category": "administrative",
     "scenario": "Medical Staff Credentials — workforce compliance as a domain operation",
     "rpms_packages": ["BPRM"],
+    "resources": [
+      {
+        "title": "RPMS Administrative Workflows (IHS)",
+        "url": "https://www.ihs.gov/rpms/applications/administrative/",
+        "type": "html"
+      }
+    ],
     "steps": [
       {
         "time": "4:45 pm",
@@ -138,6 +180,13 @@
     "category": "administrative",
     "scenario": "Administrative Resource Management System (ARMS) — travel and resource requests",
     "rpms_packages": ["ACR"],
+    "resources": [
+      {
+        "title": "RPMS Administrative Workflows (IHS)",
+        "url": "https://www.ihs.gov/rpms/applications/administrative/",
+        "type": "html"
+      }
+    ],
     "steps": [
       {
         "time": "4:45 pm",

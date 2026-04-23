@@ -68,6 +68,46 @@ layout: default
         </p>
       </section>
 
+      {% if page.resources %}
+      <section>
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+          Source Materials
+        </h2>
+        <ul class="space-y-2">
+          {% for resource in page.resources %}
+          <li>
+            <a
+              href="{{ resource.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-3 rounded-lg border border-neutral-200 dark:border-neutral-800 px-4 py-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+            >
+              {% if resource.type == 'pdf' %}
+              <span class="shrink-0 font-mono text-xs bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-400 px-1.5 py-0.5 rounded ring-1 ring-inset ring-red-200 dark:ring-red-800">
+                PDF
+              </span>
+              {% elsif resource.type == 'spec' %}
+              <span class="shrink-0 font-mono text-xs bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 px-1.5 py-0.5 rounded ring-1 ring-inset ring-purple-200 dark:ring-purple-800">
+                SPEC
+              </span>
+              {% else %}
+              <span class="shrink-0 font-mono text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-1.5 py-0.5 rounded ring-1 ring-inset ring-neutral-200 dark:ring-neutral-700">
+                {{ resource.type | default: "ref" | upcase }}
+              </span>
+              {% endif %}
+              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">
+                {{ resource.title }}
+              </span>
+              <span class="ml-auto shrink-0 text-xs text-neutral-400 dark:text-neutral-500 group-hover:text-neutral-600 dark:group-hover:text-neutral-400">
+                &rarr;
+              </span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
       {% if page.steps %}
       <section>
         <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4">
