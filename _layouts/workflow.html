@@ -116,7 +116,7 @@ layout: default
         <div class="flex flex-wrap gap-2">
           {% for ns in page.rpms_packages %}
           <a
-            href="{{ "/packages/" | append: ns | relative_url }}"
+            href="{{ "/packages/" | append: ns | downcase | relative_url }}"
             class="inline-flex items-center font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 px-3 py-1.5 rounded transition-colors"
           >
             {{ ns }}

@@ -37,7 +37,7 @@ description: "All 70+ RPMS modules organized by domain: Clinical, Administrative
         {% assign clinical_pkgs = site.data.packages | where: "kind", "clinical" | sort: "namespace" %}
         {% for pkg in clinical_pkgs %}
           <a
-            href="{{ "/packages/" | append: pkg.namespace | relative_url }}"
+            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
             class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
           >
             <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
@@ -68,7 +68,7 @@ description: "All 70+ RPMS modules organized by domain: Clinical, Administrative
         {% assign admin_pkgs = site.data.packages | where: "kind", "administrative" | sort: "namespace" %}
         {% for pkg in admin_pkgs %}
           <a
-            href="{{ "/packages/" | append: pkg.namespace | relative_url }}"
+            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
             class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
           >
             <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
@@ -100,7 +100,7 @@ description: "All 70+ RPMS modules organized by domain: Clinical, Administrative
         {% assign infra_pkgs = site.data.packages | where: "kind", "infrastructure" | sort: "namespace" %}
         {% for pkg in infra_pkgs %}
           <a
-            href="{{ "/packages/" | append: pkg.namespace | relative_url }}"
+            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
             class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
           >
             <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
