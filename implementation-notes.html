@@ -1,0 +1,667 @@
+---
+layout: default
+title: "Implementation Notes"
+description: "Practical findings from deploying RPMS on modern infrastructure — IRIS version compatibility, BMW data mapping, BPRM practice management, and VueCentric EHR client."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Implementation Notes
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        Practical findings from deploying RPMS on modern infrastructure.
+        These notes document version compatibility constraints, workarounds, and integration details that are not in IHS install guides but matter for anyone standing up a working system.
+      </p>
+      <p class="mt-3 text-sm text-neutral-500 dark:text-neutral-500">
+        Derived from implementation work across two projects: a development environment (<code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">ehr</code>) and a tribal health deployment (<code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">yakama-rpms</code>).
+        Last updated May 2026.
+      </p>
+      <div class="mt-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 p-5">
+        <p class="text-sm text-neutral-700 dark:text-neutral-300">
+          The current picture of how a release is assembled, including the YottaDB port and what the public files leave out, is
+          <a
+            href="{{ "/build" | relative_url }}"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+          >How a release is built</a>.
+          The notes below are older findings from standing a system up.
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-16">
+
+      <!-- IRIS Version Compatibility -->
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          InterSystems IRIS Version Compatibility
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          The central constraint that shapes every other decision
+        </p>
+
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              The version mismatch problem
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The current Docker development image (<code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">rpms-iris:pr-7-civicactions</code>) ships IRIS 2026.1.0.234.1 Community Edition on Ubuntu 24.04.
+              BMW 2025.3 &mdash; the latest IHS release (November 2025) &mdash; requires IRIS 2022.1.3 per its install guide (&sect;2.3).
+              The IRIS.DAT binary database format is version-specific.
+              Mounting BMW 2025.3 on IRIS 2026.1 produces: <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">&lt;DIRECTORY&gt; */usr/irissys/mgr/bmw/</code>.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              IHS release cadence gap
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              IHS has not released BMW for IRIS 2023.x, 2024.x, or 2026.x.
+              The latest BMW (2025.3) still targets IRIS 2022.1.3.
+              This creates a growing gap between the IHS application stack and the InterSystems runtime it depends on.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Community Edition constraints
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              IRIS Community Edition enforces hard limits that affect a fully-loaded RPMS instance:
+            </p>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <ul class="text-xs text-neutral-600 dark:text-neutral-400 space-y-1">
+                <li>
+                  &middot; Total database size cap: <strong class="text-neutral-900 dark:text-white">8 GB</strong>
+                </li>
+                <li>
+                  &middot; Per-database file size cap: <strong class="text-neutral-900 dark:text-white">1 GB</strong>
+                </li>
+                <li>
+                  &middot; BMW database alone: ~4.8 GB
+                </li>
+                <li>
+                  &middot; RPMS database: ~4.2 GB
+                </li>
+                <li>
+                  &middot; Combined total: ~10.6 GB &mdash; exceeds the 8 GB CE cap
+                </li>
+              </ul>
+            </div>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+              BMW class compilation requires substantial <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">iristemp</code> scratch space.
+              The 1 GB per-file limit causes <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">&lt;FILEFULL&gt;</code> errors during compilation on Community Edition.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              IRIS 2026.1 auto-stats bug
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              IRIS 2026.1 has a bug in <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">%qarTune</code> where auto-stats collection fails when class names differ from SQL table names &mdash; which is the case for many BMW classes.
+              Workaround: set <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">AdaptiveMode=0</code> in <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">iris.cpf</code>.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="mt-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Implication:</strong>
+            Anyone deploying RPMS with BPRM must choose between running a supported but outdated IRIS version (2022.1.3) or running a current IRIS version with workarounds.
+            Both paths are viable but neither is documented by IHS.
+          </p>
+        </div>
+      </section>
+
+      <!-- IHS Distribution -->
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          IHS Distribution Model
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          How software reaches facilities &mdash; and where the gaps are
+        </p>
+
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Artifact distribution
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              IHS distributes RPMS artifacts via FTP, organized into Clinical Applications, Administrative Applications, and Infrastructure.
+              Some downloads are restricted to registered IHS and tribal staff.
+              BMW is distributed only as pre-built IRIS.DAT files for Windows and AIX &mdash; no Linux build is provided.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              No CACHE.DAT since March 2026
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Per WorldVistA (March 2026), IHS stopped releasing CACHE.DAT files because they contain proprietary InterSystems content.
+              This narrows the distribution channel to IRIS.DAT binaries and KIDS builds.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              FHIR and API initiatives
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              IHS is building out the 4DH FHIR API: FHIR R4, US Core 6.1.0, USCDI v3.
+              The Centralized Information System (CIS) provides managed cloud access.
+              These represent an emerging alternative path to RPMS data that does not require MUMPS or BMW.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BMW -->
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          BMW &mdash; FileMan-to-SQL Mapping Layer
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          ~22,000 ObjectScript classes that bridge legacy MUMPS and modern web applications
+        </p>
+
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              What BMW is
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              BMW is a pre-built IRIS database (IRIS.DAT binary) containing ~22,000 generated ObjectScript classes.
+              These classes map FileMan files to SQL-accessible tables, enabling .NET applications like BPRM to query RPMS data via ADO.NET without touching MUMPS directly.
+              BMW is a required dependency for BPRM, BQRE, CCDA, and BUSA.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Distribution constraints
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              BMW is distributed as platform-specific IRIS.DAT binaries (Windows, AIX only).
+              It cannot be imported as XML or KIDS routines in its shipped form.
+              The BMW generator tool is not publicly available.
+              The binary format is locked to a specific IRIS version &mdash; you cannot mount a BMW IRIS.DAT built for one IRIS version on a different version.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Working approach: XML class export
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              The current working method for deploying BMW on Linux IRIS 2026.1:
+            </p>
+            <ol class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1.5 list-decimal list-inside">
+              <li>
+                Extract <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">bmw_2025.3_win.zip</code> and mount the Windows IRIS.DAT in Docker IRIS 2024.3
+              </li>
+              <li>
+                Export all 22,023 BMW classes as XML (~375 MB)
+              </li>
+              <li>
+                Import to the staging IRIS 2026.1 instance without compiling (<code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">"d"</code> flag)
+              </li>
+              <li>
+                Compile after import with <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">$system.OBJ.CompilePackage("BMW")</code>
+              </li>
+              <li>
+                Disable AdaptiveMode in iris.cpf to work around the IRIS 2026.1 auto-stats bug
+              </li>
+            </ol>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+              <strong class="text-neutral-900 dark:text-white">Status (May 2026):</strong>
+              22,023 BMW classes successfully exported and imported.
+              BPRM login and ADT workspace are working on Linux IRIS 2026.1.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Alternative: FM2Class wizard
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              IRIS includes a built-in FM2Class wizard that can regenerate BMW-style table classes from the FileMan data dictionary.
+              This produces ~2,000+ classes from targeted files.
+              Settings: Package=BMW, Table Name Format=<code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">&lt;FILENAME&gt;</code>, Compile Classes=checked.
+              Limitation: some computed fields produce runtime errors &mdash; an FM2Class limitation, not a FileMan issue.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Key FileMan files mapped by BMW
+            </h3>
+            <div class="mt-2 grid gap-2 sm:grid-cols-2">
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  File #2 &rarr; BMW.VA_PATIENT
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  File #200 &rarr; BMW.NEW_PERSON
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  File #9000001 &rarr; BMW.PATIENT
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  File #9000010 &rarr; BMW.VISIT
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-2">
+              Plus ~19 additional parent files with subfiles.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BPRM -->
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          BPRM &mdash; Practice Management
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          Browser-based registration, scheduling, and ADT workflows
+        </p>
+
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              What BPRM is
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              BPRM v4.0 Patch 6 (November 2025) is the IHS Practice Management Application Suite.
+              It is an ASP.NET application running on Windows Server with IIS.
+              It provides browser-based access to patient registration, scheduling, and ADT (Admit/Discharge/Transfer) workflows.
+              BPRM connects to IRIS via ADO.NET on port 1972 (SuperServer) in the RPMS namespace.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Technology stack
+            </h3>
+            <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <ul class="text-xs text-neutral-600 dark:text-neutral-400 space-y-1">
+                <li>
+                  &middot; Application server: Windows Server 2016+ with IIS 10+
+                </li>
+                <li>
+                  &middot; Runtime: .NET Framework 4.8+ and .NET Core 8.0.17+
+                </li>
+                <li>
+                  &middot; Client: Windows 10+ with Edge or Chrome
+                </li>
+                <li>
+                  &middot; Database connection: InterSystems ADO.NET provider on port 1972
+                </li>
+                <li>
+                  &middot; Data layer: BMW 2025.3 (FileMan-to-SQL mapping)
+                </li>
+                <li>
+                  &middot; Application classes: 122 stored procedures and views in <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">bprm0400.06.xml</code>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              IRIS driver incompatibility
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The BPRM MSI installer bundles <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">InterSystems.Data.IRISClient.dll</code> version 2022.1 (848,384 bytes).
+              This driver cannot connect to IRIS 2026.1.
+              Workaround: swap it with the 2026.1 version of the driver (788,480 bytes), available from the IRIS container at <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">/usr/irissys/dev/dotnet/bin/net8.0/</code>.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              RPMS package prerequisites
+            </h3>
+            <div class="mt-2 grid gap-2 sm:grid-cols-2">
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  BMW 2025.3+
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  PIMS 5.3 p1019
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  AG 7.1 p17
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  XU v8.0 p1018+
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  DI v22 p1018+
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-2">
+                <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  BSDX v3.0
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-5">
+            <h3 class="font-semibold text-amber-900 dark:text-amber-200 mb-2">
+              Security finding: hardcoded encryption key
+            </h3>
+            <p class="text-sm text-amber-800 dark:text-amber-300">
+              BPRM v4.0 p6 uses AES-128-CBC to encrypt its database connection string.
+              The encryption key and IV are static and hardcoded in <code class="font-mono text-xs bg-amber-100 dark:bg-amber-900/50 px-1.5 py-0.5 rounded">BPRM.Util.Encryption.AESService</code>.
+              The same key is used across all BPRM v4.0 p6 installations.
+              Since the key ships inside the publicly downloadable MSI installer, the encryption is effectively no protection.
+              A responsible disclosure was submitted to HHS in May 2026.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VueCentric -->
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          VueCentric &mdash; EHR Thick Client
+        </h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+          The clinical GUI layer for IHS EHR v1.1
+        </p>
+
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              What VueCentric is
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              VueCentric is a proprietary multi-tier component framework authored by Medsphere Systems Corp.
+              It provides the graphical user interface for IHS EHR v1.1.
+              It is a Delphi 7 x86 (32-bit) Windows thick-client application, launched as <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">VIM.exe</code>.
+              It is not openly redistributable.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Protocol: CIA broker, not XWB
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              VueCentric uses the CIA (Medsphere) broker protocol on port 9200 &mdash; not the standard XWB RPC Broker on port 9100.
+              The CIA protocol uses a callback model: IRIS dials back to the Windows client on an ephemeral port.
+              This means bidirectional TCP must be open between server and client.
+              In Docker/VM environments, NAT patches are required to two server-side routines:
+            </p>
+            <div class="mt-2 rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+              <ul class="text-xs text-neutral-600 dark:text-neutral-400 space-y-1">
+                <li>
+                  &middot; <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">XWBTCPL</code> ~line 101: comment out NAT IP selection
+                </li>
+                <li>
+                  &middot; <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">CIANBACT</code> ~line 23: prefer <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">CIA("IP")</code> over <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">$$CLIENTIP^CIAUOS</code>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Architecture components
+            </h3>
+            <div class="grid gap-3 sm:grid-cols-2 mt-2">
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+                <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">VIM</p>
+                <p class="text-xs text-neutral-600 dark:text-neutral-400">
+                  Visual Interface Manager &mdash; composes the UI
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+                <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">CSS</p>
+                <p class="text-xs text-neutral-600 dark:text-neutral-400">
+                  Component Support Services &mdash; context, events, remote data access
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+                <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">CMS</p>
+                <p class="text-xs text-neutral-600 dark:text-neutral-400">
+                  Component Management Service &mdash; just-in-time deployment, versioning, security
+                </p>
+              </div>
+              <div class="rounded bg-neutral-50 dark:bg-neutral-900 p-3">
+                <p class="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 mb-1">CSL</p>
+                <p class="text-xs text-neutral-600 dark:text-neutral-400">
+                  Communication Service Layer &mdash; authentication, host data exchange
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Installation and patching
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              EHR v1.1 base plus 40 patches (p1&ndash;p40) are available from IHS.
+              The base installer alone is missing ~30 DLLs; the cumulative patch installer (<code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">ehr_0110.39.exe</code>, 62 MB) is required for a functional client.
+              Server-side: 42 KIDS builds must be installed (base + 40 patches).
+              Client-side: OCX and DLL files must be registered with <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">regsvr32</code>.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Known issues
+            </h3>
+            <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1.5">
+              <li>
+                &middot; Missing <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">dclofficexp70.bpl</code> (DevExpress OfficeXP Controls for Delphi 7) causes electronic signature service failures
+              </li>
+              <li>
+                &middot; Four components fail to register: BEHESigService.dll, BEHOrders.ocx, BEHReports.ocx, BEHQOWizard.ocx
+              </li>
+              <li>
+                &middot; "User context could not be located" &rarr; set <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">CIAVM DEFAULT SOURCE</code> XPAR
+              </li>
+              <li>
+                &middot; "Unable to start patient service" &rarr; fix division pointer in NEW PERSON file
+              </li>
+              <li>
+                &middot; "Unable to start CPRS Context Adapter" &rarr; add <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">OR CPRS GUI CHART</code> menu to user
+              </li>
+            </ul>
+          </div>
+
+          <div class="rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950/30 p-5">
+            <h3 class="font-semibold text-green-900 dark:text-green-200 mb-2">
+              Current status (May 2026)
+            </h3>
+            <p class="text-sm text-green-800 dark:text-green-300">
+              VueCentric clinical desktop is running.
+              Menu bar shows User, Patient, Tools, Help.
+              Remaining non-fatal errors in BEHCONTEXTADAPTER, BEHOPTIONS, and component initialization.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Dependency chain -->
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          The Dependency Chain
+        </h2>
+        <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+          The central challenge is a version-locked dependency chain between three components.
+          Both workarounds identified below are in place and functioning.
+        </p>
+
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6">
+          <div class="space-y-4">
+
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-24 text-right">
+                <span class="inline-block font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">
+                  BPRM
+                </span>
+              </div>
+              <div>
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                  v4.0 p6 bundles IRIS 2022.1 ADO.NET driver
+                </p>
+                <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-0.5">
+                  Workaround: swap driver DLL to match target IRIS version
+                </p>
+              </div>
+            </div>
+
+            <div class="border-l-2 border-neutral-300 dark:border-neutral-700 ml-12 pl-4 py-1">
+              <p class="text-xs text-neutral-400 dark:text-neutral-600">depends on</p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-24 text-right">
+                <span class="inline-block font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">
+                  BMW
+                </span>
+              </div>
+              <div>
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                  2025.3 ships as IRIS.DAT built for IRIS 2022.1.3
+                </p>
+                <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-0.5">
+                  Workaround: export classes as XML, import into target IRIS version
+                </p>
+              </div>
+            </div>
+
+            <div class="border-l-2 border-neutral-300 dark:border-neutral-700 ml-12 pl-4 py-1">
+              <p class="text-xs text-neutral-400 dark:text-neutral-600">requires</p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-24 text-right">
+                <span class="inline-block font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">
+                  IRIS
+                </span>
+              </div>
+              <div>
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                  Staging runs 2026.1 &mdash; three major versions ahead of what BMW targets
+                </p>
+                <p class="text-xs text-green-600 dark:text-green-400 mt-0.5">
+                  Both workarounds applied &mdash; BPRM login and ADT workspace functional
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            <strong class="text-neutral-900 dark:text-white">Pattern:</strong>
+            Version-locked binary artifacts create invisible dependencies that surface only at deployment time.
+            When the release cadence of the database engine (InterSystems IRIS) outpaces the release cadence of the applications built on it (BMW, BPRM), the gap compounds.
+            Any modernization path for RPMS must account for this coupling.
+          </p>
+        </div>
+      </section>
+
+      <!-- Configuration reference -->
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Port and Protocol Reference
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead>
+              <tr class="border-b border-neutral-200 dark:border-neutral-800">
+                <th class="py-3 pr-4 font-semibold text-neutral-900 dark:text-white">
+                  Port
+                </th>
+                <th class="py-3 pr-4 font-semibold text-neutral-900 dark:text-white">
+                  Protocol
+                </th>
+                <th class="py-3 pr-4 font-semibold text-neutral-900 dark:text-white">
+                  Used By
+                </th>
+                <th class="py-3 font-semibold text-neutral-900 dark:text-white">
+                  Notes
+                </th>
+              </tr>
+            </thead>
+            <tbody class="text-neutral-600 dark:text-neutral-400">
+              <tr class="border-b border-neutral-100 dark:border-neutral-900">
+                <td class="py-2.5 pr-4 font-mono text-xs">9100</td>
+                <td class="py-2.5 pr-4">XWB RPC Broker</td>
+                <td class="py-2.5 pr-4">Roll-and-scroll, CPRS-style clients</td>
+                <td class="py-2.5">Standard VA broker protocol</td>
+              </tr>
+              <tr class="border-b border-neutral-100 dark:border-neutral-900">
+                <td class="py-2.5 pr-4 font-mono text-xs">9200</td>
+                <td class="py-2.5 pr-4">CIA Broker</td>
+                <td class="py-2.5 pr-4">VueCentric / EHR v1.1</td>
+                <td class="py-2.5">Medsphere protocol; requires callback port</td>
+              </tr>
+              <tr class="border-b border-neutral-100 dark:border-neutral-900">
+                <td class="py-2.5 pr-4 font-mono text-xs">9101</td>
+                <td class="py-2.5 pr-4">BMX Broker</td>
+                <td class="py-2.5 pr-4">BMX-based applications</td>
+                <td class="py-2.5">Alternative broker</td>
+              </tr>
+              <tr class="border-b border-neutral-100 dark:border-neutral-900">
+                <td class="py-2.5 pr-4 font-mono text-xs">1972</td>
+                <td class="py-2.5 pr-4">IRIS SuperServer / ADO.NET</td>
+                <td class="py-2.5 pr-4">BPRM, BMW SQL queries</td>
+                <td class="py-2.5">Database-level TCP; .NET driver required</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 pr-4 font-mono text-xs">52773</td>
+                <td class="py-2.5 pr-4">HTTP</td>
+                <td class="py-2.5 pr-4">IRIS Management Portal</td>
+                <td class="py-2.5">Admin interface; not exposed in production</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
