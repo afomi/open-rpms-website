@@ -13,7 +13,7 @@ description: "Distilling the patterns, domain model, and workflows from RPMS int
     <div class="mx-auto max-w-4xl px-6 py-24 sm:py-32 lg:px-8">
       <div class="max-w-2xl">
         <span class="inline-flex items-center rounded-full bg-neutral-100 dark:bg-neutral-800 px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-700">
-          Open source
+          Open source &middot; Community maintained
         </span>
         <h1 class="mt-6 text-5xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-6xl">
           Open-source business processes for healthcare.
@@ -60,6 +60,18 @@ description: "Distilling the patterns, domain model, and workflows from RPMS int
             </h3>
             <p class="text-sm text-neutral-600 dark:text-neutral-400">
               Core healthcare entities — Patient, Encounter, Order, Problem, Result — distilled from decades of operational use.
+            </p>
+          </a>
+
+          <a
+            href="{{ "/build" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              How a release is built
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              How a current copy is assembled from the public files, ported to YottaDB, and where the chart, iCare, and the front desk still have gaps.
             </p>
           </a>
 
@@ -142,9 +154,25 @@ description: "Distilling the patterns, domain model, and workflows from RPMS int
             The implementation — MUMPS globals, VAX-era conventions, terminal-based interfaces — is not what's valuable.
             The operational knowledge embedded in the design is.
           </p>
-          <p class="text-neutral-700 dark:text-neutral-300">
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
             This site is an attempt to extract that knowledge: the domain model, the workflow patterns, the security architecture, the hard-won decisions about what healthcare IT actually needs to do under pressure.
             The goal is to make those patterns available to anyone building health systems — free of the MUMPS runtime, the IRIS license, and the 1990s UX.
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            In 2020, OSEHRA — the institutional home for open-source VistA and RPMS — closed its doors.
+            The software kept running.
+            The community infrastructure did not survive.
+            This project is part of an effort to rebuild that infrastructure from the ground up, maintained by the people who use and deploy the system.
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300">
+            One piece of that work is a release people can run.
+            IHS's own way of assembling one was not in the public files, so we built a way.
+            It keeps the certified patch levels current, and the same release runs on the database IHS uses and on YottaDB.
+            <a
+              href="{{ "/build" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >How a release is built</a>
+            says what is in it, and what is not.
           </p>
         </div>
         <div class="mt-8 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
@@ -161,19 +189,167 @@ description: "Distilling the patterns, domain model, and workflows from RPMS int
       </div>
     </div>
 
+    <!-- From the blog -->
+    {% if site.posts.size > 0 %}
+    <div class="border-t border-neutral-200 dark:border-neutral-800">
+      <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-sm font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+            From the blog
+          </h2>
+          <a
+            href="{{ "/blog" | relative_url }}"
+            class="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+          >
+            All posts &rarr;
+          </a>
+        </div>
+        <div class="space-y-6">
+          {% for post in site.posts limit:3 %}
+          <a
+            href="{{ post.url | relative_url }}"
+            class="group block rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <div class="flex items-center gap-x-4 text-xs text-neutral-500 dark:text-neutral-400 mb-2">
+              <time datetime="{{ post.date | date: '%Y-%m-%d' }}">
+                {{ post.date | date: "%B %d, %Y" }}
+              </time>
+              <span>&middot;</span>
+              <span>{{ post.author }}</span>
+            </div>
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200">
+              {{ post.title }}
+            </h3>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+              {{ post.excerpt | strip_html | truncate: 160 }}
+            </p>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Contributors -->
+    <div class="border-t border-neutral-200 dark:border-neutral-800">
+      <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">
+          Contributors
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl">
+          OpenRPMS is maintained by a loose federation of organizations working on open-source RPMS infrastructure.
+          Each contributes a different piece.
+          All of it is open.
+        </p>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <a
+            href="https://github.com/CivicActions/docker-vista"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">
+              CivicActions
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Maintains docker-vista, a container pipeline that turns the public RPMS source into a runnable IRIS image.
+            </p>
+          </a>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">
+              Lakeraven
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Maintains the current release: the public files reassembled, kept up to the certified patch level, and ported to YottaDB so it runs without an InterSystems license.
+              <a
+                href="{{ "/build" | relative_url }}"
+                class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+              >How a release is built</a>
+              is the plain-language account.
+              The working record is
+              <a
+                href="https://github.com/lakeraven/rpms-ops"
+                class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+              >rpms-ops</a>.
+            </p>
+          </div>
+          <a
+            href="https://civic.studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">
+              Civic Studio
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Maintains this site.
+              Documents the domain model, integration layer, and security findings.
+              Extracted BMW from binary to portable XML.
+            </p>
+          </a>
+          <a
+            href="https://worldvista.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">
+              WorldVistA
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The 501(c)(3) nonprofit that inherited OSEHRA's VistA repositories.
+              Hosts FOIA-RPMS releases and maintains institutional continuity for the open-source VistA community.
+            </p>
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-neutral-500 dark:text-neutral-500">
+          Want to contribute?
+          This site is open source.
+          File an issue, submit a pull request, or reach out at
+          <a
+            href="mailto:wold@afomi.com"
+            class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+          >wold@afomi.com</a>.
+        </p>
+      </div>
+    </div>
+
   </main>
 
   <footer class="border-t border-neutral-200 dark:border-neutral-800">
-    <div class="mx-auto max-w-4xl px-6 py-8 lg:px-8">
+    <div class="mx-auto max-w-4xl px-6 py-8 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-sm text-neutral-500 dark:text-neutral-400">
-        OpenRPMS — unofficial, independent documentation.
-        RPMS is a product of the <a
+        Community maintained &mdash; unofficial, independent, open source.
+      </p>
+      <nav class="flex gap-6" aria-label="Footer">
+        <a
+          href="{{ "/build" | relative_url }}"
+          class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+        >
+          Build
+        </a>
+        <a
+          href="{{ "/blog" | relative_url }}"
+          class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+        >
+          Blog
+        </a>
+        <a
+          href="{{ "/licensing" | relative_url }}"
+          class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+        >
+          Licensing
+        </a>
+        <a
           href="https://www.ihs.gov/rpms/"
-          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+          class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
           target="_blank"
           rel="noopener noreferrer"
-        >Indian Health Service</a>.
-      </p>
+        >
+          IHS RPMS
+        </a>
+      </nav>
     </div>
   </footer>
 

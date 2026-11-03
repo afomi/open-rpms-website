@@ -1,0 +1,460 @@
+---
+layout: default
+title: "How a release is built"
+description: "How a current RPMS release is assembled from the public IHS files, what the chart, iCare, and the front desk need from it, and what the public release leaves out."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        How a release is built
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        An electronic health record is the server and the programs people actually open.
+      </p>
+      <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">
+        This page says how we assemble a current copy of the Resource and Patient Management System from the files the Indian Health Service has published, what the chart, the patient panel, and the front desk need from that copy, and what is still missing.
+      </p>
+      <p class="mt-3 text-sm text-neutral-500">
+        The counts below are from the October 23, 2026 release.
+        A later release publishes a fresh count with itself.
+        The kinds of gaps stay.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          The public files are not a build
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            We treat IHS as having its own way of assembling a release.
+            That way was not part of what was published.
+            We built one, because a current system cannot be stood up from the public files as they arrive.
+          </p>
+          <p>
+            The last complete public database is from 2021.
+            Everything since arrives as patches, mixed in with installers for the desktop programs.
+            The drop is three kinds of piece, taken from a working system, with no instructions for putting them back together.
+          </p>
+        </div>
+        <div class="mt-6 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              A database copy
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The stored data of a live 2021 system.
+              That site's queues, mail, accounts, and machine paths are still in it.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Source code
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The programs IHS chose to release.
+              Some packages are absent.
+              Some programs exist only as compiled code, with no source.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Patches since
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The updates published after 2021, in the patch format IHS uses.
+              Prerequisites cross packages and dates.
+              Desktop installers sit in the same folders.
+            </p>
+          </div>
+        </div>
+        <div class="mt-6 space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            The recipe we use is ordinary, and it is written down.
+            Every input file is checksummed before it is opened.
+            A hand-written note says which certified version we are aiming at.
+            That note and the patch set become an exact list.
+            The build installs that list and no other.
+            The old site's leftover state is stripped out as its own step.
+            A release is published when the checks pass, with the checksums beside it.
+          </p>
+          <p>
+            We install IHS's patches as published.
+            When something in the public files is wrong, we look for a later IHS or VA patch that already fixes it.
+            A change of our own is recorded, and it names the defect it repairs.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          The certified line, kept current
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            IHS stamps a certified electronic record with a version.
+            The package that carries the stamp is called BCER.
+            We keep that line current.
+          </p>
+          <p>
+            The floor is BCER 5.0, the first ONC-certified RPMS configuration under the 2015 Edition Cures Update.
+            The line we maintain now is BCER 9.0, certified in November 2025, with the public patches through July 2026 applied on top.
+          </p>
+          <p>
+            A release reproduces those patch levels.
+            Running it does not make a clinic certified.
+            Certification belongs to a deployed system that has been through that process.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          The same release, on two databases
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            Each certified level is built twice, from the same packages and the same patches.
+          </p>
+        </div>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              InterSystems IRIS
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The database IHS runs.
+              You bring the license.
+              The release is a database file with the patches already applied.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              YottaDB
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The same release, exported and adjusted so it runs without an InterSystems license.
+              YottaDB itself is open source, under the AGPL.
+              This is the port.
+              It is published as a container image with the build.
+              How to obtain the current image is in that project's readme.
+            </p>
+          </div>
+        </div>
+        <p class="mt-6 text-neutral-700 dark:text-neutral-300">
+          The two differ where the database forces it.
+          The one that matters for reuse is the front desk: BPRM talks to RPMS as a database, and that connection exists only on IRIS.
+          The chart and iCare can talk to either.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          The programs that make it an EHR
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            The thing we publish is the server.
+            The first thing that server has to support is the set of programs staff use, not a database on its own.
+          </p>
+          <p>
+            Our focus stays on RPMS.
+            The work around the programs is the connection: written down, and backed by an example that signs on and asks the server for something real.
+            A server no chart can sign into is not an electronic health record.
+          </p>
+        </div>
+        <div class="mt-6 space-y-4">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              VueCentric, the chart
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The Windows desktop where clinicians write notes, review results, and place orders.
+              It talks to either database.
+              Most of its files come from the public patch chain.
+              A small set of commercial libraries does not, and a chart built only from public files does not finish starting.
+              That gap is below.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              iCare, the patient panel
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The program for looking across a group of patients: panels, reminders, and population work, rather than one chart at a time.
+              It has its own connection, and both databases serve that connection.
+              The server side of iCare, through the patches on the current line, is in the release.
+              The desktop program is a separate IHS download.
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              BPRM, the front desk
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Practice management: registration, scheduling, and billing.
+              It reads RPMS through the IRIS database, not through the chart's connection.
+              On YottaDB that path does not exist.
+              Registration and scheduling there go through the server's own interfaces.
+            </p>
+          </div>
+        </div>
+        <p class="mt-6 text-neutral-700 dark:text-neutral-300">
+          The requests those programs make are written up, with examples that run against a release, in
+          <a
+            href="https://github.com/lakeraven/rpms-rpc"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+          >rpms-rpc</a>.
+          That library is the supported way to connect a new program.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          What is missing, and what that means
+        </h2>
+        <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+          The public release is a partial one.
+          These gaps are in every release built from it.
+          Each one changes what you can reuse.
+        </p>
+        <div class="space-y-4">
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Requests the server advertises, with no program behind them
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              On the October 23, 2026 release, 203 of 5,592 registered requests have no program in the build or in the public files.
+              80 belong to packages whose source was not released, including imaging, dental, and parts of the patient chart.
+              122 belong to names that were never registered as packages.
+              One names no program at all.
+              A program that calls one gets an error.
+              You can reuse the requests whose code was published.
+              You cannot rebuild the withheld parts from this release.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Programs that exist only as compiled code
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The 2021 database carries 222 programs as compiled code only.
+              200 of those have no source anywhere we can find.
+              They do not run, on either database.
+              Menu items that need them do nothing useful.
+              Scheduling has two examples: inactivating or reactivating a clinic, and ambulatory procedures.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              The Windows chart is missing libraries we cannot give you
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              VueCentric is a few hundred files.
+              The public patch chain covers most of them.
+              IHS also licensed commercial libraries onto its own build machines.
+              Those libraries are not in the public files, and they are not ours to redistribute.
+              A chart assembled only from public files stops at "class not registered."
+            </p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
+              The files a deployer has to supply are the Telerik UI for WPF assemblies (charting, persistence, and the rest of that control set), ComponentOne's grid (<code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">vsflex8l.ocx</code>), and the DevExpress libraries the older Delphi screens load (including <code class="font-mono text-xs bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">dclofficexp70.bpl</code> and the rest of that set).
+              A clinic that already has a licensed IHS chart install has these files.
+              A new project gets them from that kind of install, or from the vendor.
+            </p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              A few IHS components are simply newer than an older public snapshot, including the BMX libraries the .NET programs use.
+              Those are fine to use.
+              They come from a later public drop, and they are easy to miss.
+              One context-sharing file is left out on purpose: turning it on hangs sign-on.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              The front desk runs on IRIS
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              BPRM needs the IRIS database connection.
+              YottaDB does not serve it.
+              You can reuse BPRM against an IRIS release, with your own IRIS license and IHS's BPRM installer.
+              You cannot point BPRM at the YottaDB port.
+              The chart and iCare can use that port, within the other gaps on this page.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Drug and procedure codes that are licensed
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              The National Drug File and the AMA's procedure codes (CPT) are not in the release.
+              The build loads free stand-ins: RxNorm and NDC for drugs, and HCPCS Level II for procedures.
+              A site with its own license can bring the licensed files.
+              The stand-ins are a way to run.
+              They are a different reference set.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Lookup lists that shipped almost empty
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              39 of 111 standard lookup tables ship with three entries or fewer.
+              Beneficiary has one row of the 31 IHS publishes.
+              The build fills the published lists.
+              A clinic's own vendors, insurers, and facility names are still that clinic's job.
+              Prompts that read an empty list have nothing to offer until someone files the rows.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Imaging
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              VistA Imaging is not in the build.
+              Part of its patch media was never released.
+              A release here will not view or store images through that package.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              The 2021 copy was somebody's live system
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Queues, mail, logon blocks, accounts, and paths from the donor site come along in the database file.
+              The build removes them in one step, before a release is published.
+              What you receive is the packages and the reference data we can lawfully load.
+              It is not that site's operations, and it is not your clinic's setup.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          What you can take from this
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Reasonable to reuse
+            </h3>
+            <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-2">
+              <li>
+                The server on YottaDB, without an InterSystems license, for the packages whose code was published.
+              </li>
+              <li>
+                The same patch level on IRIS, if you have a license.
+              </li>
+              <li>
+                The chart's public files, plus the commercial libraries from a licensed install or the vendor.
+              </li>
+              <li>
+                iCare against either database.
+              </li>
+              <li>
+                BPRM against IRIS.
+              </li>
+              <li>
+                The domain, the workflow patterns, and the security model on this site.
+              </li>
+              <li>
+                The worked examples of signing on and making a request.
+              </li>
+            </ul>
+          </div>
+          <div class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              Not in the box
+            </h3>
+            <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-2">
+              <li>
+                A drop-in replacement for a production IHS site.
+              </li>
+              <li>
+                Imaging, and the dental and chart features whose code was never released.
+              </li>
+              <li>
+                A complete VueCentric folder you can hand to a clinic with nothing else.
+              </li>
+              <li>
+                BPRM pointed at YottaDB.
+              </li>
+              <li>
+                The licensed drug file and CPT codes, unless you bring them.
+              </li>
+              <li>
+                A certification you can cite.
+                The release tracks the certified patch levels.
+                It is not itself a certified product.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Where the working record is
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            The build is maintained in the open at
+            <a
+              href="https://github.com/lakeraven/rpms-ops"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >lakeraven/rpms-ops</a>.
+            That repository is the record: the inputs, the patch list, the checks, and the current gap count.
+            This page is the plain-language version.
+            When the two disagree, the repository should be believed, and this page should be corrected.
+          </p>
+          <p>
+            Someone who wants the recipe, including what a future public release from IHS could include so the rest of us would not have to rebuild it, can read
+            <a
+              href="https://github.com/lakeraven/rpms-ops/blob/main/docs/APPROACH.md"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >the approach notes</a>.
+          </p>
+          <p>
+            The short patterns of the work, clinical and administrative, stay on
+            <a
+              href="{{ "/workflows" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Workflows</a>.
+            The step-by-step journeys, with the screen a person sees, are kept in one companion so they are written once.
+            That companion is being prepared for publication.
+            This site will link to it, and will not grow a second copy.
+          </p>
+        </div>
+        <div class="mt-8 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            <strong class="text-neutral-900 dark:text-white">Disclaimer:</strong>
+            OpenRPMS is an unofficial, independent project.
+            It is not affiliated with the Indian Health Service, the Department of Health and Human Services, or the U.S. government.
+            See
+            <a
+              href="{{ "/licensing" | relative_url }}"
+              class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+            >Licensing</a>
+            for what is public domain and what is not.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

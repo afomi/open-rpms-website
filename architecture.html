@@ -53,11 +53,22 @@ description: "How RPMS is composed — four layers, infrastructure packages, and
           <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
             <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Database</h3>
             <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              InterSystems IRIS (formerly Caché) as the primary runtime.
+              InterSystems IRIS (formerly Caché) is the database IHS runs.
+              The same release also runs on YottaDB, which needs no separate database license.
               VA FileMan sits on top as the schema and data access layer — all application data is stored in FileMan files, making the schema itself queryable.
             </p>
           </div>
         </div>
+        <p class="mt-6 text-neutral-700 dark:text-neutral-300">
+          Staff reach that software through three programs: VueCentric (the chart), iCare (a panel of patients), and BPRM (registration, scheduling, and billing).
+          The server is the piece we publish.
+          BPRM's database connection exists only on IRIS.
+          How a release is assembled, and which of those programs you can reuse, is on
+          <a
+            href="{{ "/build" | relative_url }}"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+          >How a release is built</a>.
+        </p>
       </section>
 
       <section>
@@ -172,6 +183,80 @@ description: "How RPMS is composed — four layers, infrastructure packages, and
           <p class="text-neutral-700 dark:text-neutral-300 text-sm">
             <strong class="text-neutral-900 dark:text-white">Pattern:</strong> This is a federated architecture with eventual consistency for analytics — a pattern now common in modern distributed systems, arrived at pragmatically decades earlier.
           </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Running RPMS
+        </h2>
+        <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+          The current release is the certified patch level, built for IRIS and for YottaDB.
+          How it is assembled, and what it leaves out, is on
+          <a
+            href="{{ "/build" | relative_url }}"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+          >How a release is built</a>.
+          The working record, including how to obtain the current image, is
+          <a
+            href="https://github.com/lakeraven/rpms-ops"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+          >rpms-ops</a>.
+        </p>
+        <p class="mb-6 text-sm text-neutral-500 dark:text-neutral-500">
+          Earlier community images are still published.
+          They are not the certified line described above.
+        </p>
+        <div class="space-y-4">
+
+          <a
+            href="https://hub.docker.com/r/worldvista/rpms"
+            class="block rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">YottaDB</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">
+                  worldvista/rpms
+                </h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  RPMS running on YottaDB, an open-source M database engine descended from GT.M.
+                  Includes pre-loaded test data, CIA broker (port 9100), and BMX broker (port 9101).
+                  Notable as a fully open-source RPMS stack — no proprietary database license required.
+                </p>
+                <p class="mt-2 text-xs text-neutral-500 dark:text-neutral-500">
+                  Docker Hub &middot; Last updated 2017 &middot; worldvista/rpms:20170828
+                </p>
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="https://github.com/civicactions/rpms-iris"
+            class="block rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="flex items-start gap-4">
+              <code class="shrink-0 font-mono text-xs font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1 rounded">IRIS</code>
+              <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-white">
+                  civicactions/rpms-iris
+                </h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                  RPMS running on InterSystems IRIS Community Edition.
+                  Includes XWB broker (port 9100), CIA broker (port 9200), BMX broker (port 9101), IRIS Management Portal (port 52773), and SuperServer (port 1972).
+                  Used by the IHS EHR modernization engagement.
+                </p>
+                <p class="mt-2 text-xs text-neutral-500 dark:text-neutral-500">
+                  GitHub Container Registry &middot; ghcr.io/civicactions/rpms-iris
+                </p>
+              </div>
+            </div>
+          </a>
+
         </div>
       </section>
 

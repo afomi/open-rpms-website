@@ -29,6 +29,8 @@ description: "RPMS clinical and administrative workflow patterns — operational
       </div>
     </div>
 
+    {% include journeys-note.html %}
+
     {% assign clinical_workflows = site.data.workflows | where: "category", "clinical" %}
     {% assign administrative_workflows = site.data.workflows | where: "category", "administrative" %}
 
