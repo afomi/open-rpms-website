@@ -1,0 +1,160 @@
+---
+layout: default
+title: "Install RPMS"
+description: "Run RPMS on YottaDB, which is open source, or on IRIS with your own license, then make a first call into it."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Install RPMS
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        Each release of RPMS is built from the public IHS files and published two ways.
+        On YottaDB it is a container image you can run with no license.
+        On IRIS it is a database you mount in your own licensed IRIS for Health.
+        Both carry the same demo clinic: staff personas you can sign on as, and synthetic patients.
+        This page takes you from nothing to a signed-on session and a first call from code.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Before you start
+        </h2>
+        <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>
+            A machine with Docker and about 20 GB free.
+            The YottaDB image is built for x86-64; on Apple Silicon it runs under emulation, more slowly.
+          </li>
+          <li>
+            The newest release name, from the
+            <a
+              href="https://github.com/lakeraven/rpms-ops/releases"
+              class="font-semibold underline"
+            >releases page</a>.
+            Each name ends in <code>-ydb</code> or <code>-iris</code>.
+          </li>
+          <li>
+            The demo data is synthetic.
+            The brokers speak plaintext, so keep their ports on your own machine or a private network, and never load real patient data into a demo instance.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Option 1: YottaDB (open source)
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          Pull the image and run it.
+          It serves the CIA broker on 9100, the BMX broker on 9101 and the terminal over SSH, and it runs TaskMan.
+          Set any password you like for the terminal's SSH account.
+        </p>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=bcer-9.0-20261108-095b233-ydb    # the newest -ydb release
+docker run -d --name rpms \
+  -p 127.0.0.1:9100:9100 -p 127.0.0.1:9101:9101 -p 127.0.0.1:2222:22 \
+  -e RPMS_SSH_PASSWORD='choose-one' \
+  ghcr.io/lakeraven/rpms-ydb:$TAG
+docker logs -f rpms                   # wait for "TaskMan live", then Ctrl-C</code></pre>
+        <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
+          Open the terminal, called roll and scroll.
+          Give the SSH password you chose, and you land at the RPMS sign-on.
+        </p>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>ssh -p 2222 rpms@127.0.0.1
+ACCESS CODE: PMD123
+VERIFY CODE: PMD123!!</code></pre>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          That pair signs on as PROFILE,MD, one of the demo clinic's published personas.
+          The SSH account can do nothing but reach the sign-on: no shell, no file copy, no port forwarding.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Option 2: IRIS for Health (bring your own license)
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          An IRIS release is a patched RPMS database, <code>IRIS.DAT</code>, plus the BMW database that the BPRM web tier reads.
+          You bring IRIS for Health and its license key.
+          The standup script mounts both databases in the official IRIS for Health container, which needs an InterSystems login to pull.
+        </p>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=bcer-9.0-20261107-312e774-iris   # the newest -iris release
+URL=https://github.com/lakeraven/rpms-ops/releases/download/$TAG
+for f in IRIS.DAT BMW-IRIS.DAT; do
+  curl -LO "$URL/$TAG-$f.gz"
+  curl -LO "$URL/$TAG-$f.sha256"
+  gunzip -k "$TAG-$f.gz"
+done
+shasum -a 256 -c "$TAG-IRIS.DAT.sha256" "$TAG-BMW-IRIS.DAT.sha256"
+
+git clone https://github.com/lakeraven/rpms-ops
+IRIS_KEY=/path/to/iris.key rpms-ops/bin/standup.sh "./$TAG-IRIS.DAT"</code></pre>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          The script ends with <code>BUILD-LEVEL: PASS</code> when the instance is ready.
+          The same demo personas sign on, through the IRIS terminal or the brokers.
+          On IRIS the CIA broker listens on 9200 and the XWB broker on 9100.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Hello world: a first call from code
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          <a
+            href="https://github.com/lakeraven/rpms-rpc"
+            class="font-semibold underline"
+          >rpms-rpc</a>
+          is a Ruby client for the RPMS brokers.
+          It needs Ruby 4.0 or later.
+          This script signs on to the YottaDB instance from Option 1 as PROFILE,MD and prints the first page of the patient list, as a chart's patient picker reads it.
+        </p>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code># Gemfile
+source "https://rubygems.org"
+gem "rpms-rpc", git: "https://github.com/lakeraven/rpms-rpc"</code></pre>
+        <pre class="mt-4 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code># hello.rb
+require "rpms_rpc/cia_client"
+
+client = RpmsRpc::CiaClient.new(host: "127.0.0.1", port: 9100)
+client.connect
+client.authenticate(ENV.fetch("RPMS_ACCESS_CODE"), ENV.fetch("RPMS_VERIFY_CODE"))
+
+client.call_rpc("ORWPT LIST ALL", "", "1").first(5).each do |line|
+  dfn, name = line.split("^")
+  puts "#{dfn}  #{name}"
+end
+
+client.disconnect</code></pre>
+        <pre class="mt-4 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>bundle install
+RPMS_ACCESS_CODE=PMD123 RPMS_VERIFY_CODE='PMD123!!' bundle exec ruby hello.rb
+990051  ALPHA,AVERY
+990001  ALPHA,CASEY
+990027  ANCHOR,JAMIE
+990050  ASHGROVE,SAM
+990028  BEACON,DREW</code></pre>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          Each line is a patient's internal number and name, from the demo clinic's synthetic patients.
+          From here, the same client reads and writes through the RPCs RPMS registers.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          What a release does not include
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-400">
+          The Windows clients, VueCentric and BPRM, are distributed by IHS to sites and are not part of a release.
+          A release does carry the server side they need, and its notes list what each client expects.
+        </p>
+      </section>
+
+    </div>
+  </main>
+</div>
