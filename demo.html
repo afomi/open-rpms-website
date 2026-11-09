@@ -1,0 +1,131 @@
+---
+layout: default
+title: "Try RPMS"
+description: "A running RPMS system with test data only, refreshed about weekly. Sign in as a demo clinic persona, try a workflow, and tell us what you find."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Try RPMS
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        demo.openrpms.org is a running RPMS system you can sign in to from a browser.
+        It holds a demo clinic: staff you can sign in as, and patients who are made up.
+        Look up a patient, read a chart, and walk through the workflows the clinic's staff use.
+      </p>
+      <div class="mt-8">
+        <a
+          href="https://demo.openrpms.org"
+          class="inline-block rounded-md bg-neutral-900 px-5 py-3 text-base font-semibold text-white hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
+        >
+          Open the demo
+        </a>
+      </div>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Test data only
+        </h2>
+        <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>
+            Every patient in the demo is synthetic.
+            Please enter only made-up information, and never real patient data.
+          </li>
+          <li>
+            The demo is rebuilt from the newest release about once a week.
+            Anything you enter is cleared at the next rebuild.
+          </li>
+          <li>
+            It is a place to look and try, not a service to rely on.
+            It may be down while it is rebuilt.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Sign in as a demo persona
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          Each persona is a member of the demo clinic's staff, with the access that role has in RPMS.
+          Signing in as a different persona shows how the same system looks from another job.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-left text-sm text-neutral-600 dark:text-neutral-400">
+            <thead>
+              <tr class="border-b border-neutral-200 dark:border-neutral-800">
+                <th class="py-2 pr-6 font-semibold text-neutral-900 dark:text-white">Persona</th>
+                <th class="py-2 pr-6 font-semibold text-neutral-900 dark:text-white">Access code</th>
+                <th class="py-2 font-semibold text-neutral-900 dark:text-white">Verify code</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-neutral-200 dark:border-neutral-800">
+                <td class="py-2 pr-6">Provider (PROFILE,MD)</td>
+                <td class="py-2 pr-6"><code>PMD123</code></td>
+                <td class="py-2"><code>PMD123!!</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Tell us what you find
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          Feedback goes in GitHub issues, where everyone can see it and follow what happens next.
+          You need a free GitHub account to open one.
+        </p>
+        <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>
+            <strong>A workflow that doesn't match how your clinic works.</strong>
+            Say which job you do, what you were trying to get done, and where the steps went somewhere you didn't expect.
+          </li>
+          <li>
+            <strong>Something broken.</strong>
+            Say which persona you signed in as, what you clicked or typed, what you expected, and what happened.
+            A screenshot helps.
+          </li>
+          <li>
+            <strong>An idea.</strong>
+            Describe the need first, then the solution you have in mind.
+          </li>
+        </ul>
+        <div class="mt-6">
+          <a
+            href="https://github.com/afomi/open-rpms-website/issues/new"
+            class="font-semibold underline"
+          >Open an issue</a>
+        </div>
+        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-500">
+          Please leave out anything about a real person, including your own patients.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Run your own
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-400">
+          The demo runs a published release.
+          To run the same release on your own machine, see
+          <a
+            href="{{ "/install" | relative_url }}"
+            class="font-semibold underline"
+          >Install RPMS</a>.
+        </p>
+      </section>
+
+    </div>
+  </main>
+</div>
