@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Try RPMS"
-description: "A running RPMS system with test data only, refreshed about weekly. Sign in as a demo clinic persona, try a workflow, and tell us what you find."
+description: "A running RPMS system with test data only, reset from time to time. Sign in as a demo clinic persona, try a workflow, and tell us what you find."
 ---
 
 <div class="bg-white dark:bg-neutral-950">
@@ -15,8 +15,9 @@ description: "A running RPMS system with test data only, refreshed about weekly.
       </h1>
       <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
         demo.openrpms.org is a running RPMS system you can sign in to from a browser.
-        It holds a demo clinic: staff you can sign in as, and patients who are made up.
+        It holds the demo clinic: staff you can sign in as, and patients who are made up.
         Look up a patient, read a chart, and walk through the workflows the clinic's staff use.
+        Before you sign in, please read the terms below.
       </p>
       <div class="mt-8">
         <a
@@ -32,20 +33,44 @@ description: "A running RPMS system with test data only, refreshed about weekly.
 
       <section>
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-          Test data only
+          Terms of use
         </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          By signing in to the demo, you agree to these terms.
+          The demo shows the same terms when you sign in.
+        </p>
         <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
           <li>
-            Every patient in the demo is synthetic.
-            Please enter only made-up information, and never real patient data.
+            <strong>It is a test environment.</strong>
+            Every patient in it is synthetic, and it is not used for care.
           </li>
           <li>
-            The demo is rebuilt from the newest release about once a week.
-            Anything you enter is cleared at the next rebuild.
+            <strong>Never enter real patient information.</strong>
+            That includes your own, a family member's, or anyone else's.
+            Enter only made-up information.
           </li>
           <li>
-            It is a place to look and try, not a service to rely on.
-            It may be down while it is rebuilt.
+            <strong>Anyone can sign in.</strong>
+            The sign-in pairs are public, so others can see and change what you enter.
+            Expect other visitors' test data in it too.
+          </li>
+          <li>
+            <strong>Data may be reset at any time.</strong>
+            The demo is put back to its starting data from time to time, and anything entered is erased.
+          </li>
+          <li>
+            <strong>No promise of availability.</strong>
+            It may be slow, down, or changed without notice.
+          </li>
+          <li>
+            <strong>Use it fairly.</strong>
+            Don't try to break in, overload it, or reach anything beyond the demo.
+            Report a security problem privately, through
+            <a
+              href="https://github.com/afomi/open-rpms-website/security"
+              class="font-semibold underline"
+            >the repository's security page</a>,
+            not in a public issue.
           </li>
         </ul>
       </section>
