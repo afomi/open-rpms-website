@@ -138,24 +138,30 @@ description: "A running RPMS system with test data only, reset from time to time
         <ol class="list-decimal space-y-3 pl-6 text-neutral-600 dark:text-neutral-400">
           <li>
             <strong>Find a patient.</strong>
-            As any persona, search the patient list by name and open one of the demo patients.
+            As any persona, type a name in <strong>Find a patient</strong> at the top of the page, such as <code>DEMO</code>, and open one of the demo patients.
           </li>
           <li>
             <strong>Register a new patient.</strong>
-            As the registration clerk, add a made-up patient with a name, date of birth and sex, then find them again.
+            As the registration clerk, choose <strong>Registration</strong> and search for a made-up name first, so nobody gets a second chart.
+            Then register them with a name, sex, date of birth, tribe of membership and community of residence; type the first letters of a tribe or community to choose one.
+            Search again to find them.
           </li>
           <li>
             <strong>Book an appointment.</strong>
-            As the scheduler, book the patient into a clinic slot, then look at the day's schedule.
+            As the scheduler, choose <strong>Scheduling</strong>, pick a clinic and a day, and book a patient into an open time.
+            The clinic's day then shows the appointment, and the patient's chart lists it.
           </li>
           <li>
             <strong>Read a chart.</strong>
-            As the provider, open a patient's chart and look over their problems, allergies, medications and vital signs.
+            As the provider, open <code>DEMO,PATIENT ONE</code> and look over the problem list, allergies, vital signs and immunizations.
+            The demo patients have no medications on file yet.
           </li>
           <li>
             <strong>Look from another role.</strong>
             Sign in as a different persona and open the same patient.
-            Notice what each role can and cannot see or change.
+            The chart reads the same for every role, because in RPMS everyone who can sign on to the chart can read it.
+            What changes is the work each role can do: the menu shows <strong>Registration</strong> to the registration clerk, <strong>Scheduling</strong> to the scheduler and <strong>Referrals</strong> to the provider.
+            The nurse and the medical assistant work from the chart alone.
           </li>
         </ol>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
