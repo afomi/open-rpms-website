@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # ruby 3.4.8 (Gemfile) is not built for ubuntu-26.04, which ubuntu-latest became
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # ruby 3.4.8 (Gemfile) is not built for ubuntu-26.04, which ubuntu-latest became
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
