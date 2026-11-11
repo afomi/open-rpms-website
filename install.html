@@ -30,16 +30,25 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
         </h2>
         <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
           <li>
-            A machine with Docker and about 20 GB free.
-            The YottaDB image is built for x86-64; on Apple Silicon it runs under emulation, more slowly.
+            A machine with Docker, <code>curl</code>, <code>jq</code> and <code>ssh</code>, and about 20 GB free for YottaDB.
+            IRIS needs about 25 GB more, for the downloaded databases and the copy the standup makes.
           </li>
           <li>
-            The newest release name, from the
+            The YottaDB image is built for x86-64.
+            On Apple Silicon it runs under emulation, and Docker warns that the image's platform does not match the host.
+            That warning is expected, and the image works.
+          </li>
+          <li>
+            Releases are named like <code>bcer-9.0-20261110-55d9e3e-ydb</code>: the certification line, the build date, the commit, and the engine (<code>-ydb</code> or <code>-iris</code>).
+            New releases come out often, so the commands below look up the newest one for each engine rather than naming it.
+            Every release is listed on the
             <a
               href="https://github.com/lakeraven/rpms-ops/releases"
               class="font-semibold underline"
             >releases page</a>.
-            Each name ends in <code>-ydb</code> or <code>-iris</code>.
+          </li>
+          <li>
+            Each release's notes are its <code>MANIFEST.md</code> file, attached to the release: what it contains, layer by layer, and what each client expects.
           </li>
           <li>
             The demo data is synthetic.
@@ -50,29 +59,84 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
 
       <section>
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          The demo personas
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          These sign-on pairs are published with every release, on both engines.
+          Each is a member of the demo clinic's staff, with that role's menus and keys.
+          The verify code is the access code followed by <code>!!</code>.
+        </p>
+        <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>
+            PROFILE,MD, a physician: <code>PMD123</code> / <code>PMD123!!</code>
+          </li>
+          <li>
+            PROFILE,RN, a nurse: <code>PRN123</code> / <code>PRN123!!</code>
+          </li>
+          <li>
+            PROFILE,MA, a medical assistant: <code>PMA123</code> / <code>PMA123!!</code>
+          </li>
+          <li>
+            PROFILE,REG, patient registration: <code>PREG123</code> / <code>PREG123!!</code>
+          </li>
+          <li>
+            PROFILE,REGSUP, a registration supervisor: <code>PRSUP123</code> / <code>PRSUP123!!</code>
+          </li>
+          <li>
+            PROFILE,SCHED, a scheduler: <code>PSCH123</code> / <code>PSCH123!!</code>
+          </li>
+          <li>
+            PROFILE,BILL, a billing technician: <code>PBIL123</code> / <code>PBIL123!!</code>.
+            This persona works in the terminal only, so the brokers refuse it.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
           Option 1: YottaDB (open source)
         </h2>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
-          Pull the image and run it.
+          Look up the newest YottaDB release, then pull the image and run it.
           It serves the CIA broker on 9100, the BMX broker on 9101 and the terminal over SSH, and it runs TaskMan.
           Set any password you like for the terminal's SSH account.
         </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=bcer-9.0-20261108-095b233-ydb    # the newest -ydb release
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/rpms-ops/releases \
+  | jq -r '[.[] | select(.tag_name | endswith("-ydb"))][0].tag_name')
+echo "$TAG"                           # the newest -ydb release
 docker run -d --name rpms \
   -p 127.0.0.1:9100:9100 -p 127.0.0.1:9101:9101 -p 127.0.0.1:2222:22 \
   -e RPMS_SSH_PASSWORD='choose-one' \
   ghcr.io/lakeraven/rpms-ydb:$TAG
 docker logs -f rpms                   # wait for "TaskMan live", then Ctrl-C</code></pre>
         <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
+          The first run downloads about 6 GB.
+          Once the image is local, it reaches "TaskMan live" in under a minute.
+        </p>
+        <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
           Open the terminal, called roll and scroll.
+          The first time, <code>ssh</code> asks whether to trust the container's host key: answer <code>yes</code>.
           Give the SSH password you chose, and you land at the RPMS sign-on.
+          The codes you type are not shown.
         </p>
         <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>ssh -p 2222 rpms@127.0.0.1
 ACCESS CODE: PMD123
-VERIFY CODE: PMD123!!</code></pre>
+VERIFY CODE: PMD123!!
+
+Good morning PROFILE,MD
+Site set to DEMO IHS CLINIC
+
+Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code></pre>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-          That pair signs on as PROFILE,MD, one of the demo clinic's published personas.
+          You are signed on as PROFILE,MD, at that persona's main menu.
+          Type <code>^</code> at an option prompt to step back, and at the main menu it signs you off.
+          If a persona is asked for a terminal type, press Enter to take the default.
           The SSH account can do nothing but reach the sign-on: no shell, no file copy, no port forwarding.
+        </p>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          Everything you change lives inside the container.
+          <code>docker rm -f rpms</code> removes it, and the next <code>docker run</code> starts again from the release.
+          A new container has a new host key, so before you connect to it, forget the old one with <code>ssh-keygen -R '[127.0.0.1]:2222'</code>.
         </p>
       </section>
 
@@ -83,9 +147,14 @@ VERIFY CODE: PMD123!!</code></pre>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
           An IRIS release is a patched RPMS database, <code>IRIS.DAT</code>, plus the BMW database that the BPRM web tier reads.
           You bring IRIS for Health and its license key.
-          The standup script mounts both databases in the official IRIS for Health container, which needs an InterSystems login to pull.
+          The standup script, <code>bin/standup.sh</code> in the rpms-ops repository, mounts both databases in an IRIS for Health container and configures them.
+          Name the IRIS for Health image your license covers in <code>IRIS_IMAGE</code>.
+          Images from the InterSystems registry need an InterSystems login to pull.
+          Releases are built on IRIS for Health 2022.1, which the registry no longer serves, and a release also runs on 2026.2.
         </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=bcer-9.0-20261107-312e774-iris   # the newest -iris release
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/rpms-ops/releases \
+  | jq -r '[.[] | select(.tag_name | endswith("-iris"))][0].tag_name')
+echo "$TAG"                           # the newest -iris release
 URL=https://github.com/lakeraven/rpms-ops/releases/download/$TAG
 for f in IRIS.DAT BMW-IRIS.DAT; do
   curl -LO "$URL/$TAG-$f.gz"
@@ -95,11 +164,36 @@ done
 shasum -a 256 -c "$TAG-IRIS.DAT.sha256" "$TAG-BMW-IRIS.DAT.sha256"
 
 git clone https://github.com/lakeraven/rpms-ops
-IRIS_KEY=/path/to/iris.key rpms-ops/bin/standup.sh "./$TAG-IRIS.DAT"</code></pre>
+CONTAINER=rpms-iris \
+IRIS_IMAGE=containers.intersystems.com/intersystems/irishealth:&lt;your version&gt; \
+IRIS_KEY=/path/to/iris.key \
+RPMS_SSH_PASSWORD='choose-one' \
+  rpms-ops/bin/standup.sh "$PWD/$TAG-IRIS.DAT"</code></pre>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-          The script ends with <code>BUILD-LEVEL: PASS</code> when the instance is ready.
-          The same demo personas sign on, through the IRIS terminal or the brokers.
-          On IRIS the CIA broker listens on 9200 and the XWB broker on 9100.
+          Give the database as a full path, as <code>$PWD</code> does here: the script runs from its own directory, so a relative path is not found.
+          It finds the BMW database beside it.
+          <code>CONTAINER</code> names the container the script creates, and it replaces any container already using that name.
+          Its default is <code>rpms</code>, the name Option 1 uses, so set it if you run both.
+        </p>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          The script takes about five minutes.
+          It prints <code>BUILD-LEVEL: PASS</code> once the instance passes its checks, then <code>RPMS up</code>.
+          The terminal is SSH on port 12222, and the same demo personas sign on.
+        </p>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>ssh -p 12222 rpms@127.0.0.1
+ACCESS CODE: PMD123
+VERIFY CODE: PMD123!!</code></pre>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          Inside the container the CIA broker listens on 9200 and the XWB broker on 9100.
+          The script publishes them only when you also set <code>PUBLISH_BROKERS=1</code>, and then on ports Docker picks: <code>docker port rpms-iris</code> lists them.
+          It also publishes the IRIS SuperServer on 11972 and the management portal on 15273, on every network interface, so run it on a machine no one else can reach.
+          If one of those ports is already taken, set <code>SSH_PORT</code>, <code>SUPERSERVER_PORT</code> or <code>PORTAL_PORT</code> to a free one.
+        </p>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          To try the IRIS path before you have a license, IRIS for Health Community Edition runs a release's RPMS database without its BMW database.
+          Set <code>IRIS_IMAGE=intersystems/irishealth-community:2026.2</code> and <code>BMW_NONE=1</code>, and leave out <code>IRIS_KEY</code>.
+          Community Edition limits connections and database size, and its built-in license expires a year after the image was built.
+          It is for evaluation, not for running a clinic.
         </p>
       </section>
 
@@ -113,8 +207,9 @@ IRIS_KEY=/path/to/iris.key rpms-ops/bin/standup.sh "./$TAG-IRIS.DAT"</code></pre
             class="font-semibold underline"
           >rpms-rpc</a>
           is a Ruby client for the RPMS brokers.
-          It needs Ruby 4.0 or later.
+          It needs Ruby 4.0 or later, Bundler, <code>git</code>, and a C compiler for one of its gems.
           This script signs on to the YottaDB instance from Option 1 as PROFILE,MD and prints the first page of the patient list, as a chart's patient picker reads it.
+          Put the two files in a new directory.
         </p>
         <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code># Gemfile
 source "https://rubygems.org"
