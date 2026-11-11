@@ -35,7 +35,7 @@ The template uses the Public Sans font family, a clean and modern typeface. You 
 
 ## Components
 
-Visit the [design system page](/design) to see all available components:
+Visit the [design system page](/design-system) to see all available components:
 
 - Buttons in various styles and sizes
 - Cards and containers

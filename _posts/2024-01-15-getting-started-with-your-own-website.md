@@ -28,7 +28,7 @@ This template makes it easy to get started:
 
 ## Customizing Your Site
 
-Check out the [design system](/design) to see all the available colors, typography, and components. The theme uses CSS custom properties, making it simple to change the entire color palette by editing a few values.
+Check out the [design system](/design-system) to see all the available colors, typography, and components. The theme uses CSS custom properties, making it simple to change the entire color palette by editing a few values.
 
 ## What's Next?
 
