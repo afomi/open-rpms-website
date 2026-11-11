@@ -164,16 +164,14 @@ done
 shasum -a 256 -c "$TAG-IRIS.DAT.sha256" "$TAG-BMW-IRIS.DAT.sha256"
 
 git clone https://github.com/lakeraven/rpms-ops
-CONTAINER=rpms-iris \
 IRIS_IMAGE=containers.intersystems.com/intersystems/irishealth:&lt;your version&gt; \
 IRIS_KEY=/path/to/iris.key \
 RPMS_SSH_PASSWORD='choose-one' \
-  rpms-ops/bin/standup.sh "$PWD/$TAG-IRIS.DAT"</code></pre>
+  rpms-ops/bin/standup.sh ./$TAG-IRIS.DAT</code></pre>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-          Give the database as a full path, as <code>$PWD</code> does here: the script runs from its own directory, so a relative path is not found.
-          It finds the BMW database beside it.
-          <code>CONTAINER</code> names the container the script creates, and it replaces any container already using that name.
-          Its default is <code>rpms</code>, the name Option 1 uses, so set it if you run both.
+          The script finds the BMW database beside the RPMS one.
+          It names its container <code>rpms-iris</code>, so it does not touch Option 1's <code>rpms</code>, and it never replaces a container it did not create.
+          If <code>IRIS_IMAGE</code> is missing or cannot be pulled, it stops and says what to set.
         </p>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           The script takes about five minutes.
@@ -186,8 +184,10 @@ VERIFY CODE: PMD123!!</code></pre>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           Inside the container the CIA broker listens on 9200 and the XWB broker on 9100.
           The script publishes them only when you also set <code>PUBLISH_BROKERS=1</code>, and then on ports Docker picks: <code>docker port rpms-iris</code> lists them.
-          It also publishes the IRIS SuperServer on 11972 and the management portal on 15273, on every network interface, so run it on a machine no one else can reach.
-          If one of those ports is already taken, set <code>SSH_PORT</code>, <code>SUPERSERVER_PORT</code> or <code>PORTAL_PORT</code> to a free one.
+          It also publishes the IRIS SuperServer on 11972 and the management portal on 15273.
+          Every port is on this machine only (127.0.0.1), and the script prints where each one landed.
+          If one is already taken, set <code>SSH_PORT</code>, <code>SUPERSERVER_PORT</code> or <code>PORTAL_PORT</code> to another port on this machine, such as <code>127.0.0.1:12223</code>, or to <code>127.0.0.1:0</code> for any free one.
+          A bare port number, without <code>127.0.0.1:</code>, opens that port to your network.
         </p>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           To try the IRIS path before you have a license, IRIS for Health Community Edition runs a release's RPMS database without its BMW database.
