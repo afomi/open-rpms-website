@@ -1,5 +1,12 @@
 <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Cross mark — clean medical reference -->
+  <!-- An <img> or favicon cannot inherit the page's text colour, so the mark sets its own and follows the colour scheme, as the site's dark: classes do. -->
+  <style>
+    svg { color: #171717; }
+    @media (prefers-color-scheme: dark) {
+      svg { color: #ffffff; }
+    }
+  </style>
   <rect x="20" y="6" width="8" height="36" rx="1" fill="currentColor"/>
   <rect x="6" y="20" width="36" height="8" rx="1" fill="currentColor"/>
 </svg>
