@@ -105,7 +105,9 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
   | jq -r '[.[] | select(.tag_name | endswith("-ydb"))][0].tag_name')
 echo "$TAG"                           # the newest -ydb release
 docker run -d --name rpms \
-  -p 127.0.0.1:9100:9100 -p 127.0.0.1:9101:9101 -p 127.0.0.1:2222:22 \
+  -p 127.0.0.1:9100:9100 \
+  -p 127.0.0.1:9101:9101 \
+  -p 127.0.0.1:2222:22 \
   -e RPMS_SSH_PASSWORD='choose-one' \
   ghcr.io/lakeraven/rpms-ydb:$TAG
 docker logs -f rpms                   # wait for "TaskMan live", then Ctrl-C</code></pre>
@@ -242,12 +244,33 @@ RPMS_ACCESS_CODE=PMD123 RPMS_VERIFY_CODE='PMD123!!' bundle exec ruby hello.rb
 
       <section>
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-          What a release does not include
+          User interfaces
         </h2>
-        <p class="text-neutral-600 dark:text-neutral-400">
-          The Windows clients, VueCentric and BPRM, are distributed by IHS to sites and are not part of a release.
-          A release does carry the server side they need, and its notes list what each client expects.
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          Staff have traditionally used RPMS through the Windows applications IHS distributes: VueCentric, the RPMS-EHR desktop, and BPRM, the web registration and scheduling.
+          Those interfaces are not included here.
+          A release is the RPMS server, its database and its brokers, and IHS distributes the interfaces to sites.
+          Each release's notes list what each client expects of the server.
         </p>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          You reach a release in three ways:
+        </p>
+        <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>
+            The terminal, over SSH to the sign-on, as both options above show.
+          </li>
+          <li>
+            The brokers, which those clients and other programs such as rpms-rpc connect to, as the hello world shows.
+          </li>
+          <li>
+            The
+            <a
+              href="{{ "/demo" | relative_url }}"
+              class="font-semibold underline"
+            >web demo</a>,
+            a running instance you sign in to from a browser.
+          </li>
+        </ul>
       </section>
 
     </div>
