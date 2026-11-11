@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "OpenRPMS — Open-Source Healthcare Operations"
-description: "Distilling the patterns, domain model, and workflows from RPMS into open, reusable healthcare operations knowledge."
+description: "Open business processes for healthcare, starting with the people who do the work and what they need. RPMS is the foundation underneath."
 ---
 
 <div class="bg-white dark:bg-neutral-950">
@@ -19,8 +19,10 @@ description: "Distilling the patterns, domain model, and workflows from RPMS int
           Open-source business processes for healthcare.
         </h1>
         <p class="mt-6 text-lg text-neutral-600 dark:text-neutral-400">
-          The Resource and Patient Management System (RPMS) encodes 40+ years of clinical and administrative workflow knowledge for the Indian Health Service.
-          This site distills those patterns — the domain model, workflows, architecture, and security model — into open, reusable knowledge for anyone building health systems.
+          A health program runs on work people do every day: registering a patient, booking a visit, seeing the patient, billing for the care.
+          OpenRPMS starts there, with the people who do the work, what they need, and the processes that get it done.
+          The Resource and Patient Management System (RPMS) has supported that work for the Indian Health Service for 40+ years.
+          This site distills its patterns — the domain model, workflows, architecture, and security model — into open, reusable knowledge for anyone building health systems.
         </p>
         <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">
           Not a transcription of MUMPS globals.
@@ -28,16 +30,16 @@ description: "Distilling the patterns, domain model, and workflows from RPMS int
         </p>
         <div class="mt-10 flex items-center gap-x-6">
           <a
-            href="{{ "/domain-model" | relative_url }}"
+            href="{{ "/design" | relative_url }}"
             class="rounded-md bg-neutral-900 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-neutral-900 shadow-sm hover:bg-neutral-700 dark:hover:bg-neutral-100"
           >
-            Start with the Domain Model
+            Start with the people
           </a>
           <a
-            href="{{ "/applications" | relative_url }}"
+            href="{{ "/domain-model" | relative_url }}"
             class="text-sm font-semibold text-neutral-900 dark:text-neutral-100"
           >
-            Browse all applications <span aria-hidden="true">&rarr;</span>
+            Explore the domain model <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </div>
@@ -50,6 +52,18 @@ description: "Distilling the patterns, domain model, and workflows from RPMS int
           What's here
         </h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <a
+            href="{{ "/design" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
+              People First
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Who does the work, what they need, and the processes that get it done, step by step on the screen it happens on.
+            </p>
+          </a>
 
           <a
             href="{{ "/domain-model" | relative_url }}"
