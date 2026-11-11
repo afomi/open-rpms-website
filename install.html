@@ -186,7 +186,8 @@ VERIFY CODE: PMD123!!</code></pre>
           The script publishes them only when you also set <code>PUBLISH_BROKERS=1</code>, and then on ports Docker picks: <code>docker port rpms-iris</code> lists them.
           It also publishes the IRIS SuperServer on 11972 and the management portal on 15273.
           Every port is on this machine only (127.0.0.1), and the script prints where each one landed.
-          If one is already taken, set <code>SSH_PORT</code>, <code>SUPERSERVER_PORT</code> or <code>PORTAL_PORT</code> to a free one, or to <code>127.0.0.1:0</code> for any free port.
+          If one is already taken, set <code>SSH_PORT</code>, <code>SUPERSERVER_PORT</code> or <code>PORTAL_PORT</code> to another port on this machine, such as <code>127.0.0.1:12223</code>, or to <code>127.0.0.1:0</code> for any free one.
+          A bare port number, without <code>127.0.0.1:</code>, opens that port to your network.
         </p>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           To try the IRIS path before you have a license, IRIS for Health Community Edition runs a release's RPMS database without its BMW database.
