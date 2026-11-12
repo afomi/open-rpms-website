@@ -43,7 +43,7 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
             New releases come out often, so the commands below look up the newest one for each engine rather than naming it.
             Every release is listed on the
             <a
-              href="https://github.com/lakeraven/rpms-ops/releases"
+              href="https://github.com/lakeraven/openrpms/releases"
               class="font-semibold underline"
             >releases page</a>.
           </li>
@@ -101,7 +101,7 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
           It serves the CIA broker on 9100, the BMX broker on 9101 and the terminal over SSH, and it runs TaskMan.
           Set any password you like for the terminal's SSH account.
         </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/rpms-ops/releases \
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/openrpms/releases \
   | jq -r '[.[] | select(.tag_name | endswith("-ydb"))][0].tag_name')
 echo "$TAG"                           # the newest -ydb release
 docker run -d --name rpms \
@@ -149,15 +149,15 @@ Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code></pre>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
           An IRIS release is a patched RPMS database, <code>IRIS.DAT</code>, plus the BMW database that the BPRM web tier reads.
           You bring IRIS for Health and its license key.
-          The standup script, <code>bin/standup.sh</code> in the rpms-ops repository, mounts both databases in an IRIS for Health container and configures them.
+          The standup script, <code>bin/standup.sh</code> in the openrpms repository, mounts both databases in an IRIS for Health container and configures them.
           Name the IRIS for Health image your license covers in <code>IRIS_IMAGE</code>.
           Images from the InterSystems registry need an InterSystems login to pull.
           Releases are built on IRIS for Health 2022.1, which the registry no longer serves, and a release also runs on 2026.2.
         </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/rpms-ops/releases \
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/openrpms/releases \
   | jq -r '[.[] | select(.tag_name | endswith("-iris"))][0].tag_name')
 echo "$TAG"                           # the newest -iris release
-URL=https://github.com/lakeraven/rpms-ops/releases/download/$TAG
+URL=https://github.com/lakeraven/openrpms/releases/download/$TAG
 for f in IRIS.DAT BMW-IRIS.DAT; do
   curl -LO "$URL/$TAG-$f.gz"
   curl -LO "$URL/$TAG-$f.sha256"
@@ -165,11 +165,11 @@ for f in IRIS.DAT BMW-IRIS.DAT; do
 done
 shasum -a 256 -c "$TAG-IRIS.DAT.sha256" "$TAG-BMW-IRIS.DAT.sha256"
 
-git clone https://github.com/lakeraven/rpms-ops
+git clone https://github.com/lakeraven/openrpms
 IRIS_IMAGE=containers.intersystems.com/intersystems/irishealth:&lt;your version&gt; \
 IRIS_KEY=/path/to/iris.key \
 RPMS_SSH_PASSWORD='choose-one' \
-  rpms-ops/bin/standup.sh ./$TAG-IRIS.DAT</code></pre>
+  openrpms/bin/standup.sh ./$TAG-IRIS.DAT</code></pre>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           The script finds the BMW database beside the RPMS one.
           It names its container <code>rpms-iris</code>, so it does not touch Option 1's <code>rpms</code>, and it never replaces a container it did not create.
