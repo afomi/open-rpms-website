@@ -1,0 +1,52 @@
+---
+layout: default
+title: "Reference"
+description: "How RPMS works: its domain model, architecture, security patterns, application catalog, licensing, and the IHS EHR site readiness documents."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Reference
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        How RPMS is put together, distilled from public IHS documentation and decades of operational use.
+        Start with the page that matches your question.
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      {% for ref in site.data.reference %}
+        <a
+          href="{{ ref.url | relative_url }}"
+          class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+        >
+          <h2 class="font-semibold text-neutral-900 dark:text-white mb-2">
+            {{ ref.name }}
+          </h2>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            {{ ref.summary }}
+          </p>
+        </a>
+      {% endfor %}
+    </div>
+
+    <p class="mt-12 text-neutral-600 dark:text-neutral-400">
+      The people, needs and journeys behind these pages are on
+      <a
+        href="{{ "/design" | relative_url }}"
+        class="font-semibold underline"
+      >People first</a>,
+      and the RPCs each release registers are listed on
+      <a
+        href="https://ux.openrpms.org/"
+        class="font-semibold underline"
+      >ux.openrpms.org</a>.
+    </p>
+
+  </main>
+</div>

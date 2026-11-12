@@ -1,0 +1,137 @@
+---
+layout: default
+title: "Build with us"
+description: "How each release of RPMS is built in the open from IHS's public files, how it is checked, what it records, and how IHS, sites and partners can take part."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Build RPMS in the open, with us
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS belongs to the programs and people it serves.
+        OpenRPMS builds each IHS release in the open, so that sites, IHS, partners and developers can look at the same thing, check it, and improve it together.
+        This page says how a release is made, what it records, and where you can take part.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          How a release is built
+        </h2>
+        <ol class="list-decimal space-y-3 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>
+            <strong class="text-neutral-900 dark:text-white">From IHS's public files.</strong>
+            The build starts from the last complete RPMS database IHS released under FOIA and installs every KIDS patch IHS has released since, in order.
+            Every input is checksummed before it is used.
+          </li>
+          <li>
+            <strong class="text-neutral-900 dark:text-white">Stock first.</strong>
+            Every way a release differs from stock RPMS is registered, with its reason, and whether stock was tried without it.
+            Defects found in the public release are recorded with their evidence.
+          </li>
+          <li>
+            <strong class="text-neutral-900 dark:text-white">Gated.</strong>
+            A release publishes only when it reaches the IHS certified patch level, every certified package is installed and current, and real clients sign on and get the answers they expect.
+          </li>
+          <li>
+            <strong class="text-neutral-900 dark:text-white">Published with its evidence.</strong>
+            Each release carries what it contains, layer by layer, where every input came from, every RPC it registers, and the record of each check, as files anyone can read without running anything.
+          </li>
+        </ol>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          It is built for two engines: IRIS for Health, the engine IHS certifies RPMS on, and YottaDB, which is open source.
+          The YottaDB line is not certified today, and we intend to pursue it.
+        </p>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          See the
+          <a
+            href="https://github.com/lakeraven/rpms-ops/releases"
+            class="font-semibold underline"
+          >releases</a>
+          and the
+          <a
+            href="https://github.com/lakeraven/rpms-ops"
+            class="font-semibold underline"
+          >build repository</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Where you can take part
+        </h2>
+        <ul class="space-y-4 text-neutral-600 dark:text-neutral-400">
+          <li>
+            <strong class="text-neutral-900 dark:text-white">Clinic and program staff.</strong>
+            Walk your role's work on
+            <a
+              href="{{ "/demo" | relative_url }}"
+              class="font-semibold underline"
+            >the demo</a>
+            and tell us where it differs from how your clinic works.
+            The needs and journeys you check are on
+            <a
+              href="{{ "/design" | relative_url }}"
+              class="font-semibold underline"
+            >People first</a>.
+          </li>
+          <li>
+            <strong class="text-neutral-900 dark:text-white">Site IT staff.</strong>
+            <a
+              href="{{ "/install" | relative_url }}"
+              class="font-semibold underline"
+            >Run a release</a>
+            and report what you find: a platform it has not met, a step that did not end the way the page says.
+          </li>
+          <li>
+            <strong class="text-neutral-900 dark:text-white">Developers.</strong>
+            Build on the RPCs with
+            <a
+              href="https://github.com/lakeraven/rpms-rpc"
+              class="font-semibold underline"
+            >rpms-rpc</a>
+            and
+            <a
+              href="https://github.com/lakeraven/lakeraven-ehr"
+              class="font-semibold underline"
+            >lakeraven-ehr</a>,
+            and send fixes as pull requests.
+          </li>
+          <li>
+            <strong class="text-neutral-900 dark:text-white">IHS and partners.</strong>
+            Review a release's evidence, and the defects it records in the public release.
+            A fix that IHS carries in its own patches is the best outcome, because every site then takes it the usual way, by KIDS.
+            We would welcome building releases together, in the open.
+          </li>
+        </ul>
+        <div class="mt-8">
+          <a
+            href="https://github.com/afomi/open-rpms-website/issues/new"
+            class="rounded-md bg-neutral-900 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-neutral-900 shadow-sm hover:bg-neutral-700 dark:hover:bg-neutral-100"
+          >Start a conversation</a>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          What we hold to
+        </h2>
+        <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>The work comes first: a change is judged by what it does for the person doing the work.</li>
+          <li>Stock RPMS first, and every difference written down.</li>
+          <li>Synthetic data only, everywhere in the open.</li>
+          <li>Every release reproducible from public sources, so no single host or sponsor is a single point of failure.</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+</div>
