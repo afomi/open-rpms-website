@@ -93,8 +93,8 @@ description: "How RPMS is composed — four layers, infrastructure packages, and
               class="text-neutral-900 dark:text-white"
             >YottaDB</strong>
             runs the same code through a small, automated port.
-            It is the same language on a different vendor's engine, so nothing is translated: the build changes only the lines that use an IRIS extension, and runs about 99.9% of FOIA's lines exactly as shipped.
-            As of bcer-9.0-20261112-3435868-ydb, that is about 7,300 changed lines out of about 16 million, in about 1,900 of some 67,000 routines.
+            It is the same language on a different vendor's engine, so nothing is translated: the build changes only the lines that use an IRIS extension, and runs 99.95% of FOIA's lines exactly as shipped.
+            In the routine ledger of 2026-11-12 (genesis bcer-9.0-20261111-312e774-ydb), that is 7,294 changed lines out of about 16.2 million, in 1,859 of 66,956 routines.
           </p>
           <p
             class="text-neutral-700 dark:text-neutral-300 text-sm"
@@ -107,7 +107,7 @@ description: "How RPMS is composed — four layers, infrastructure packages, and
             <li>Syntax only: a line IRIS accepts is written the way both engines accept, with the same meaning.</li>
             <li>Platform: devices, sockets and files go through YottaDB's own services, mostly through the GT.M Kernel routines that ship in FOIA.</li>
             <li>Missing functions: a call to an IRIS built-in that YottaDB lacks goes to a small routine that computes the same answer, measured against IRIS.</li>
-            <li>Omitted: about 500 IRIS class files that only IRIS can run.</li>
+            <li>Omitted: 512 IRIS class files that only IRIS can run.</li>
           </ul>
           <p
             class="text-neutral-700 dark:text-neutral-300 text-sm"
