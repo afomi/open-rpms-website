@@ -60,6 +60,77 @@ description: "How RPMS is composed — four layers, infrastructure packages, and
         </div>
       </section>
 
+      <section
+        id="two-engines"
+      >
+        <h2
+          class="text-2xl font-bold text-neutral-900 dark:text-white mb-4"
+        >
+          Two engines, one FOIA
+        </h2>
+        <div
+          class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 space-y-4"
+        >
+          <p
+            class="text-neutral-700 dark:text-neutral-300 text-sm"
+          >
+            RPMS is written in M, a standard language that more than one vendor's engine runs.
+            Every release is built twice from the same FOIA code: once for InterSystems IRIS, the engine IHS runs, and once for YottaDB, an open-source M engine.
+          </p>
+          <p
+            class="text-neutral-700 dark:text-neutral-300 text-sm"
+          >
+            <strong
+              class="text-neutral-900 dark:text-white"
+            >IRIS</strong>
+            runs FOIA plus the IHS patches, installed in the order IHS ships them.
+            Every place the build departs from that is registered, with its reason and its evidence.
+          </p>
+          <p
+            class="text-neutral-700 dark:text-neutral-300 text-sm"
+          >
+            <strong
+              class="text-neutral-900 dark:text-white"
+            >YottaDB</strong>
+            runs the same code through a small, automated port.
+            It is the same language on a different vendor's engine, so nothing is translated: the build changes only the lines that use an IRIS extension, and runs about 99.9% of FOIA's lines exactly as shipped.
+            As of bcer-9.0-20261112-3435868-ydb, that is about 7,300 changed lines out of about 16 million, in about 1,900 of some 67,000 routines.
+          </p>
+          <p
+            class="text-neutral-700 dark:text-neutral-300 text-sm"
+          >
+            The changes come in four kinds:
+          </p>
+          <ul
+            class="space-y-1 text-sm text-neutral-700 dark:text-neutral-300 list-disc list-inside"
+          >
+            <li>Syntax only: a line IRIS accepts is written the way both engines accept, with the same meaning.</li>
+            <li>Platform: devices, sockets and files go through YottaDB's own services, mostly through the GT.M Kernel routines that ship in FOIA.</li>
+            <li>Missing functions: a call to an IRIS built-in that YottaDB lacks goes to a small routine that computes the same answer, measured against IRIS.</li>
+            <li>Omitted: about 500 IRIS class files that only IRIS can run.</li>
+          </ul>
+          <p
+            class="text-neutral-700 dark:text-neutral-300 text-sm"
+          >
+            Those class files are the features YottaDB does not have yet: C-CDA document export, the patient portal's web services, the Emergency Department Dashboard and the audit report web pages, the EHI export, and the immunization registry exchange.
+            The terminology web service client is among them too, though neither build calls a remote terminology server today.
+          </p>
+          <p
+            class="text-neutral-700 dark:text-neutral-300 text-sm"
+          >
+            Where an engine setting can make YottaDB behave as IRIS does, the build uses the setting instead of rewriting FOIA, and each one is tested against IRIS on every release.
+          </p>
+          <a
+            href="https://github.com/lakeraven/openrpms/blob/main/docs/YDB-PORT.md"
+            class="inline-block text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            How the YottaDB build ports FOIA RPMS &rarr;
+          </a>
+        </div>
+      </section>
+
       <section>
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
           The Infrastructure Stack
