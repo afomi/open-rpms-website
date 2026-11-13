@@ -30,8 +30,8 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
         </h2>
         <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
           <li>
-            A machine with Docker, <code>curl</code>, <code>jq</code> and <code>ssh</code>, and about 20 GB free for YottaDB.
-            IRIS needs about 25 GB more, for the downloaded databases and the copy the standup makes.
+            A machine with Docker and <code>ssh</code>, and about 20 GB free for YottaDB.
+            IRIS also needs <code>curl</code>, and about 25 GB more for the downloaded databases and the copy the standup makes.
           </li>
           <li>
             The YottaDB image is built for x86-64.
@@ -40,15 +40,13 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
           </li>
           <li>
             Releases are named like <code>bcer-9.0-20261110-55d9e3e-ydb</code>: the certification line, the build date, the commit, and the engine (<code>-ydb</code> or <code>-iris</code>).
-            New releases come out often, so the commands below look up the newest one for each engine rather than naming it.
-            Every release is listed on the
-            <a
-              href="https://github.com/lakeraven/openrpms/releases"
-              class="font-semibold underline"
-            >releases page</a>.
+            New releases come out often.
+            The YottaDB image's <code>latest</code> tag always names the newest release, so the command below runs it without looking anything up.
+            Each release is also tagged with its own name, for when you want to stay on one.
           </li>
           <li>
-            Each release's notes are its <code>MANIFEST.md</code> file, attached to the release: what it contains, layer by layer, and what each client expects.
+            Each release's notes are its <code>MANIFEST.md</code> file: what it contains, layer by layer, and what each client expects.
+            The notes, and the releases page that lists them, open with the openrpms repository.
           </li>
           <li>
             The demo data is synthetic.
@@ -97,20 +95,23 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
           Option 1: YottaDB (open source)
         </h2>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
-          Look up the newest YottaDB release, then pull the image and run it.
+          One command pulls the newest YottaDB release and runs it.
+          No account or login is needed.
           It serves the CIA broker on 9100, the BMX broker on 9101 and the terminal over SSH, and it runs TaskMan.
           Set any password you like for the terminal's SSH account.
         </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/openrpms/releases \
-  | jq -r '[.[] | select(.tag_name | endswith("-ydb"))][0].tag_name')
-echo "$TAG"                           # the newest -ydb release
-docker run -d --name rpms \
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>docker run -d --name rpms \
   -p 127.0.0.1:9100:9100 \
   -p 127.0.0.1:9101:9101 \
   -p 127.0.0.1:2222:22 \
   -e RPMS_SSH_PASSWORD='choose-one' \
-  ghcr.io/lakeraven/rpms-ydb:$TAG
+  ghcr.io/lakeraven/rpms-ydb:latest
 docker logs -f rpms                   # wait for "TaskMan live", then Ctrl-C</code></pre>
+        <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
+          Every port is published on 127.0.0.1, so only this machine can reach it.
+          Keep it that way: the brokers speak plaintext and are meant for your own machine or a private network.
+          To stay on one release, put its name in place of <code>latest</code>, for example <code>ghcr.io/lakeraven/rpms-ydb:bcer-9.0-20261110-55d9e3e-ydb</code>.
+        </p>
         <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
           The first run downloads about 6 GB.
           Once the image is local, it reaches "TaskMan live" in under a minute.
@@ -146,6 +147,11 @@ Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code></pre>
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
           Option 2: IRIS for Health (bring your own license)
         </h2>
+        <p class="mb-4 rounded-md border border-neutral-300 p-4 text-neutral-700 dark:border-neutral-700 dark:text-neutral-300">
+          The IRIS path opens when the openrpms repository does.
+          Its databases are release downloads and its standup script lives in that repository, so the commands below work from that day on.
+          Until then, Option 1 runs the same RPMS on YottaDB.
+        </p>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
           An IRIS release is a patched RPMS database, <code>IRIS.DAT</code>, plus the BMW database that the BPRM web tier reads.
           You bring IRIS for Health and its license key.
