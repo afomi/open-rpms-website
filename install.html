@@ -266,12 +266,12 @@ description: "Three ways in: run RPMS on YottaDB, which is open source, run it o
   -p 127.0.0.1:9101:9101 \
   -p 127.0.0.1:2222:22 \
   -e RPMS_SSH_PASSWORD='choose-one' \
-  ghcr.io/lakeraven/rpms-ydb:latest
+  ghcr.io/lakeraven/openrpms:latest
 docker logs -f rpms                   # wait for "TaskMan live", then Ctrl-C</code></pre>
         <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
           Every port is published on 127.0.0.1, so only this machine can reach it.
           Keep it that way: the brokers speak plaintext and are meant for your own machine or a private network.
-          To stay on one release, put its name in place of <code>latest</code>, for example <code>ghcr.io/lakeraven/rpms-ydb:bcer-9.0-20261110-55d9e3e-ydb</code>.
+          To stay on one release, put its name in place of <code>latest</code>, for example <code>ghcr.io/lakeraven/openrpms:bcer-9.0-&lt;date&gt;-&lt;commit&gt;-ydb</code>.
         </p>
         <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
           The first run downloads about 6 GB.
