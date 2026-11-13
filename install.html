@@ -169,16 +169,14 @@ description: "Three ways in: run RPMS on YottaDB, which is open source, run it o
         <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
           <li>
             Releases are named like <code>bcer-9.0-20261110-55d9e3e-ydb</code>: the certification line, the build date, the commit, and the engine (<code>-ydb</code> or <code>-iris</code>).
-            New releases come out often, so the commands below look up the newest one for each engine rather than naming it.
-            Every release is listed on the
-            <a
-              href="https://github.com/lakeraven/rpms-ops/releases"
-              class="font-semibold underline"
-            >releases page</a>.
+            New releases come out often.
+            The YottaDB image's <code>latest</code> tag always names the newest release, so the command below runs it without looking anything up.
+            Each release is also tagged with its own name, for when you want to stay on one.
           </li>
           <li>
-            Each release's notes are its <code>MANIFEST.md</code> file, attached to the release: what it contains, layer by layer, and what each client expects.
+            Each release's notes are its <code>MANIFEST.md</code> file: what it contains, layer by layer, and what each client expects.
             Beside it is the evidence: the client calls it answered, each persona's first steps, and a patient registered and read back.
+            The notes, and the releases page that lists them, open with the openrpms repository.
           </li>
           <li>
             The demo data is synthetic.
@@ -237,7 +235,7 @@ description: "Three ways in: run RPMS on YottaDB, which is open source, run it o
           <div>
             <dt class="font-semibold text-neutral-900 dark:text-white">What you need</dt>
             <dd>
-              A machine with Docker, <code>curl</code>, <code>jq</code> and <code>ssh</code>, and about 20 GB free.
+              A machine with Docker and <code>ssh</code>, and about 20 GB free.
               The image is built for x86-64.
               On Apple Silicon it runs under emulation, and Docker warns that the image's platform does not match the host.
               That warning is expected, and the image works.
@@ -245,19 +243,22 @@ description: "Three ways in: run RPMS on YottaDB, which is open source, run it o
           </div>
         </dl>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
-          Look up the newest YottaDB release, then pull the image and run it.
+          One command pulls the newest YottaDB release and runs it.
+          No account or login is needed.
           Set any password you like for the terminal's SSH account.
         </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s "https://api.github.com/repos/lakeraven/rpms-ops/releases?per_page=100" \
-  | jq -r '[.[] | select(.tag_name | endswith("-ydb"))][0].tag_name')
-echo "$TAG"                           # the newest -ydb release
-docker run -d --name rpms \
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>docker run -d --name rpms \
   -p 127.0.0.1:9100:9100 \
   -p 127.0.0.1:9101:9101 \
   -p 127.0.0.1:2222:22 \
   -e RPMS_SSH_PASSWORD='choose-one' \
-  ghcr.io/lakeraven/rpms-ydb:$TAG
+  ghcr.io/lakeraven/rpms-ydb:latest
 docker logs -f rpms                   # wait for "TaskMan live", then Ctrl-C</code></pre>
+        <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
+          Every port is published on 127.0.0.1, so only this machine can reach it.
+          Keep it that way: the brokers speak plaintext and are meant for your own machine or a private network.
+          To stay on one release, put its name in place of <code>latest</code>, for example <code>ghcr.io/lakeraven/rpms-ydb:bcer-9.0-20261110-55d9e3e-ydb</code>.
+        </p>
         <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
           The first run downloads about 6 GB.
           Once the image is local, it reaches "TaskMan live" in under a minute.
@@ -301,12 +302,17 @@ Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code></pre>
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
           Path 2: IRIS for Health (bring your own license)
         </h2>
+        <p class="mb-4 rounded-md border border-neutral-300 p-4 text-neutral-700 dark:border-neutral-700 dark:text-neutral-300">
+          The IRIS path opens when the openrpms repository does.
+          Its databases are release downloads and its standup script lives in that repository, so the commands below work from that day on.
+          Until then, path 1 runs the same RPMS on YottaDB.
+        </p>
         <dl class="mb-6 space-y-3 text-neutral-600 dark:text-neutral-400">
           <div>
             <dt class="font-semibold text-neutral-900 dark:text-white">What you get</dt>
             <dd>
               A patched RPMS database, <code>IRIS.DAT</code>, with the IHS patches already installed, plus the BMW database that the BPRM web tier reads.
-              The standup script, <code>bin/standup.sh</code> in the rpms-ops repository, mounts both in an IRIS for Health container and configures them.
+              The standup script, <code>bin/standup.sh</code> in the openrpms repository, mounts both in an IRIS for Health container and configures them.
             </dd>
           </div>
           <div>
@@ -319,10 +325,10 @@ Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code></pre>
             </dd>
           </div>
         </dl>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s "https://api.github.com/repos/lakeraven/rpms-ops/releases?per_page=100" \
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s "https://api.github.com/repos/lakeraven/openrpms/releases?per_page=100" \
   | jq -r '[.[] | select(.tag_name | endswith("-iris"))][0].tag_name')
 echo "$TAG"                           # the newest -iris release
-URL=https://github.com/lakeraven/rpms-ops/releases/download/$TAG
+URL=https://github.com/lakeraven/openrpms/releases/download/$TAG
 for f in IRIS.DAT BMW-IRIS.DAT; do
   curl -LO "$URL/$TAG-$f.gz"
   curl -LO "$URL/$TAG-$f.sha256"
@@ -330,11 +336,11 @@ for f in IRIS.DAT BMW-IRIS.DAT; do
 done
 shasum -a 256 -c "$TAG-IRIS.DAT.sha256" "$TAG-BMW-IRIS.DAT.sha256"
 
-git clone https://github.com/lakeraven/rpms-ops
+git clone https://github.com/lakeraven/openrpms
 IRIS_IMAGE=containers.intersystems.com/intersystems/irishealth:&lt;your version&gt; \
 IRIS_KEY=/path/to/iris.key \
 RPMS_SSH_PASSWORD='choose-one' \
-  rpms-ops/bin/standup.sh ./$TAG-IRIS.DAT</code></pre>
+  openrpms/bin/standup.sh ./$TAG-IRIS.DAT</code></pre>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           The script finds the BMW database beside the RPMS one.
           It names its container <code>rpms-iris</code>, so it does not touch path 1's <code>rpms</code>, and it never replaces a container it did not create.
@@ -405,8 +411,9 @@ VERIFY CODE: PMD123!!</code></pre>
         </dl>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
           Download every LKR patch and its install note, then list the patches in the order they install.
+          The patches are release downloads, so this command works once the openrpms repository opens, like path 2.
         </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>curl -s "https://api.github.com/repos/lakeraven/rpms-ops/releases?per_page=100" \
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>curl -s "https://api.github.com/repos/lakeraven/openrpms/releases?per_page=100" \
   | jq -r '.[].assets[] | select(.name | test("-LKR-1\\.0-[0-9]+\\.(kids|md)$")) | .browser_download_url' \
   &gt; lkr-urls.txt
 while read -r url; do
@@ -543,9 +550,9 @@ RPMS_ACCESS_CODE=PMD123 RPMS_VERIFY_CODE='PMD123!!' bundle exec ruby hello.rb
           <li>
             A release that will not start, sign on or install:
             <a
-              href="https://github.com/lakeraven/rpms-ops/issues"
+              href="https://github.com/lakeraven/openrpms/issues"
               class="font-semibold underline"
-            >rpms-ops issues</a>.
+            >openrpms issues</a>.
             Say which release, which path, the command you ran, and the last lines it printed.
           </li>
           <li>
