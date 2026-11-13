@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "OpenRPMS — Open-Source Healthcare Operations"
-description: "Open business processes for healthcare, starting with the people who do the work and what they need. RPMS is the foundation underneath."
+title: "OpenRPMS — RPMS, built in the open"
+description: "RPMS, built in the open, starting with the people who use it. Try it in a browser, run it on YottaDB with no license or on IRIS with your own, and build on its RPCs."
 ---
 
 <div class="bg-white dark:bg-neutral-950">
@@ -16,32 +16,156 @@ description: "Open business processes for healthcare, starting with the people w
           Open source
         </span>
         <h1 class="mt-6 text-5xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-6xl">
-          Open-source business processes for healthcare.
+          RPMS, built in the open, starting with the people who use it.
         </h1>
         <p class="mt-6 text-lg text-neutral-600 dark:text-neutral-400">
           A health program runs on work people do every day: registering a patient, booking a visit, seeing the patient, billing for the care.
-          OpenRPMS starts there, with the people who do the work, what they need, and the processes that get it done.
-          The Resource and Patient Management System (RPMS) has supported that work for the Indian Health Service for 40+ years.
-          This site distills its patterns — the domain model, workflows, architecture, and security model — into open, reusable knowledge for anyone building health systems.
+          The Resource and Patient Management System (RPMS) has supported that work for the Indian Health Service for more than 40 years.
+          OpenRPMS starts with the people who do the work and what they need, and builds each IHS release of RPMS in the open, with the evidence that it works.
         </p>
         <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">
-          Not a transcription of MUMPS globals.
-          An opinionated extraction of the ideas worth carrying forward.
+          You can try it in a browser today, run it yourself, and build on it.
         </p>
-        <div class="mt-10 flex items-center gap-x-6">
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
           <a
-            href="{{ "/design" | relative_url }}"
+            href="#start-here"
             class="rounded-md bg-neutral-900 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-neutral-900 shadow-sm hover:bg-neutral-700 dark:hover:bg-neutral-100"
           >
-            Start with the people
+            Start here
           </a>
           <a
-            href="{{ "/domain-model" | relative_url }}"
+            href="{{ "/design" | relative_url }}"
             class="text-sm font-semibold text-neutral-900 dark:text-neutral-100"
           >
-            Explore the domain model <span aria-hidden="true">&rarr;</span>
+            Start with the people <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
+      </div>
+    </div>
+
+    <!-- Start here -->
+    <div
+      id="start-here"
+      class="border-t border-neutral-200 dark:border-neutral-800"
+    >
+      <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+          Start here
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-8">
+          Pick the line that sounds most like you.
+        </p>
+        <div class="grid gap-6 sm:grid-cols-2">
+
+          <a
+            href="{{ "/demo" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              I work in a clinic or a health program
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Sign in to the demo as your role, try a task from your day, and tell us whether it goes the way your clinic works.
+              Every patient in it is made up.
+            </p>
+            <p class="mt-3 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              Try the demo <span aria-hidden="true">&rarr;</span>
+            </p>
+          </a>
+
+          <a
+            href="{{ "/install" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              I run IT for a tribal or IHS site
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Run a release on YottaDB with no license, or on IRIS with your own.
+              If your site already runs RPMS, see which KIDS patches fit it.
+              Each path ends in a check that tells you it worked.
+            </p>
+            <p class="mt-3 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              Choose an install path <span aria-hidden="true">&rarr;</span>
+            </p>
+          </a>
+
+          <a
+            href="{{ "/install#hello-world" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              I build software on RPMS
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Run a release, then make a first call through its brokers with the rpms-rpc Ruby client.
+              The same client powers lakeraven-ehr, a web tier over RPMS.
+            </p>
+            <p class="mt-3 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              Make a first call <span aria-hidden="true">&rarr;</span>
+            </p>
+          </a>
+
+          <a
+            href="{{ "/together" | relative_url }}"
+            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              I want to build RPMS in the open with you
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              See how each release is built from IHS's public files, how it is checked, and what it records.
+              Then tell us where you would like to take part.
+            </p>
+            <p class="mt-3 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              Build with us <span aria-hidden="true">&rarr;</span>
+            </p>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Two engines -->
+    <div class="border-t border-neutral-200 dark:border-neutral-800">
+      <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          One release, two engines
+        </h2>
+        <p class="max-w-2xl text-neutral-600 dark:text-neutral-400 mb-8">
+          Each release carries the same RPMS packages at the same IHS patch level, and the same demo clinic.
+          You choose the engine that fits your site.
+        </p>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              RPMS on YottaDB
+            </h3>
+            <ul class="list-disc space-y-1 pl-5 text-sm text-neutral-600 dark:text-neutral-400">
+              <li>Open source, free to run: one container image.</li>
+              <li>The chart's broker, iCare's broker and the terminal.</li>
+              <li>No BPRM web registration and scheduling.</li>
+              <li>Not certified today; we intend to pursue it.</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              RPMS on IRIS
+            </h3>
+            <ul class="list-disc space-y-1 pl-5 text-sm text-neutral-600 dark:text-neutral-400">
+              <li>Bring your own InterSystems IRIS for Health license.</li>
+              <li>Every broker, plus the BMW database BPRM reads.</li>
+              <li>IRIS is the engine IHS certifies RPMS on.</li>
+              <li>Community Edition runs it for evaluation.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-6 text-sm">
+          <a
+            href="{{ "/install#whats-included" | relative_url }}"
+            class="font-semibold text-neutral-900 dark:text-neutral-100 underline"
+          >What's included in each, side by side</a>
+        </p>
       </div>
     </div>
 
@@ -49,7 +173,7 @@ description: "Open business processes for healthcare, starting with the people w
     <div class="border-t border-neutral-200 dark:border-neutral-800">
       <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
         <h2 class="text-sm font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">
-          What's here
+          Learn how RPMS works
         </h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
@@ -153,12 +277,13 @@ description: "Open business processes for healthcare, starting with the people w
             It has done so reliably for decades, in low-bandwidth, resource-constrained environments, at facilities ranging from a two-room rural clinic to a 200-bed area hospital.
           </p>
           <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-            The implementation — MUMPS globals, VAX-era conventions, terminal-based interfaces — is not what's valuable.
-            The operational knowledge embedded in the design is.
+            What makes it valuable is the operational knowledge in its design: how a clinic's work really flows, and the hard-won decisions about what health IT needs to do under pressure.
           </p>
           <p class="text-neutral-700 dark:text-neutral-300">
-            This site is an attempt to extract that knowledge: the domain model, the workflow patterns, the security architecture, the hard-won decisions about what healthcare IT actually needs to do under pressure.
-            The goal is to make those patterns available to anyone building health systems — free of the MUMPS runtime, the IRIS license, and the 1990s UX.
+            OpenRPMS carries that knowledge forward in three ways.
+            It describes the work from the people who do it.
+            It builds each IHS release of RPMS reproducibly, from public files, with the evidence that it works.
+            And it gives clinics, IHS, partners and developers one place to look at the same thing and improve it together.
           </p>
         </div>
         <div class="mt-8 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
@@ -166,33 +291,24 @@ description: "Open business processes for healthcare, starting with the people w
             <strong class="text-neutral-900 dark:text-white">Disclaimer:</strong>
             OpenRPMS is an open source project.
             It is not affiliated with the Indian Health Service, the Department of Health and Human Services, or the U.S. government.
-            See <a
+            RPMS is a product of the
+            <a
+              href="https://www.ihs.gov/rpms/"
+              class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Indian Health Service</a>.
+            See
+            <a
               href="{{ "/licensing" | relative_url }}"
               class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
-            >Licensing</a> for source and IP status of RPMS components.
+            >Licensing</a>
+            for source and IP status of RPMS components.
           </p>
         </div>
       </div>
     </div>
 
   </main>
-
-  <footer class="border-t border-neutral-200 dark:border-neutral-800">
-    <div class="mx-auto max-w-4xl px-6 py-8 lg:px-8">
-      <p class="text-sm text-neutral-500 dark:text-neutral-400">
-        OpenRPMS — open source, built in the open.
-        Want to help? <a
-          href="https://github.com/openrpms"
-          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
-        >Contribute on GitHub</a>.
-        RPMS is a product of the <a
-          href="https://www.ihs.gov/rpms/"
-          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Indian Health Service</a>.
-      </p>
-    </div>
-  </footer>
 
 </div>

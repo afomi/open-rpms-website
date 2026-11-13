@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Install RPMS"
-description: "Run RPMS on YottaDB, which is open source, or on IRIS with your own license, then make a first call into it."
+description: "Three ways in: run RPMS on YottaDB, which is open source, run it on IRIS with your own license, or take our KIDS patches into a YottaDB RPMS you already run. Each path ends in a check that tells you it worked."
 ---
 
 <div class="bg-white dark:bg-neutral-950">
@@ -14,11 +14,9 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
         Install RPMS
       </h1>
       <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
-        Each release of RPMS is built from the public IHS files and published two ways.
-        On YottaDB it is a container image you can run with no license.
-        On IRIS it is a database you mount in your own licensed IRIS for Health.
-        Both carry the same demo clinic: staff personas you can sign on as, and synthetic patients.
-        This page takes you from nothing to a signed-on session and a first call from code.
+        Each release of RPMS is built from the public IHS files, checked, and published with its evidence.
+        There are three ways in, depending on where you start.
+        Each path says what you get, what you need, the commands to run, and how you know it worked.
       </p>
     </div>
 
@@ -26,18 +24,149 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
 
       <section>
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Choose your path
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-3">
+          <a
+            href="#yottadb"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              1. YottaDB
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              You want RPMS running in minutes, with no license.
+              One container image.
+            </p>
+          </a>
+          <a
+            href="#iris"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              2. IRIS, your own license
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              You run IRIS, need BPRM, or need the engine IHS certifies.
+              Two databases you mount.
+            </p>
+          </a>
+          <a
+            href="#kids"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+          >
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+              3. KIDS, into RPMS you run
+            </h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Your site already runs RPMS and takes changes as KIDS patches, the usual way.
+            </p>
+          </a>
+        </div>
+        <p class="mt-6 text-neutral-600 dark:text-neutral-400">
+          Building software on RPMS?
+          Take path 1, then the
+          <a
+            href="#hello-world"
+            class="font-semibold underline"
+          >first call from code</a>.
+          Want to see it without installing anything?
+          <a
+            href="{{ "/demo" | relative_url }}"
+            class="font-semibold underline"
+          >Try the demo</a>.
+        </p>
+      </section>
+
+      <section id="whats-included">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          What's included, by engine
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          Both engines carry the same RPMS packages at the same IHS patch level, and the same demo clinic.
+          They differ in what runs around them.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-left text-sm text-neutral-600 dark:text-neutral-400">
+            <thead>
+              <tr class="border-b border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white">
+                <th class="py-2 pr-4 font-semibold"></th>
+                <th class="py-2 pr-4 font-semibold">YottaDB</th>
+                <th class="py-2 font-semibold">IRIS</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">License</td>
+                <td class="py-2 pr-4">None: YottaDB is open source</td>
+                <td class="py-2">Your own InterSystems IRIS for Health license</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">What ships</td>
+                <td class="py-2 pr-4">A container image</td>
+                <td class="py-2">Two databases, <code>IRIS.DAT</code> and <code>BMW-IRIS.DAT</code></td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">Demo clinic, personas, synthetic patients</td>
+                <td class="py-2 pr-4">Yes</td>
+                <td class="py-2">Yes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">Terminal (roll and scroll, over SSH)</td>
+                <td class="py-2 pr-4">Yes</td>
+                <td class="py-2">Yes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">CIA broker (VueCentric, rpms-rpc)</td>
+                <td class="py-2 pr-4">Yes</td>
+                <td class="py-2">Yes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">XWB broker</td>
+                <td class="py-2 pr-4">No</td>
+                <td class="py-2">Yes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">BMX broker (iCare, .NET clients)</td>
+                <td class="py-2 pr-4">Yes</td>
+                <td class="py-2">Yes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">BPRM and BMW (web registration and scheduling)</td>
+                <td class="py-2 pr-4">No</td>
+                <td class="py-2">Yes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">BUSA audit reviewer report</td>
+                <td class="py-2 pr-4">No</td>
+                <td class="py-2">Yes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">KIDS patch for a site already running RPMS</td>
+                <td class="py-2 pr-4">Yes, <code>LKR*1.0*&lt;n&gt;</code></td>
+                <td class="py-2">Not yet</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 font-medium text-neutral-900 dark:text-white">Evidence on every release</td>
+                <td class="py-2 pr-4">Yes</td>
+                <td class="py-2">Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          <strong class="text-neutral-900 dark:text-white">Certification.</strong>
+          IRIS is the engine IHS certifies RPMS on.
+          Every release reproduces a certified IHS patch level, and no release is itself a certified deployment.
+          The YottaDB line is not certified today, and we intend to pursue it.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
           Before you start
         </h2>
         <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
-          <li>
-            A machine with Docker and <code>ssh</code>, and about 20 GB free for YottaDB.
-            IRIS also needs <code>curl</code>, and about 25 GB more for the downloaded databases and the copy the standup makes.
-          </li>
-          <li>
-            The YottaDB image is built for x86-64.
-            On Apple Silicon it runs under emulation, and Docker warns that the image's platform does not match the host.
-            That warning is expected, and the image works.
-          </li>
           <li>
             Releases are named like <code>bcer-9.0-20261110-55d9e3e-ydb</code>: the certification line, the build date, the commit, and the engine (<code>-ydb</code> or <code>-iris</code>).
             New releases come out often.
@@ -46,6 +175,7 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
           </li>
           <li>
             Each release's notes are its <code>MANIFEST.md</code> file: what it contains, layer by layer, and what each client expects.
+            Beside it is the evidence: the client calls it answered, each persona's first steps, and a patient registered and read back.
             The notes, and the releases page that lists them, open with the openrpms repository.
           </li>
           <li>
@@ -90,14 +220,31 @@ description: "Run RPMS on YottaDB, which is open source, or on IRIS with your ow
         </ul>
       </section>
 
-      <section>
+      <section id="yottadb">
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-          Option 1: YottaDB (open source)
+          Path 1: YottaDB (open source)
         </h2>
+        <dl class="mb-6 space-y-3 text-neutral-600 dark:text-neutral-400">
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-white">What you get</dt>
+            <dd>
+              One container image with RPMS, the demo clinic and TaskMan.
+              It serves the CIA broker on 9100, the BMX broker on 9101 and the terminal over SSH.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-white">What you need</dt>
+            <dd>
+              A machine with Docker and <code>ssh</code>, and about 20 GB free.
+              The image is built for x86-64.
+              On Apple Silicon it runs under emulation, and Docker warns that the image's platform does not match the host.
+              That warning is expected, and the image works.
+            </dd>
+          </div>
+        </dl>
         <p class="mb-4 text-neutral-600 dark:text-neutral-400">
           One command pulls the newest YottaDB release and runs it.
           No account or login is needed.
-          It serves the CIA broker on 9100, the BMX broker on 9101 and the terminal over SSH, and it runs TaskMan.
           Set any password you like for the terminal's SSH account.
         </p>
         <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>docker run -d --name rpms \
@@ -130,8 +277,16 @@ Good morning PROFILE,MD
 Site set to DEMO IHS CLINIC
 
 Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code></pre>
+        <div class="mt-6 rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950 p-5">
+          <p class="font-semibold text-green-950 dark:text-green-100">
+            You know it worked when
+          </p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-green-950 dark:text-green-100">
+            <li><code>docker logs</code> shows <code>TaskMan live</code>.</li>
+            <li>The sign-on greets PROFILE,MD and stops at <code>Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code>.</li>
+          </ul>
+        </div>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-          You are signed on as PROFILE,MD, at that persona's main menu.
           Type <code>^</code> at an option prompt to step back, and at the main menu it signs you off.
           If a persona is asked for a terminal type, press Enter to take the default.
           The SSH account can do nothing but reach the sign-on: no shell, no file copy, no port forwarding.
@@ -143,24 +298,34 @@ Select IHS Core &lt;TEST ACCOUNT&gt; Option:</code></pre>
         </p>
       </section>
 
-      <section>
+      <section id="iris">
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
-          Option 2: IRIS for Health (bring your own license)
+          Path 2: IRIS for Health (bring your own license)
         </h2>
         <p class="mb-4 rounded-md border border-neutral-300 p-4 text-neutral-700 dark:border-neutral-700 dark:text-neutral-300">
           The IRIS path opens when the openrpms repository does.
           Its databases are release downloads and its standup script lives in that repository, so the commands below work from that day on.
-          Until then, Option 1 runs the same RPMS on YottaDB.
+          Until then, path 1 runs the same RPMS on YottaDB.
         </p>
-        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
-          An IRIS release is a patched RPMS database, <code>IRIS.DAT</code>, plus the BMW database that the BPRM web tier reads.
-          You bring IRIS for Health and its license key.
-          The standup script, <code>bin/standup.sh</code> in the openrpms repository, mounts both databases in an IRIS for Health container and configures them.
-          Name the IRIS for Health image your license covers in <code>IRIS_IMAGE</code>.
-          Images from the InterSystems registry need an InterSystems login to pull.
-          Releases are built on IRIS for Health 2022.1, which the registry no longer serves, and a release also runs on 2026.2.
-        </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s https://api.github.com/repos/lakeraven/openrpms/releases \
+        <dl class="mb-6 space-y-3 text-neutral-600 dark:text-neutral-400">
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-white">What you get</dt>
+            <dd>
+              A patched RPMS database, <code>IRIS.DAT</code>, with the IHS patches already installed, plus the BMW database that the BPRM web tier reads.
+              The standup script, <code>bin/standup.sh</code> in the openrpms repository, mounts both in an IRIS for Health container and configures them.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-white">What you need</dt>
+            <dd>
+              Your IRIS for Health license key, and the IRIS for Health image it covers, named in <code>IRIS_IMAGE</code>.
+              Images from the InterSystems registry need an InterSystems login to pull.
+              Releases are built on IRIS for Health 2022.1, which the registry no longer serves, and a release also runs on 2026.2.
+              Docker, <code>curl</code>, <code>jq</code>, <code>git</code> and <code>ssh</code>, and about 45 GB free: 20 GB for the engine and 25 GB for the downloaded databases and the copy the standup makes.
+            </dd>
+          </div>
+        </dl>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>TAG=$(curl -s "https://api.github.com/repos/lakeraven/openrpms/releases?per_page=100" \
   | jq -r '[.[] | select(.tag_name | endswith("-iris"))][0].tag_name')
 echo "$TAG"                           # the newest -iris release
 URL=https://github.com/lakeraven/openrpms/releases/download/$TAG
@@ -178,17 +343,23 @@ RPMS_SSH_PASSWORD='choose-one' \
   openrpms/bin/standup.sh ./$TAG-IRIS.DAT</code></pre>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           The script finds the BMW database beside the RPMS one.
-          It names its container <code>rpms-iris</code>, so it does not touch Option 1's <code>rpms</code>, and it never replaces a container it did not create.
+          It names its container <code>rpms-iris</code>, so it does not touch path 1's <code>rpms</code>, and it never replaces a container it did not create.
           If <code>IRIS_IMAGE</code> is missing or cannot be pulled, it stops and says what to set.
+          It takes about five minutes.
         </p>
-        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-          The script takes about five minutes.
-          It prints <code>BUILD-LEVEL: PASS</code> once the instance passes its checks, then <code>RPMS up</code>.
-          The terminal is SSH on port 12222, and the same demo personas sign on.
-        </p>
-        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>ssh -p 12222 rpms@127.0.0.1
+        <pre class="mt-4 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>ssh -p 12222 rpms@127.0.0.1
 ACCESS CODE: PMD123
 VERIFY CODE: PMD123!!</code></pre>
+        <div class="mt-6 rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950 p-5">
+          <p class="font-semibold text-green-950 dark:text-green-100">
+            You know it worked when
+          </p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-green-950 dark:text-green-100">
+            <li><code>shasum</code> answers <code>OK</code> for both databases.</li>
+            <li>The script prints <code>BUILD-LEVEL: PASS</code>, once the instance passes its checks, and then <code>RPMS up</code>.</li>
+            <li>The terminal on port 12222 signs on as PROFILE,MD.</li>
+          </ul>
+        </div>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
           Inside the container the CIA broker listens on 9200 and the XWB broker on 9100.
           The script publishes them only when you also set <code>PUBLISH_BROKERS=1</code>, and then on ports Docker picks: <code>docker port rpms-iris</code> lists them.
@@ -205,7 +376,83 @@ VERIFY CODE: PMD123!!</code></pre>
         </p>
       </section>
 
-      <section>
+      <section id="kids">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Path 3: KIDS, into RPMS you already run
+        </h2>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          A KIDS patch is how RPMS sites take changes, and this path follows that practice.
+          It is for your RPMS system administrator.
+        </p>
+        <dl class="mb-6 space-y-3 text-neutral-600 dark:text-neutral-400">
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-white">What you get</dt>
+            <dd>
+              Every YottaDB release carries the next patch of our site-local package, LAKERAVEN (namespace <code>LKR</code>), as <code>&lt;tag&gt;-LKR-1.0-&lt;n&gt;.kids</code>, with an install note beside it.
+              Patch 1 carries every routine fix; each later patch carries what changed since the one before.
+              KIDS adds the package to your PACKAGE file on the first install and records each patch in its history.
+              A release can also carry a stand-alone build, such as <code>LKR BMX LISTENER 1.0</code>, the BMX listener iCare uses.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-white">Which sites it fits</dt>
+            <dd>
+              Sites running RPMS on YottaDB.
+              Several of these routines are YottaDB rewrites of stock routines, and on IRIS they would replace working code.
+              A site on IRIS keeps taking IHS's own patches; our IRIS releases carry their fixes inside the database.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-neutral-900 dark:text-white">What you need</dt>
+            <dd>
+              Programmer access to the Kernel Installation &amp; Distribution System menu, a snapshot of your database taken just before (KIDS has no uninstall), and the patches in order, from patch 1.
+            </dd>
+          </div>
+        </dl>
+        <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+          Download every LKR patch and its install note, then list the patches in the order they install.
+          The patches are release downloads, so this command works once the openrpms repository opens, like path 2.
+        </p>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>curl -s "https://api.github.com/repos/lakeraven/openrpms/releases?per_page=100" \
+  | jq -r '.[].assets[] | select(.name | test("-LKR-1\\.0-[0-9]+\\.(kids|md)$")) | .browser_download_url' \
+  &gt; lkr-urls.txt
+while read -r url; do
+  curl -LO "$url"
+done &lt; lkr-urls.txt
+ls *-LKR-1.0-*.kids | sort -t- -k8 -n</code></pre>
+        <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
+          Read the newest install note first.
+          It lists the routines the patch replaces, the patch it requires, and the release that issued each earlier one.
+          Then, for each patch in turn, use the stock KIDS Installation menu:
+        </p>
+        <ol class="list-decimal space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>Load a Distribution: the <code>.kids</code> file.</li>
+          <li>Verify Checksums in Transport Global.</li>
+          <li>Compare Transport Global to Current System: a routine whose difference you do not expect is a reason to stop.</li>
+          <li>Backup a Transport Global: your current copies of the routines, saved in a MailMan message, which is the back-out.</li>
+          <li>Install Package(s): <code>LKR*1.0*&lt;n&gt;</code>.</li>
+        </ol>
+        <p class="mt-4 mb-4 text-neutral-600 dark:text-neutral-400">
+          Then check the patch from programmer mode:
+        </p>
+        <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code>W $$PATCH^XPDUTL("LKR*1.0*13")
+1</code></pre>
+        <div class="mt-6 rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950 p-5">
+          <p class="font-semibold text-green-950 dark:text-green-100">
+            You know it worked when
+          </p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-green-950 dark:text-green-100">
+            <li>KIDS ends the install with <code>Install Completed</code>.</li>
+            <li><code>$$PATCH^XPDUTL</code> answers <code>1</code> for the patch you installed.</li>
+          </ul>
+        </div>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          Each patch is packed and checked by its release's gate, which installs it by KIDS into an older release of our image.
+          It has not yet been proven on a YottaDB RPMS other than ours, so we would like to hear how it goes on yours.
+        </p>
+      </section>
+
+      <section id="hello-world">
         <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
           Hello world: a first call from code
         </h2>
@@ -216,7 +463,7 @@ VERIFY CODE: PMD123!!</code></pre>
           >rpms-rpc</a>
           is a Ruby client for the RPMS brokers.
           It needs Ruby 4.0 or later, Bundler, <code>git</code>, and a C compiler for one of its gems.
-          This script signs on to the YottaDB instance from Option 1 as PROFILE,MD and prints the first page of the patient list, as a chart's patient picker reads it.
+          This script signs on to the YottaDB instance from path 1 as PROFILE,MD and prints the first page of the patient list, as a chart's patient picker reads it.
           Put the two files in a new directory.
         </p>
         <pre class="mt-2 overflow-x-auto rounded-md bg-neutral-800 p-4 text-sm text-neutral-100"><code># Gemfile
@@ -242,9 +489,22 @@ RPMS_ACCESS_CODE=PMD123 RPMS_VERIFY_CODE='PMD123!!' bundle exec ruby hello.rb
 990027  ANCHOR,JAMIE
 990050  ASHGROVE,SAM
 990028  BEACON,DREW</code></pre>
+        <div class="mt-6 rounded-lg border border-green-300 dark:border-green-800 bg-green-50 dark:bg-green-950 p-5">
+          <p class="font-semibold text-green-950 dark:text-green-100">
+            You know it worked when
+          </p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-green-950 dark:text-green-100">
+            <li>It prints five lines, each a patient's internal number and name from the demo clinic's synthetic patients.</li>
+          </ul>
+        </div>
         <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-          Each line is a patient's internal number and name, from the demo clinic's synthetic patients.
           From here, the same client reads and writes through the RPCs RPMS registers.
+          Each release lists them in its <code>rpcs.json</code>.
+          <a
+            href="https://github.com/lakeraven/lakeraven-ehr"
+            class="font-semibold underline"
+          >lakeraven-ehr</a>
+          is a web tier built on the same client, and a working example of a larger application.
         </p>
       </section>
 
@@ -263,7 +523,7 @@ RPMS_ACCESS_CODE=PMD123 RPMS_VERIFY_CODE='PMD123!!' bundle exec ruby hello.rb
         </p>
         <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
           <li>
-            The terminal, over SSH to the sign-on, as both options above show.
+            The terminal, over SSH to the sign-on, as paths 1 and 2 show.
           </li>
           <li>
             The brokers, which those clients and other programs such as rpms-rpc connect to, as the hello world shows.
@@ -277,6 +537,45 @@ RPMS_ACCESS_CODE=PMD123 RPMS_VERIFY_CODE='PMD123!!' bundle exec ruby hello.rb
             a running instance you sign in to from a browser.
           </li>
         </ul>
+      </section>
+
+      <section id="help">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+          Where to get help
+        </h2>
+        <ul class="list-disc space-y-2 pl-6 text-neutral-600 dark:text-neutral-400">
+          <li>
+            Start with the release's <code>MANIFEST.md</code>, and for a KIDS patch its install note.
+          </li>
+          <li>
+            A release that will not start, sign on or install:
+            <a
+              href="https://github.com/lakeraven/openrpms/issues"
+              class="font-semibold underline"
+            >openrpms issues</a>.
+            Say which release, which path, the command you ran, and the last lines it printed.
+          </li>
+          <li>
+            The Ruby client:
+            <a
+              href="https://github.com/lakeraven/rpms-rpc/issues"
+              class="font-semibold underline"
+            >rpms-rpc issues</a>.
+          </li>
+          <li>
+            This page, or anything else on the site:
+            <a
+              href="https://github.com/afomi/open-rpms-website/issues"
+              class="font-semibold underline"
+            >website issues</a>.
+          </li>
+          <li>
+            Your IRIS license or engine: InterSystems.
+          </li>
+        </ul>
+        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+          Please leave out anything about a real patient, and report a security problem privately, through the repository's security page.
+        </p>
       </section>
 
     </div>

@@ -1,0 +1,25 @@
+# The pages /reference/ lists, in order.
+- url: /domain-model
+  name: Domain model
+  summary: The core entities, such as Patient, Encounter, Order, Problem and Result, and how they relate.
+- url: /architecture
+  name: Architecture
+  summary: The four layers, the infrastructure packages, and how site-based instances report upward.
+- url: /security
+  name: Security patterns
+  summary: Kernel access control, audit trails, and e-prescribing of controlled substances.
+- url: /applications
+  name: Application catalog
+  summary: Every RPMS application by domain, with its namespace.
+- url: /workflows/hospital-view
+  name: Hospital-wide process view
+  summary: Every clinical and administrative workflow on one canvas.
+- url: /licensing
+  name: Licensing
+  summary: Why RPMS is in the public domain, which parts are restricted, and the runtimes it needs.
+- url: /ehr-site-survey
+  name: EHR site questionnaire
+  summary: The IHS questionnaire a facility fills in before an EHR implementation.
+- url: /ehr-site-tracking
+  name: EHR site tracking record
+  summary: The checklist a facility works through to prepare for the EHR.
